@@ -1,0 +1,24 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+a:link {
+    text-decoration: none;
+    color: black;
+}
+
+a:hover {
+    color: blue;
+}
+
+a:visited {
+    color: black;
+}
+
+a:active {
+    color: blue;
+}
+
+.lista:nth-child(odd) {
+    background:  #9ee3fa;
+}
+

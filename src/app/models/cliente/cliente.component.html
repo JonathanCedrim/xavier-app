@@ -1,0 +1,65 @@
+<nav>
+  <a mat-raised-button routerLink="/cliente">Clientes</a>
+
+  <a mat-raised-button color="accent" routerLink="/cliente/novo">Novo Cliente</a>
+</nav>   
+
+<section>
+<p>
+Total: {{ clientes.length}} Clientes.
+</p>
+
+<p>
+<input matInput placeholder="Insira os dados para realizar busca..." [(ngModel)]="busca"/>
+</p>
+<button mat-button color="primary" (click)="buscaPorNome()">Buscar por Nome</button>
+<button mat-button color="primary" (click)="buscaPorRG()">Buscar por RG</button>
+<button mat-button color="primary" (click)="buscaPorCPF()">Buscar por CPF</button>
+
+<table>
+  <thead>
+      <tr>
+        <th data-field="name">Código</th>
+        <th data-field="name">Nome</th>
+        <th data-field="name">RG</th>
+        <th data-field="name">CPF</th>
+        <th data-field="name">Telefone</th>
+        <th data-field="name">Operadora</th>
+        <th data-field="name">Celular</th>
+        <th data-field="name">Operadora</th>
+        <th data-field="name">Celular</th>
+        <th data-field="name">Nascimento</th>
+        <th data-field="name">Salario</th>
+        
+      </tr>
+  </thead>
+
+  <tbody>    
+    <tr class="lista" *ngFor="let cliente of clientes">
+      <td>{{ cliente.codigo }}</td>
+      <td><i class="material-icons">account_box</i>
+        <a [routerLink]="['/cliente', cliente.id]">{{ cliente.nome }}</a>
+      </td>
+      <td><i class="material-icons">account_box</i>{{ cliente.rg }}</td>
+      <td><i class="material-icons">account_box</i>{{ cliente.cpf }}</td>
+      <td><i class="material-icons">phone</i>{{ cliente.telefone }}</td>
+      <td><i class="material-icons">sd_storage</i>{{ cliente.operadora }}</td>
+      <td><i class="material-icons">phone_iphone</i>{{ cliente.celular }}</td>
+      <td><i class="material-icons">sd_storage</i>{{ cliente.operadoraII }}</td>
+      <td><i class="material-icons">phone_iphone</i>{{ cliente.celularII }}</td>
+      <td><i class="material-icons">cake</i>{{ cliente.dataNascimento }}</td>
+      <td><i class="material-icons">monetization_on</i>{{ cliente.salario }}</td>
+      <td>
+        <a [routerLink]="['/cliente', cliente.id]">
+          <i class="material-icons">mode_edit</i>
+        </a>
+      </td>
+      <td>
+        <a (click)="deleteCliente(cliente)">
+          <i class="material-icons">clear</i>
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</section>
