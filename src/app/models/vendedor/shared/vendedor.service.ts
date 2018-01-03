@@ -8,6 +8,8 @@ import 'rxjs/add/operator/catch';
 
 import { Observable } from 'rxjs/Rx';
 
+import { Vendedor } from './vendedor';
+
 @Injectable()
 export class VendedorService {
 
@@ -52,7 +54,9 @@ export class VendedorService {
   }
 
 
-  addVendedor(vendedor) {
+  addVendedor(vendedor: Vendedor) {
+    
+    this.upCaseVendedor(vendedor);
     return this.http.post(this.url, JSON.stringify(vendedor),
   {
     headers: new HttpHeaders().set('Content-Type', 'application/json')
@@ -60,6 +64,7 @@ export class VendedorService {
   }
 
   updateVendedor(vendedor) {
+    this.upCaseVendedor(vendedor);
     return this.http.put(this.url, JSON.stringify(vendedor), 
     {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
@@ -72,5 +77,27 @@ export class VendedorService {
       responseType: 'text'})
     .map(res => console.log("deletado com sucesso"),
          err => err);
+  }
+
+  upCaseVendedor(vendedor: Vendedor) {
+    vendedor.nome = vendedor.nome.toUpperCase();
+    
+    if(vendedor.email != undefined)
+     vendedor.email = vendedor.email.toUpperCase();
+    
+    if(vendedor.operadora != undefined)
+     vendedor.operadora = vendedor.operadora.toUpperCase();
+
+    if(vendedor.operadoraII != undefined)
+    vendedor.operadoraII = vendedor.operadoraII.toUpperCase();
+
+
+    vendedor.municipio = vendedor.municipio.toUpperCase();
+    vendedor.sigla = vendedor.sigla.toUpperCase();
+    vendedor.bairro = vendedor.bairro.toUpperCase();
+    vendedor.endereco = vendedor.endereco.toUpperCase();
+
+    if(vendedor.observacao != undefined)
+    vendedor.observacao = vendedor.observacao.toUpperCase();
   }
 }

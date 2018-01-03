@@ -14,7 +14,7 @@
 <mat-form-field floatPlaceholder="never">
   <input matInput placeholder="Insira os dados para realizar busca..." [(ngModel)]="busca" #filter/>
 </mat-form-field>
-
+<br />
 
 <button mat-button color="primary" (click)="buscaPorNome()">Buscar por Nome</button>
 <button mat-button color="primary" (click)="buscaPorRG()">Buscar por RG</button>
@@ -23,16 +23,15 @@
 <table>
     <thead>
         <tr>
-          <th data-field="name">Código</th>
-          <th data-field="name">Nome</th>
-          <th data-field="name">RG</th>
-          <th data-field="name">CPF</th>
-          <th data-field="name">Telefone</th>
-          <th data-field="name">Operadora</th>
-          <th data-field="name">Celular</th>
-          <th data-field="name">Operadora</th>
-          <th data-field="name">Celular</th>
-          <th data-field="name">Nascimento</th>
+          <th>Código</th>
+          <th>Nome</th>
+          <th>RG</th>
+          <th>CPF</th>
+          <th>Telefone</th>
+          <th>Operadora</th>
+          <th>Celular</th>
+          <th>Operadora</th>
+          <th>Celular</th>          
         </tr>
     </thead>
   
@@ -42,15 +41,13 @@
         <td><i class="material-icons">account_box</i>
           <a [routerLink]="['/vendedor', vendedor.id]">{{ vendedor.nome }}</a>
         </td>
-        <td><i class="material-icons">account_box</i>{{ vendedor.rg }}</td>
-        <td><i class="material-icons">account_box</i>{{ vendedor.cpf }}</td>
-        <td><i class="material-icons">phone</i>{{ vendedor.telefone }}</td>
-        <td><i class="material-icons">sd_storage</i>{{ vendedor.operadora }}</td>
-        <td><i class="material-icons">phone_iphone</i>{{ vendedor.celular }}</td>
-        <td><i class="material-icons">sd_storage</i>{{ vendedor.operadoraII }}</td>
-        <td><i class="material-icons">phone_iphone</i>{{ vendedor.celularII }}</td>
-        <td><i class="material-icons">cake</i>{{ vendedor.dataNascimento }}</td>
-        <td><i class="material-icons">monetization_on</i>{{ vendedor.salario }}</td>
+        <td><i class="material-icons">account_box</i>    {{ vendedor.rg }}            </td>
+        <td><i class="material-icons">account_box</i>    {{ vendedor.cpf }}           </td>
+        <td><i class="material-icons">phone</i>          {{ vendedor.telefone }}      </td>
+        <td><i class="material-icons">sd_storage</i>     {{ vendedor.operadora }}     </td>
+        <td><i class="material-icons">phone_iphone</i>   {{ vendedor.celular }}       </td>
+        <td><i class="material-icons">sd_storage</i>     {{ vendedor.operadoraII }}   </td>
+        <td><i class="material-icons">phone_iphone</i>   {{ vendedor.celularII }}     </td>
         <td>
           <a [routerLink]="['/vendedor', vendedor.id]">
             <i class="material-icons">mode_edit</i>

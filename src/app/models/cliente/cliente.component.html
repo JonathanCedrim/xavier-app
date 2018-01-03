@@ -9,9 +9,10 @@
 Total: {{ clientes.length}} Clientes.
 </p>
 
-<p>
-<input matInput placeholder="Insira os dados para realizar busca..." [(ngModel)]="busca"/>
-</p>
+<mat-form-field floatPlaceholder="never">
+  <input matInput placeholder="Insira os dados para realizar busca..." [(ngModel)]="busca"#filter/>
+</mat-form-field>
+<br />
 <button mat-button color="primary" (click)="buscaPorNome()">Buscar por Nome</button>
 <button mat-button color="primary" (click)="buscaPorRG()">Buscar por RG</button>
 <button mat-button color="primary" (click)="buscaPorCPF()">Buscar por CPF</button>
@@ -19,18 +20,16 @@ Total: {{ clientes.length}} Clientes.
 <table>
   <thead>
       <tr>
-        <th data-field="name">Código</th>
-        <th data-field="name">Nome</th>
-        <th data-field="name">RG</th>
-        <th data-field="name">CPF</th>
-        <th data-field="name">Telefone</th>
-        <th data-field="name">Operadora</th>
-        <th data-field="name">Celular</th>
-        <th data-field="name">Operadora</th>
-        <th data-field="name">Celular</th>
-        <th data-field="name">Nascimento</th>
-        <th data-field="name">Salario</th>
-        
+        <th>Código</th>
+        <th>Nome</th>
+        <th>RG</th>
+        <th>CPF</th>
+        <th>Telefone</th>
+        <th>Operadora</th>
+        <th>Celular</th>
+        <th>Operadora</th>
+        <th>Celular</th>
+        <th>Vendedor</th>
       </tr>
   </thead>
 
@@ -47,8 +46,8 @@ Total: {{ clientes.length}} Clientes.
       <td><i class="material-icons">phone_iphone</i>{{ cliente.celular }}</td>
       <td><i class="material-icons">sd_storage</i>{{ cliente.operadoraII }}</td>
       <td><i class="material-icons">phone_iphone</i>{{ cliente.celularII }}</td>
-      <td><i class="material-icons">cake</i>{{ cliente.dataNascimento }}</td>
-      <td><i class="material-icons">monetization_on</i>{{ cliente.salario }}</td>
+      <td *ngIf="cliente.vendedor.id!=undefinied">{{ cliente.vendedor.codigo }}</td>
+      <td *ngIf="cliente.vendedor.id==undefinied">{{ cliente.vendedor }}</td>
       <td>
         <a [routerLink]="['/cliente', cliente.id]">
           <i class="material-icons">mode_edit</i>

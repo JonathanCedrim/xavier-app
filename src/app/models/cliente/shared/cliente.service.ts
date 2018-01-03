@@ -8,6 +8,8 @@ import 'rxjs/add/operator/catch';
 
 import { Observable } from 'rxjs/Rx';
 
+import { Cliente } from './cliente';
+
 @Injectable()
 export class ClienteService {
 
@@ -72,5 +74,19 @@ export class ClienteService {
       responseType: 'text'})
     .map(res => console.log("deletado com sucesso"),
          err => err);
+  }
+
+  upCaseCliente(cliente: Cliente) {
+    cliente.nome = cliente.nome.toUpperCase();
+    cliente.conjugue = cliente.conjugue.toUpperCase();
+    cliente.estadoCivil = cliente.estadoCivil.toUpperCase();
+    cliente.email = cliente.email.toUpperCase();
+    cliente.operadora = cliente.operadora.toUpperCase();
+    cliente.operadoraII = cliente.operadoraII.toUpperCase();
+    cliente.municipio = cliente.municipio.toUpperCase();
+    cliente.sigla = cliente.sigla.toUpperCase();
+    cliente.bairro = cliente.bairro.toUpperCase();
+    cliente.endereco = cliente.endereco.toUpperCase();
+    cliente.referencia = cliente.referencia.toUpperCase();    
   }
 }

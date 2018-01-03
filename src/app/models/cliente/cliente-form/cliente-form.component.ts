@@ -28,6 +28,7 @@ export class ClienteFormComponent implements OnInit
     private id;
     private firstFormGroup: FormGroup
     private title: string;
+    private codigoWrite: boolean = false;
     private cliente: Cliente = new Cliente();
     private vendedor: Vendedor = new Vendedor();
     private cep: Cep = new Cep();
@@ -62,13 +63,13 @@ export class ClienteFormComponent implements OnInit
             municipio: ['', [Validators.minLength(3) ,Validators.maxLength(30)]],
             sigla: ['', [Validators.minLength(2), Validators.maxLength(5)]],
             cep: ['', [Validators.pattern('^([0-9]){5}([-]?)([0-9]){3}$')]],
-            bairro: ['', [Validators.min(2), Validators.maxLength(70)]],
-            endereco: ['', [Validators.min(2), Validators.maxLength(70)]],
-            numero: ['', [Validators.min(1)]],
-            observacao: ['', [Validators.min(2), Validators.maxLength(70)]],
-            dataCadastro: ['', [Validators.min(1), Validators.maxLength(10)]],
-            spc: ['', [Validators.min(1), Validators.maxLength(10)]],
-            selecionado: ['', [Validators.min(1), Validators.maxLength(10)]],
+            bairro: ['', [Validators.minLength(2), Validators.maxLength(70)]],
+            endereco: ['', [Validators.minLength(2), Validators.maxLength(70)]],
+            numero: ['', [Validators.maxLength(10)]],
+            observacao: ['', [Validators.minLength(2), Validators.maxLength(70)]],
+            dataCadastro: ['', [Validators.minLength(1), Validators.maxLength(10)]],
+            spc: ['', [Validators.minLength(1), Validators.maxLength(10)]],
+            selecionado: ['', [Validators.minLength(1), Validators.maxLength(10)]],
         })
     }
 
@@ -85,6 +86,7 @@ export class ClienteFormComponent implements OnInit
           
         if(!id)
         { 
+          this.codigoWrite = false;
           this.cliente.dataCadastro = new Date();
           return ;
         }

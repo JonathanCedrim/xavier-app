@@ -15,7 +15,7 @@
        
       <mat-form-field>
         <input matInput placeholder="Codigo" name="codigo" formControlName="codigo" [(ngModel)]="cliente.codigo"
-            [class.invalid]="firstFormGroup.controls['codigo'].touched && !firstFormGroup.controls['codigo'].valid" readonly="true"/>
+            [class.invalid]="firstFormGroup.controls['codigo'].touched && !firstFormGroup.controls['codigo'].valid"  [readonly]="codigoWrite"/>
       </mat-form-field>
 
       <h4>Vendedor</h4>

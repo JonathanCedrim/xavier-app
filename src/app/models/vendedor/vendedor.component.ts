@@ -16,8 +16,8 @@ export class VendedorComponent implements OnInit {
 
   ngOnInit() {
     this.vendedorService.getVendedores().subscribe(data => 
-      { 
-        this.vendedores = data;      
+      {         
+        this.vendedores = data;
       });
   }
 
