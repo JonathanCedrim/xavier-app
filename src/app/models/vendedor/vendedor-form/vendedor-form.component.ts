@@ -25,6 +25,7 @@ export class VendedorFormComponent implements OnInit {
   id;
   firstFormGroup: FormGroup
   title: string;
+  codigoWrite: boolean = false;
   vendedor: Vendedor = new Vendedor();
   cep: Cep = new Cep();
   operadoras: string[] = ['TIM', 'VIVO', 'OI', 'CLARO', 'NEXTEL', 'ALGAR'];
@@ -57,11 +58,11 @@ export class VendedorFormComponent implements OnInit {
           endereco: ['', [Validators.min(2), Validators.maxLength(70)]],
           numero: ['', [Validators.min(1), Validators.maxLength(10)]],
           observacao: ['', [Validators.min(2), Validators.maxLength(70)]],
-          salario: ['', [Validators.min(1), Validators.maxLength(10)]],
-          pedidoInicial: ['', [Validators.min(1), Validators.maxLength(10)]],
-          pedidoFinal: ['', [Validators.min(1), Validators.maxLength(10)]],
-          registroInicial: ['', [Validators.min(1), Validators.maxLength(10)]],
-          registroFinal: ['', [Validators.min(1), Validators.maxLength(10)]],          
+          salario: [''],
+          pedidoInicial: [''],
+          pedidoFinal: [''],
+          registroInicial: [''],
+          registroFinal: ['']
       })
   }
 
@@ -73,7 +74,9 @@ export class VendedorFormComponent implements OnInit {
     this.title = id ? 'Editar Vendedor': 'Novo Vendedor';
     this.id = id ? id: null;
 
-    if(!id) { return ;}
+    if(!id) {
+      this.codigoWrite = true;
+      return ;}
 
     this.vendedorService.getVendedor(id)
       .subscribe(
@@ -121,11 +124,6 @@ export class VendedorFormComponent implements OnInit {
     {
       console.log("invalido");
     }
-  }
-  
-  log() {
-    console.log("operadora 1: " + this.vendedor.operadora);
-    console.log("operadora 2: " + this.vendedor.operadoraII);
   }
 
   private setEndereco(cep: Cep) 

@@ -15,7 +15,7 @@
        
       <mat-form-field>
         <input matInput placeholder="Codigo" name="codigo" formControlName="codigo" [(ngModel)]="cliente.codigo"
-            [class.invalid]="firstFormGroup.controls['codigo'].touched && !firstFormGroup.controls['codigo'].valid" readonly="true"/>
+            [class.invalid]="firstFormGroup.controls['codigo'].touched && !firstFormGroup.controls['codigo'].valid"  [readonly]="codigoWrite"/>
       </mat-form-field>
 
       <h4>Vendedor</h4>
@@ -43,6 +43,18 @@
             </mat-error>
       </mat-form-field>
 
+      <mat-form-field>
+        <input id="nome" matInput placeholder="Nome do Cônjugue" formControlName="conjugue" [(ngModel)]="cliente.conjugue"/>
+        
+        <mat-error *ngIf="firstFormGroup.controls['conjugue'].touched && firstFormGroup.controls['conjugue'].dirty">
+          Nome do Cônjugue deve conter entre 2 e 70 caracteres
+        </mat-error>
+        <mat-error *ngIf="firstFormGroup.controls['conjugue'].invalid && firstFormGroup.controls['conjugue'].pristine">
+           Nome do Cônjugue é <strong>obrigatorio</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <br />
       <mat-form-field>
         <input matInput placeholder="RG" formControlName="rg" [(ngModel)]="cliente.rg"/>
 
@@ -101,6 +113,7 @@
         </mat-error>
     </mat-form-field>
 
+    <br />
     <mat-form-field>        
       <input matInput placeholder="Operadora" formControlName="operadora" [(ngModel)]="cliente.operadora"/>
 
@@ -157,8 +170,7 @@
         <mat-error *ngIf="firstFormGroup.controls['cep'].invalid && firstFormGroup.controls['cep'].pristine">
             CEP é <strong>obrigatorio</strong>
         </mat-error>    
-    </mat-form-field>
-    <br /> 
+    </mat-form-field>    
 
     <mat-form-field>
       <input matInput placeholder="Municipio" formControlName="municipio" [(ngModel)]="cliente.municipio"required/>
@@ -172,7 +184,7 @@
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput placeholder="Sigla" formControlName="sigla" [(ngModel)]="cliente.sigla"/>
+      <input matInput placeholder="Sigla" formControlName="sigla" [(ngModel)]="cliente.sigla" required/>
 
       <mat-error *ngIf="firstFormGroup.controls['sigla'].touched && firstFormGroup.controls['sigla'].dirty">
           Sigla deve conter entre 2 a 5 caracteres
@@ -205,7 +217,7 @@
     </mat-form-field>
 
     <mat-form-field>
-        <input matInput placeholder="Numero" formControlName="numero" [(ngModel)]="cliente.numero" required/>
+        <input matInput placeholder="Numero" formControlName="numero" [(ngModel)]="cliente.numero" />
   
         <mat-error *ngIf="firstFormGroup.controls['numero'].touched && firstFormGroup.controls['numero'].dirty">
             Numero deve conter entre 2 e 70 caracteres
@@ -225,6 +237,17 @@
           Observacao é <strong>obrigatorio</strong>
         </mat-error>
     </mat-form-field>
+
+    <mat-form-field>
+        <input matInput placeholder="Referencia do local" formControlName="referencia"  [(ngModel)]="cliente.referencia"/>
+  
+        <mat-error *ngIf="firstFormGroup.controls['referencia'].touched && firstFormGroup.controls['referencia'].dirty">
+            Referencia deve conter entre 2 e 70 caracteres
+          </mat-error>
+          <mat-error *ngIf="firstFormGroup.controls['referencia'].invalid && firstFormGroup.controls['referencia'].pristine">
+            Referencia é <strong>obrigatorio</strong>
+          </mat-error>
+      </mat-form-field>
     
     <h4>Status</h4>
     <mat-form-field>
@@ -259,10 +282,7 @@
     <hr/>
     <div>
         <button mat-raised-button color="primary" (click)="save()" [disabled]="!firstFormGroup.valid">Salvar</button>
-    </div>
-    <div>
-        <button mat-raised-button color="primary" (click)="log()">Log</button>
-    </div>
+    </div>    
 </form>
 </mat-step>
 </mat-horizontal-stepper>
