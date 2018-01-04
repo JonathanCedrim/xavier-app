@@ -51,6 +51,7 @@ export class ClienteFormComponent implements OnInit
             vendedorCodigo: [''],
             vendedorNome: [''],
             nome: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(70)]],
+            conjugue: ['', [ Validators.minLength(2), Validators.maxLength(70)]],
             rg: ['', [Validators.minLength(9), Validators.maxLength(14)]],
             cpf: ['', [Validators.minLength(11), Validators.maxLength(11)]],
             email: ['', [BasicValidators.email] ],
@@ -66,6 +67,7 @@ export class ClienteFormComponent implements OnInit
             bairro: ['', [Validators.minLength(2), Validators.maxLength(70)]],
             endereco: ['', [Validators.minLength(2), Validators.maxLength(70)]],
             numero: ['', [Validators.maxLength(10)]],
+            referencia: ['', [Validators.maxLength(70)]],
             observacao: ['', [Validators.minLength(2), Validators.maxLength(70)]],
             dataCadastro: ['', [Validators.minLength(1), Validators.maxLength(10)]],
             spc: ['', [Validators.minLength(1), Validators.maxLength(10)]],
@@ -86,7 +88,7 @@ export class ClienteFormComponent implements OnInit
           
         if(!id)
         { 
-          this.codigoWrite = false;
+          this.codigoWrite = true;
           this.cliente.dataCadastro = new Date();
           return ;
         }

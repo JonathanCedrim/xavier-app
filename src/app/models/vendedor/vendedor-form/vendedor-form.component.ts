@@ -25,6 +25,7 @@ export class VendedorFormComponent implements OnInit {
   id;
   firstFormGroup: FormGroup
   title: string;
+  codigoWrite: boolean = false;
   vendedor: Vendedor = new Vendedor();
   cep: Cep = new Cep();
   operadoras: string[] = ['TIM', 'VIVO', 'OI', 'CLARO', 'NEXTEL', 'ALGAR'];
@@ -73,7 +74,9 @@ export class VendedorFormComponent implements OnInit {
     this.title = id ? 'Editar Vendedor': 'Novo Vendedor';
     this.id = id ? id: null;
 
-    if(!id) { return ;}
+    if(!id) {
+      this.codigoWrite = true;
+      return ;}
 
     this.vendedorService.getVendedor(id)
       .subscribe(

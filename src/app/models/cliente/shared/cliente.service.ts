@@ -55,6 +55,7 @@ export class ClienteService {
 
 
   addCliente(cliente) {
+    this.upCaseCliente(cliente);
     return this.http.post(this.url, JSON.stringify(cliente),
   {
     headers: new HttpHeaders().set('Content-Type', 'application/json')
@@ -62,6 +63,7 @@ export class ClienteService {
   }
 
   updateCliente(cliente) {
+    this.upCaseCliente(cliente);
     return this.http.put(this.url, JSON.stringify(cliente), 
     {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
@@ -76,17 +78,26 @@ export class ClienteService {
          err => err);
   }
 
-  upCaseCliente(cliente: Cliente) {
+  private upCaseCliente(cliente: Cliente) {
     cliente.nome = cliente.nome.toUpperCase();
-    cliente.conjugue = cliente.conjugue.toUpperCase();
-    cliente.estadoCivil = cliente.estadoCivil.toUpperCase();
-    cliente.email = cliente.email.toUpperCase();
-    cliente.operadora = cliente.operadora.toUpperCase();
-    cliente.operadoraII = cliente.operadoraII.toUpperCase();
-    cliente.municipio = cliente.municipio.toUpperCase();
-    cliente.sigla = cliente.sigla.toUpperCase();
+    if(cliente.conjugue != undefined)
+      cliente.conjugue = cliente.conjugue.toUpperCase();
+    if(cliente.estadoCivil != undefined)
+      cliente.estadoCivil = cliente.estadoCivil.toUpperCase();
+    if(cliente.email != undefined)
+      cliente.email = cliente.email.toUpperCase();
+    if(cliente.operadora != undefined)
+      cliente.operadora = cliente.operadora.toUpperCase();
+    if(cliente.operadoraII != undefined)
+      cliente.operadoraII = cliente.operadoraII.toUpperCase();
+    if(cliente.municipio != undefined)
+      cliente.municipio = cliente.municipio.toUpperCase();    
+    
+    cliente.sigla = cliente.sigla.toUpperCase();    
     cliente.bairro = cliente.bairro.toUpperCase();
     cliente.endereco = cliente.endereco.toUpperCase();
+    
+    if(cliente.referencia != undefined)
     cliente.referencia = cliente.referencia.toUpperCase();    
   }
 }
