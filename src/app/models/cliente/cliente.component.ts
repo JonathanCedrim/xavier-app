@@ -10,8 +10,8 @@ import { ClienteService } from './shared/cliente.service';
 })
 export class ClienteComponent implements OnInit {
 
-  private clientes: Cliente[] = [];
-  private busca;
+  clientes: Cliente[] = [];
+  busca;
   constructor(private clienteService: ClienteService) { }
 
   ngOnInit() {
