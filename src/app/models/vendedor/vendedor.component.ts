@@ -10,13 +10,13 @@ import { VendedorService } from './shared/vendedor.service';
 })
 export class VendedorComponent implements OnInit {
 
-  private vendedores: Vendedor[] = [];
-  private busca;
+  vendedores: Vendedor[] = [];
+  busca;
   constructor(private vendedorService: VendedorService) { }
 
   ngOnInit() {
     this.vendedorService.getVendedores().subscribe(data => 
-      {         
+      {
         this.vendedores = data;
       });
   }
@@ -55,12 +55,12 @@ export class VendedorComponent implements OnInit {
 
   deleteVendedor(vendedor) {
     if(confirm("Tem certeza que deseja deletar: " + vendedor.nome + "?")) {
-      
+
       let index = this.vendedores.indexOf(vendedor);
       this.vendedores.splice(index, 1);
 
       this.vendedorService.deleteVendedor(vendedor.id)
-        .subscribe(null, 
+        .subscribe(null,
           err => {
                     alert("Não foi possivel remover vendedor: " + err.message);
                     this.vendedores.splice(index, 0, vendedor);

@@ -7,7 +7,7 @@
 
 <h5>{{ title }}</h5>
 
-<mat-horizontal-stepper [linear]="isLinear">
+<mat-horizontal-stepper>
 <mat-step [stepControl]="firstFormGroup">
 
 <form [formGroup]="firstFormGroup" >      
@@ -114,16 +114,17 @@
     </mat-form-field>
 
     <br />
-    <mat-form-field>        
-      <input matInput placeholder="Operadora" formControlName="operadora" [(ngModel)]="cliente.operadora"/>
-
-      <mat-error *ngIf="firstFormGroup.controls['operadora'].touched && firstFormGroup.controls['operadora'].dirty">
-          Operadora deve está entre 2 a 10 caracteres.
-        </mat-error>
+    <mat-form-field>
+        <mat-select placeholder="Operadora" formControlName="operadora" [(ngModel)]="cliente.operadora">
+            <mat-option *ngFor="let operadora of operadoras"  [value]="operadora">
+                {{ operadora }}
+            </mat-option>
+        </mat-select>
+        
         <mat-error *ngIf="firstFormGroup.controls['operadora'].invalid && firstFormGroup.controls['operadora'].pristine">
-           Operadora é <strong>obrigatorio</strong>
+            Operadora é <strong>obrigatorio</strong>
         </mat-error>
-    </mat-form-field>
+      </mat-form-field>
 
     <mat-form-field>
       <input matInput placeholder="Celular" formControlName="celular" [(ngModel)]="cliente.celular"/>
@@ -137,14 +138,18 @@
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput placeholder="Operadora" formControlName="operadoraII" [(ngModel)]="cliente.operadoraII"/>
+        <mat-select placeholder="Operadora" formControlName="operadoraII" [(ngModel)]="cliente.operadoraII">
+            <mat-option *ngFor="let operadora of operadoras"  [value]="operadora">
+                {{ operadora }}
+            </mat-option>
+        </mat-select>
 
-      <mat-error *ngIf="firstFormGroup.controls['operadoraII'].touched && firstFormGroup.controls['operadoraII'].dirty">
-          Operadora deve está entre 2 a 10 caracteres.
-        </mat-error>
-        <mat-error *ngIf="firstFormGroup.controls['operadoraII'].invalid && firstFormGroup.controls['operadoraII'].pristine">
-            Operadora é <strong>obrigatorio</strong>
-        </mat-error>
+    <mat-error *ngIf="firstFormGroup.controls['operadoraII'].touched && firstFormGroup.controls['operadoraII'].dirty">
+        Operadora deve está entre 2 a 10 caracteres.
+      </mat-error>
+      <mat-error *ngIf="firstFormGroup.controls['operadoraII'].invalid && firstFormGroup.controls['operadoraII'].pristine">
+          Operadora é <strong>obrigatorio</strong>
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field>

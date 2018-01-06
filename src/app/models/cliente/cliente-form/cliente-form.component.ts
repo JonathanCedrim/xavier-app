@@ -25,15 +25,16 @@ import { BasicValidators } from '../../../shared/basic-validators';
 
 export class ClienteFormComponent implements OnInit
  {
-    private id;
-    private firstFormGroup: FormGroup
-    private title: string;
-    private codigoWrite: boolean = false;
-    private cliente: Cliente = new Cliente();
-    private vendedor: Vendedor = new Vendedor();
-    private cep: Cep = new Cep();
-    private vendedores: Vendedor[] = [];
-    private data: Date;
+    id;
+    firstFormGroup: FormGroup
+    title: string;
+    codigoWrite: boolean = false;
+    cliente: Cliente = new Cliente();
+    vendedor: Vendedor = new Vendedor();
+    cep: Cep = new Cep();
+    vendedores: Vendedor[] = [];
+    data: Date;
+    operadoras: string[] = ['TIM', 'VIVO', 'OI', 'CLARO', 'NEXTEL', 'ALGAR'];
     startDate = new Date(1970, 0, 1);
 
     constructor(
