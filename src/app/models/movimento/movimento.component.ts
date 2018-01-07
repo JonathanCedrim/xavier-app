@@ -16,8 +16,8 @@ export class MovimentoComponent implements OnInit {
 
   ngOnInit() {
     this.movimentoService.getMovimentos().subscribe(data => 
-      {
-        this.movimentos = data;
+      {        
+          this.movimentos = data;        
       });
   }
 
