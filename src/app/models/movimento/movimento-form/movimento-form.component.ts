@@ -40,8 +40,8 @@ export class MovimentoFormComponent implements OnInit {
           vendedorCodigo: [''],
           vendedorNome: ['', [Validators.minLength(0)]],
           dataCadastro: [''],
-          numeroRecibo: ['', [Validators.min(2), Validators.maxLength(70)]],
-          numeroPedido: ['', [Validators.min(2), Validators.maxLength(70)]],
+          numeroRecibo: ['', [Validators.min(0), Validators.maxLength(70)]],
+          numeroPedido: ['', [Validators.min(0), Validators.maxLength(70)]],
           valorCompra: ['', [Validators.min(2), Validators.maxLength(70)]],
           valorRecebido: ['', [Validators.min(2), Validators.maxLength(70)]],
           saldo: ['', [Validators.min(2), Validators.maxLength(70)]],
@@ -70,17 +70,17 @@ export class MovimentoFormComponent implements OnInit {
           this.movimento = movimento;
               if(this.movimento.dataPagamento != null || this.movimento.dataPagamento != undefined)
               {
-                this.movimento.dataCadastro = new Date(this.movimento.dataCadastro);
-              }              
-
-              if(this.movimento.dataPagamento != null || this.movimento.dataPagamento != undefined)
-              {
                 this.movimento.dataPagamento = new Date(this.movimento.dataPagamento);
-              }
-
+              }              
+              
               if(this.movimento.dataPagamentoII != null || this.movimento.dataPagamentoII != undefined)
               {
                 this.movimento.dataPagamentoII = new Date(this.movimento.dataPagamentoII);
+              }
+
+              if(this.movimento.dataCadastro != null || this.movimento.dataCadastro != undefined)
+              {
+                this.movimento.dataCadastro = new Date(this.movimento.dataCadastro);
               }
           },
         response => {

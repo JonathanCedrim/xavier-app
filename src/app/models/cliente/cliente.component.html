@@ -36,7 +36,7 @@ Total: {{ clientes.length}} Clientes.
   <tbody>    
     <tr class="lista" *ngFor="let cliente of clientes">
       <td>{{ cliente.codigo }}</td>
-      <td><i class="material-icons">account_box</i>
+      <td><i class="material-icons">face</i>
         <a [routerLink]="['/cliente', cliente.id]">{{ cliente.nome }}</a>
       </td>
       <td><i class="material-icons">account_box</i>{{ cliente.rg }}</td>

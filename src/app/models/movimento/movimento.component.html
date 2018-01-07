@@ -25,29 +25,31 @@ Total: {{ movimentos.length}} Movimentos.
 <table>
   <thead>
       <tr>
-        <th>Código</th>
-        <th>Vendedor</th>
-        <th>Cliente</th>
-        <th>Recibo</th>
-        <th>Pedido</th>
-        <th>Data De Cadastro</th>
-        <th>Valor Da Compra</th>
-        <th>Valor Do Recibo</th>
-        <th>Observação</th>
-        <th>Data De Pagamento</th>
-        <th>Data De Pagamento</th>
-        <th>Saldo</th>
+
+          <th>Código</th>
+          <th>Vendedor</th>
+          <th>Cliente</th>
+          <th>Nº Recibo</th>
+          <th>Nº Pedido</th>
+          <th>Valor Da Compra</th>
+          <th>Valor Recebido</th>
+          <th>Observação</th>
+          <th>Saldo Devedor</th>
+          <th>1º Data De Pagamento</th>
+          <th>2º Data De Pagamento</th>
+          <th>Data De Cadastro</th>
+          <th>Saldo</th>
       </tr>
   </thead>
 
   <tbody>    
-    <tr class="lista" *ngFor="let movimento of movimentos">
-      <td>{{ movimento.codigo }}</td>
+    <tr class="lista" *ngFor="let movimento of movimentos">      
       <td><i class="material-icons">account_box</i>
         <a [routerLink]="['/movimento', movimento.id]">{{ movimento.codigo }}</a>
       </td>
-      <td><i class="material-icons">account_box</i>    {{ movimento.codigoVendedor }}            </td>
-      <td><i class="material-icons">account_box</i>    {{ movimento.codigoCliente }}           </td>
+
+      <td><i class="material-icons">account_box</i>{{ movimento.vendedor.nome }}</td>
+      <td><i class="material-icons">account_box</i>{{ movimento.cliente.nome }}</td>
       <td><i class="material-icons">phone</i>          {{ movimento.numeroRecibo }}      </td>
       <td><i class="material-icons">sd_storage</i>     {{ movimento.numeroPedido }}     </td>
       <td><i class="material-icons">phone_iphone</i>   {{ movimento.dataCadastro }}       </td>
@@ -56,17 +58,18 @@ Total: {{ movimentos.length}} Movimentos.
       <td><i class="material-icons">phone_iphone</i>   {{ movimento.observacao }}     </td>
       <td><i class="material-icons">phone_iphone</i>   {{ movimento.dataPagamento }}     </td>
       <td><i class="material-icons">phone_iphone</i>   {{ movimento.dataPagamentoII }}     </td>
-      <td><i class="material-icons">phone_iphone</i>   {{ movimento.saldo }}     </td>
+      <td><i class="material-icons">phone_iphone</i>   {{ movimento.dataCadastro }}     </td>
+      <td><i class="material-icons">attach_money</i>   {{ movimento.saldo }}     </td>
       <td>
-        <a [routerLink]="['/movimento', movimento.id]">
-          <i class="material-icons">mode_edit</i>
-        </a>
-      </td>
-      <td>
-        <a (click)="deleteMovimento(movimento)">
-          <i class="material-icons">clear</i>
-        </a>
-      </td>
+          <a [routerLink]="['/movimento', movimento.id]">
+            <i class="material-icons">mode_edit</i>
+          </a>
+        </td>
+        <td>
+          <a (click)="deleteMovimento(movimento)">
+            <i class="material-icons">clear</i>
+          </a>
+        </td>
     </tr>
   </tbody>
 </table>
