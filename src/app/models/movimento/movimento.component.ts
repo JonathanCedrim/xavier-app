@@ -21,8 +21,8 @@ export class MovimentoComponent implements OnInit {
       });
   }
 
-  buscaPorNome() {
-    this.movimentoService.getMovimentoByNome(this.busca).subscribe(
+  buscaPorCodigo() {
+    this.movimentoService.getMovimentoByCodigo(this.busca).subscribe(
       data => {
           if(data != null) 
           {
@@ -31,8 +31,8 @@ export class MovimentoComponent implements OnInit {
       });
   }
 
-  buscaPorRG() {
-        this.movimentoService.getMovimentoByRG(this.busca).subscribe(
+  buscaPorVendedorId() {
+        this.movimentoService.getMovimentoByVendedorId(this.busca).subscribe(
         data => {
           if(data != null) {
             this.movimentos = [];
@@ -42,16 +42,34 @@ export class MovimentoComponent implements OnInit {
     );
   }
 
-  buscaPorCPF() {
-    this.movimentoService.getMovimentoByCPF(this.busca).subscribe(
+  buscaPorClienteId() {
+    this.movimentoService.getMovimentoByClienteId(this.busca).subscribe(
     data => {
       if(data != null) {
         this.movimentos = [];
         this.movimentos.push(data)
       }
+    });
   }
-);
-}
+
+  buscaPorNumeroRecibo() {
+    this.movimentoService.getMovimentoByNumeroRecibo(this.busca).subscribe(
+    data => {
+      if(data != null) {
+        this.movimentos = [];
+        this.movimentos.push(data)
+      }
+    });
+  }
+  buscaPorNumeroPedido() {
+    this.movimentoService.getMovimentoByNumeroPedido(this.busca).subscribe(
+    data => {
+      if(data != null) {
+        this.movimentos = [];
+        this.movimentos.push(data)
+      }
+    });
+  }
 
   deleteMovimento(movimento) {
     if(confirm("Tem certeza que deseja deletar: " + movimento.nome + "?")) {
