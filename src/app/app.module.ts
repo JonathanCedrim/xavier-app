@@ -10,25 +10,29 @@ import { MatButtonToggleModule,  MatButtonModule } from '@angular/material';
 import { RoutingModule } from './app.routing';
 import { VendedorModule } from './models/vendedor/vendedor.module';
 import { ClienteModule } from './models/cliente/cliente.module';
+import { HomePageComponent } from './models/home-page/home-page.component';
+import { MovimentoModule } from './models/movimento/movimento.module';
 
 import { AppComponent } from './app.component';
-import { HomePageComponent } from './models/home-page/home-page.component';
 import { NotFoundComponent } from './models/not-found/not-found.component';
 import { HomePageModule } from './models/home-page/home-page.module';
 import { VendedorRouting } from './models/vendedor/vendedor.routing';
 import { ClienteRouting } from './models/cliente/cliente.routing';
+import { MovimentoRouting} from './models/movimento/movimento.routing';
 
 import { LoginPageComponent } from './models/login-page/login-page.component';
 import { ClienteFormComponent } from './models/cliente/cliente-form/cliente-form.component';
 
 import { CepService } from './shared/cep.service';
+import { MovimentoComponent } from './models/movimento/movimento.component';
+import { MovimentoFormComponent } from './models/movimento/movimento-form/movimento-form.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     NotFoundComponent,
-    LoginPageComponent
+    LoginPageComponent,    
   ],
   imports: [
     BrowserModule,
@@ -36,12 +40,14 @@ import { CepService } from './shared/cep.service';
     BrowserAnimationsModule,
     MatButtonModule,
     MatButtonToggleModule,
-    FormsModule,
-    VendedorModule,
-    ClienteModule,
     MatButtonModule,
-    VendedorRouting,
+    FormsModule,
+    ClienteModule,
+    VendedorModule,
+    MovimentoModule,
     ClienteRouting,
+    VendedorRouting,
+    MovimentoRouting,
     HomePageModule,
     RoutingModule
   ],
