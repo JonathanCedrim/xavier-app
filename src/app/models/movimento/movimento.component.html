@@ -1,3 +1,73 @@
+<nav>
+  <a mat-raised-button routerLink="/movimento">Movimentos</a>
+
+  <a mat-raised-button color="accent" routerLink="/movimento/novo">Novo Movimento</a>
+</nav>   
+
+<section>
 <p>
-  movimento works!
+Total: {{ movimentos.length}} Movimentos.
 </p>
+
+
+
+<mat-form-field floatPlaceholder="never">
+<input matInput placeholder="Insira os dados para realizar busca..." [(ngModel)]="busca" #filter/>
+</mat-form-field>
+<br />
+
+<button mat-button color="primary" (click)="buscaPorCodigo()">Buscar por Codigo</button>
+<button mat-button color="primary" (click)="buscaPorCodigoVendedor()">Buscar por Codigo Vendedor</button>
+<button mat-button color="primary" (click)="buscaPorCodigoCliente()">Buscar por Codigo Cliente</button>
+<button mat-button color="primary" (click)="buscaPorNumeroRecibo()">Buscar por Numero Recibo</button>
+<button mat-button color="primary" (click)="buscaPorNumeroPedido()">Buscar por Numero Pedido</button>
+
+<table>
+  <thead>
+      <tr>
+        <th>Código</th>
+        <th>Vendedor</th>
+        <th>Cliente</th>
+        <th>Recibo</th>
+        <th>Pedido</th>
+        <th>Data De Cadastro</th>
+        <th>Valor Da Compra</th>
+        <th>Valor Do Recibo</th>
+        <th>Observação</th>
+        <th>Data De Pagamento</th>
+        <th>Data De Pagamento</th>
+        <th>Saldo</th>
+      </tr>
+  </thead>
+
+  <tbody>    
+    <tr class="lista" *ngFor="let movimento of movimentos">
+      <td>{{ movimento.codigo }}</td>
+      <td><i class="material-icons">account_box</i>
+        <a [routerLink]="['/movimento', movimento.id]">{{ movimento.codigo }}</a>
+      </td>
+      <td><i class="material-icons">account_box</i>    {{ movimento.codigoVendedor }}            </td>
+      <td><i class="material-icons">account_box</i>    {{ movimento.codigoCliente }}           </td>
+      <td><i class="material-icons">phone</i>          {{ movimento.numeroRecibo }}      </td>
+      <td><i class="material-icons">sd_storage</i>     {{ movimento.numeroPedido }}     </td>
+      <td><i class="material-icons">phone_iphone</i>   {{ movimento.dataCadastro }}       </td>
+      <td><i class="material-icons">sd_storage</i>     {{ movimento.valorCompra }}   </td>
+      <td><i class="material-icons">phone_iphone</i>   {{ movimento.valorRecebido }}     </td>
+      <td><i class="material-icons">phone_iphone</i>   {{ movimento.observacao }}     </td>
+      <td><i class="material-icons">phone_iphone</i>   {{ movimento.dataPagamento }}     </td>
+      <td><i class="material-icons">phone_iphone</i>   {{ movimento.dataPagamentoII }}     </td>
+      <td><i class="material-icons">phone_iphone</i>   {{ movimento.saldo }}     </td>
+      <td>
+        <a [routerLink]="['/movimento', movimento.id]">
+          <i class="material-icons">mode_edit</i>
+        </a>
+      </td>
+      <td>
+        <a (click)="deleteMovimento(movimento)">
+          <i class="material-icons">clear</i>
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</section>

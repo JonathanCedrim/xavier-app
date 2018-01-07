@@ -13,6 +13,6 @@ export class Movimento {
     valorRecebido: string;
     saldo: string;
     observacao: string
-    dataPagamento: string;
+    dataPagamento: Date;
     dataPagamentoII: Date;
 }

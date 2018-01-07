@@ -31,8 +31,8 @@ export class MovimentoComponent implements OnInit {
       });
   }
 
-  buscaPorVendedorId() {
-        this.movimentoService.getMovimentoByVendedorId(this.busca).subscribe(
+  buscaPorCodigoVendedor() {
+        this.movimentoService.getMovimentoByCodigo(this.busca).subscribe(
         data => {
           if(data != null) {
             this.movimentos = [];
@@ -42,8 +42,8 @@ export class MovimentoComponent implements OnInit {
     );
   }
 
-  buscaPorClienteId() {
-    this.movimentoService.getMovimentoByClienteId(this.busca).subscribe(
+  buscaPorCodigoCliente() {
+    this.movimentoService.getMovimentoByCodigoCliente(this.busca).subscribe(
     data => {
       if(data != null) {
         this.movimentos = [];

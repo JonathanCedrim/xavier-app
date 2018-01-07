@@ -35,16 +35,16 @@ export class MovimentoService {
             err => console.log(err));
   }
 
-  getMovimentoByVendedorId(vendedorId: number) {
-    return this.http.get(this.url + '/busca/vendedor/' + vendedorId)
+  getMovimentoByCodigoVendedor(codigoVendedor: number) {
+    return this.http.get(this.url + '/busca/vendedor/' + codigoVendedor)
         .map(res => JSON.parse(JSON.stringify(res)),
             err => console.log(err));
   }
 
   
 
-  getMovimentoByClienteId(clienteId: number) {
-    return this.http.get(this.url + '/busca/cliente/' + clienteId)
+  getMovimentoByCodigoCliente(codigoCliente: number) {
+    return this.http.get(this.url + '/busca/cliente/' + codigoCliente)
         .map(res => JSON.parse(JSON.stringify(res)),
             err => console.log(err));
   }
