@@ -96,26 +96,4 @@ export class MovimentoFormComponent implements OnInit {
 
     resultado.subscribe(data => this.router.navigate(['movimento']));
   }
-
-  atualizaEnderecoViaCep(codigo: string) {
-    if(codigo.length == 8) 
-    {
-      this.cepService.getCep(codigo)
-          .subscribe(data =>
-            {
-              this.cep = data
-              this.setEndereco(this.cep);
-          });
-    } else 
-    {
-      console.log("invalido");
-    }
-  }
-
-  private setEndereco(cep: Cep) 
-  {
-      this.movimento.sigla = cep.uf;
-      this.movimento.bairro = cep.bairro;
-      this.movimento.endereco = cep.logradouro;
-  }
 }

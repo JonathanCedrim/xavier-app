@@ -24,10 +24,10 @@
       <mat-form-field>
             <input id="codigoVendedor" matInput placeholder="Codigo Vendedor" formControlName="vendedor" [(ngModel)]="movimento.vendedor.codigo" autofocus required/>
             
-            <mat-error *ngIf="firstFormGroup.controls['codigoVendedor'].touched && firstFormGroup.controls['codigoVendedor'].dirty">
+            <mat-error *ngIf="firstFormGroup.controls['vendedor'].touched && firstFormGroup.controls['vendedor'].dirty">
               Codigo Vendedor deve conter entre 1 a 10 digitos
             </mat-error>
-            <mat-error *ngIf="firstFormGroup.controls['codigoVendedor'].invalid && firstFormGroup.controls['codigoVendedor'].pristine">
+            <mat-error *ngIf="firstFormGroup.controls['vendedor'].invalid && firstFormGroup.controls['vendedor'].pristine">
                Codigo Vendedor é <strong>obrigatorio</strong>
             </mat-error>
       </mat-form-field>
@@ -35,10 +35,10 @@
       <mat-form-field>
         <input id="codigoCliente" matInput placeholder="Codigo Cliente" formControlName="cliente" [(ngModel)]="movimento.cliente.codigo" autofocus required/>
         
-        <mat-error *ngIf="firstFormGroup.controls['codigoCliente'].touched && firstFormGroup.controls['codigoCliente'].dirty">
+        <mat-error *ngIf="firstFormGroup.controls['cliente'].touched && firstFormGroup.controls['cliente'].dirty">
           Codigo Cliente deve conter entre 1 a 10 digitos
         </mat-error>
-        <mat-error *ngIf="firstFormGroup.controls['codigoCliente'].invalid && firstFormGroup.controls['codigoCliente'].pristine">
+        <mat-error *ngIf="firstFormGroup.controls['cliente'].invalid && firstFormGroup.controls['cliente'].pristine">
            Codigo Vendedor é <strong>obrigatorio</strong>
         </mat-error>
   </mat-form-field>
@@ -57,23 +57,23 @@
   </mat-form-field>
 
       <mat-form-field>
-            <input matInput placeholder="Numero Do Recibo" formControlName="recibo" [(ngModel)]="movimento.recibo"/>
+            <input matInput placeholder="Numero Do Recibo" formControlName="numeroRecibo" [(ngModel)]="movimento.numeroRecibo"/>
 
-            <mat-error *ngIf="firstFormGroup.controls['recibo'].touched && firstFormGroup.controls['recibo'].dirty">
+            <mat-error *ngIf="firstFormGroup.controls['numeroRecibo'].touched && firstFormGroup.controls['numeroRecibo'].dirty">
                 Numero do Recibo deve conter ao menos 1 caracterer.
             </mat-error>
-            <mat-error *ngIf="firstFormGroup.controls['recibo'].invalid && firstFormGroup.controls['recibo'].pristine">
+            <mat-error *ngIf="firstFormGroup.controls['numeroRecibo'].invalid && firstFormGroup.controls['numeroRecibo'].pristine">
                 Numero do Recibo é <strong>obrigatorio</strong>
             </mat-error>
       </mat-form-field>
 
     <mat-form-field>
-        <input matInput placeholder="Numero Do Pedido" formControlName="pedido" [(ngModel)]="movimento.pedido"/>
+        <input matInput placeholder="Numero Do Pedido" formControlName="numeroPedido" [(ngModel)]="movimento.numeroPedido"/>
 
-        <mat-error *ngIf="firstFormGroup.controls['pedido'].touched && firstFormGroup.controls['pedido'].dirty">
+        <mat-error *ngIf="firstFormGroup.controls['numeroPedido'].touched && firstFormGroup.controls['numeroPedido'].dirty">
             Numero do Pedido deve conter ao menos 1 caracterer.
         </mat-error>
-        <mat-error *ngIf="firstFormGroup.controls['pedido'].invalid && firstFormGroup.controls['pedido'].pristine">
+        <mat-error *ngIf="firstFormGroup.controls['numeroPedido'].invalid && firstFormGroup.controls['numeroPedido'].pristine">
             Numero do Pedido é <strong>obrigatorio</strong>
         </mat-error>
     </mat-form-field>
