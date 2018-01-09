@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
 import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { Vendedor } from '../shared/vendedor';
 import { Cep } from '../../../shared/cep';
@@ -15,10 +15,10 @@ import { BasicValidators } from '../../../shared/basic-validators';
   templateUrl: './vendedor-form.component.html',
   styleUrls: ['./vendedor-form.component.css'],
   providers: [
-    {provide: MAT_DATE_LOCALE, useValue: 'pt_BR'},
+    {provide: MAT_DATE_LOCALE, useValue: 'pt-BR'},
     {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
     {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
-  ]
+  ],
 })
 export class VendedorFormComponent implements OnInit {
 
@@ -35,6 +35,7 @@ export class VendedorFormComponent implements OnInit {
     formBuilder: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
+    private adapter: DateAdapter<any>,
     private vendedorService: VendedorService,
     private cepService: CepService
   ) {
@@ -67,6 +68,8 @@ export class VendedorFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.adapter.setLocale("pt-BR");
+
     let id = this.route.params.subscribe(params => {
     
     let id = params['id'];

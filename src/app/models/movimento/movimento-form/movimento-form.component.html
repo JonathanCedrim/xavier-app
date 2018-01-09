@@ -48,8 +48,8 @@
       <br />
 
     <mat-form-field>
-        <input id="codigoCliente" matInput placeholder="Codigo Cliente" formControlName="clienteCodigo" [(ngModel)]="movimento.cliente.codigo" required
-        (keyup)="atualizaCamposCliente(firstFormGroup.controls['clienteCodigo'].value)"/>
+        <input id="codigoCliente" matInput placeholder="Codigo Cliente" formControlName="clienteCodigo" [(ngModel)]="movimento.cliente.codigo"
+        (keyup)="atualizaCamposCliente()" required/>
         
         <mat-error *ngIf="firstFormGroup.controls['clienteCodigo'].touched && firstFormGroup.controls['clienteCodigo'].dirty">
           Codigo Cliente deve conter entre 1 a 10 digitos
@@ -116,21 +116,6 @@
     </mat-form-field>
 
     <br />
-
-    <mat-form-field>
-        <input matInput placeholder="Saldo Devedor" formControlName="saldo" [(ngModel)]="movimento.saldo"/>
-
-        <mat-error *ngIf="firstFormGroup.controls['saldo'].touched && firstFormGroup.controls['saldo'].dirty">
-            saldo deve conter ao menos 1 caracterer.
-        </mat-error>
-        <mat-error *ngIf="firstFormGroup.controls['saldo'].invalid && firstFormGroup.controls['saldo'].pristine">
-            saldo é <strong>obrigatorio</strong>
-        </mat-error>
-    </mat-form-field>
-
-  <br />
-    
- 
     <br />
 
     <mat-form-field>

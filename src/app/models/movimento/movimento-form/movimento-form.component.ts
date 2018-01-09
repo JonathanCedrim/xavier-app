@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
+import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { Movimento } from '../shared/movimento';
 import { MovimentoService } from '../shared/movimento.service';
@@ -12,7 +13,12 @@ import { ClienteService } from '../../cliente/shared/cliente.service';
 @Component({
   selector: 'app-movimento-form',
   templateUrl: './movimento-form.component.html',
-  styleUrls: ['./movimento-form.component.css'],  
+  styleUrls: ['./movimento-form.component.css'],
+  providers: [
+    {provide: MAT_DATE_LOCALE, useValue: 'pt-BR'},
+    {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
+  ],
 })
 export class MovimentoFormComponent implements OnInit {
 
@@ -21,12 +27,14 @@ export class MovimentoFormComponent implements OnInit {
   title: string;
   codigoWrite: boolean = false;
   movimento: Movimento = new Movimento();
+  movimentos: Movimento[] = [];
   startDate = new Date(1970, 0, 1);
 
   constructor(
     formBuilder: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
+    private adapter: DateAdapter<any>,
     private movimentoService: MovimentoService,
     private vendedorService: VendedorService,
     private clienteService: ClienteService
@@ -44,7 +52,6 @@ export class MovimentoFormComponent implements OnInit {
           numeroPedido: ['', [Validators.min(0), Validators.maxLength(70)]],
           valorCompra: ['', [Validators.min(2), Validators.maxLength(70)]],
           valorRecebido: ['', [Validators.min(2), Validators.maxLength(70)]],
-          saldo: ['', [Validators.min(2), Validators.maxLength(70)]],
           observacao: ['', [Validators.min(2), Validators.maxLength(70)]],          
           dataPagamento: [''],
           dataPagamentoII: ['']
@@ -52,6 +59,8 @@ export class MovimentoFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.adapter.setLocale("pt-BR");
+
     let id = this.route.params.subscribe(params => {
     
     let id = params['id'];
@@ -110,14 +119,24 @@ export class MovimentoFormComponent implements OnInit {
   atualizaCamposVendedor(codigo) {
     this.vendedorService.getVendedorByCodigo(codigo)
       .subscribe(data => {
-        this.movimento.vendedor = data;
+        this.movimento.vendedor.nome = "Insira o codigo do vendedor";  
+          if(data != null && data!= undefined) {
+            this.movimento.vendedor = data;
+          }
       });
   }
 
-  atualizaCamposCliente(codigo) {
-    this.clienteService.getClienteByCodigo(codigo)
-      .subscribe(data => {
-          this.movimento.cliente = data;
-      });
+  atualizaCamposCliente() {
+    let codigoCliente = this.movimento.cliente.codigo;
+    let codigoVendedor = this.movimento.vendedor.codigo;
+    
+      this.clienteService.getClienteByCodigo(codigoVendedor, codigoCliente)
+        .subscribe(data => {
+
+          this.movimento.cliente.nome = "Insira o codigo do vendedor";
+            if(data != null && data != undefined) {
+              this.movimento.cliente = data;
+            }   
+        });    
   }
 }

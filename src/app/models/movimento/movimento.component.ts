@@ -10,16 +10,14 @@ import { MovimentoService } from './shared/movimento.service';
 })
 export class MovimentoComponent implements OnInit {
 
+  movimento: Movimento = new Movimento();
   movimentos: Movimento[] = [];
+  saldo: number = 0;
   busca;
+
   constructor(private movimentoService: MovimentoService) { }
 
-  ngOnInit() {
-    this.movimentoService.getMovimentos().subscribe(data => 
-      {        
-          this.movimentos = data;        
-      });
-  }
+  ngOnInit() { }
 
   buscaPorCodigo() {
     this.movimentoService.getMovimentoByCodigo(this.busca).subscribe(
@@ -42,16 +40,6 @@ export class MovimentoComponent implements OnInit {
     );
   }
 
-  buscaPorCodigoCliente() {
-    this.movimentoService.getMovimentoByCodigoCliente(this.busca).subscribe(
-    data => {
-      if(data != null) {
-        this.movimentos = [];
-        this.movimentos.push(data)
-      }
-    });
-  }
-
   buscaPorNumeroRecibo() {
     this.movimentoService.getMovimentoByNumeroRecibo(this.busca).subscribe(
     data => {
@@ -61,6 +49,7 @@ export class MovimentoComponent implements OnInit {
       }
     });
   }
+  
   buscaPorNumeroPedido() {
     this.movimentoService.getMovimentoByNumeroPedido(this.busca).subscribe(
     data => {
@@ -84,5 +73,19 @@ export class MovimentoComponent implements OnInit {
                     this.movimentos.splice(index, 0, movimento);
           });
     }
+  }
+
+  buscaMovimentos() {
+      this.movimentoService.getMovimentosByCodigoVendedorAndCodigoCliente(this.movimento.vendedor.codigo, this.movimento.cliente.codigo)
+        .subscribe(data => {
+            if(data != null)
+              this.movimentos = data;
+
+              for(let movimento of this.movimentos) {          
+                this.saldo += movimento.valorCompra - movimento.valorRecebido;
+              }
+        });
+
+        
   }
 }

@@ -41,8 +41,6 @@ export class MovimentoService {
             err => console.log(err));
   }
 
-  
-
   getMovimentoByCodigoCliente(codigoCliente: number) {
     return this.http.get(this.url + '/busca/cliente/' + codigoCliente)
         .map(res => JSON.parse(JSON.stringify(res)),
@@ -57,6 +55,12 @@ export class MovimentoService {
 
   getMovimentoByNumeroPedido(numeroPedido: number) {
     return this.http.get(this.url + '/busca/numeroPedido/' + numeroPedido)
+        .map(res => JSON.parse(JSON.stringify(res)),
+            err => console.log(err));
+  }
+
+  getMovimentosByCodigoVendedorAndCodigoCliente(codigoVendedor: number, codigoCliente: number) {
+    return this.http.get(this.url + '/busca/vendedor/' + codigoVendedor + '/cliente/' + codigoCliente)
         .map(res => JSON.parse(JSON.stringify(res)),
             err => console.log(err));
   }

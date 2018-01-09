@@ -35,9 +35,9 @@ export class ClienteService {
             err => console.log(err));
   }
 
-  getClienteByCodigo(codigo) {
-    return this.http.get(this.url + '/busca/codigo/' + codigo)
-        .map(res => JSON.parse(JSON.stringify(res)),
+  getClienteByCodigo(codigoVendedor, codigoCliente) {
+    return this.http.get(this.url + '/busca/codigo/vendedor/' + codigoVendedor + '/cliente/' + codigoCliente)
+            .map(res => JSON.parse(JSON.stringify(res)),
             err => console.log(err));
   }
 

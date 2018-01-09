@@ -17,7 +17,7 @@ import { BasicValidators } from '../../../shared/basic-validators';
   templateUrl: './cliente-form.component.html',
   styleUrls: ['./cliente-form.component.css'],
   providers: [
-    {provide: MAT_DATE_LOCALE, useValue: 'pt_BR'},
+    {provide: MAT_DATE_LOCALE, useValue: 'pt-BR'},
     {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
     {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
   ],
@@ -77,7 +77,7 @@ export class ClienteFormComponent implements OnInit
     }
 
     ngOnInit() {
-      this.adapter.setLocale('pt_BR');
+      this.adapter.setLocale('pt-BR');
       
       let id = this.route.params.subscribe(params =>
       {
