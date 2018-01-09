@@ -9,8 +9,8 @@ export class Movimento {
     dataCadastro: Date;
     numeroRecibo: number;
     numeroPedido: number;
-    valorCompra: string;
-    valorRecebido: string;
+    valorCompra: number;
+    valorRecebido: number;
     saldo: string;
     observacao: string
     dataPagamento: Date;

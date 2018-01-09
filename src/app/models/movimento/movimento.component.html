@@ -10,18 +10,27 @@ Total: {{ movimentos.length}} Movimentos.
 </p>
 
 
+<mat-form-field floatPlaceholder="never">
+  <input matInput placeholder="Codigo Do Vendedor" [(ngModel)]="movimento.vendedor.codigo" autofocus />
+</mat-form-field>
 
+<mat-form-field floatPlaceholder="never">
+  <input matInput placeholder="Codigo Do Cliente" [(ngModel)]="movimento.cliente.codigo"/>
+</mat-form-field>
+
+<button mat-button color="primary" (click)="buscaMovimentos()">Buscar Movimentos</button>
+
+<br />
+<hr />
 <mat-form-field floatPlaceholder="never">
 <input matInput placeholder="Insira os dados para realizar busca..." [(ngModel)]="busca" #filter/>
 </mat-form-field>
 <br />
 
-<button mat-button color="primary" (click)="buscaPorCodigo()">Buscar por Codigo</button>
-<button mat-button color="primary" (click)="buscaPorCodigoVendedor()">Buscar por Codigo Vendedor</button>
-<button mat-button color="primary" (click)="buscaPorCodigoCliente()">Buscar por Codigo Cliente</button>
 <button mat-button color="primary" (click)="buscaPorNumeroRecibo()">Buscar por Numero Recibo</button>
 <button mat-button color="primary" (click)="buscaPorNumeroPedido()">Buscar por Numero Pedido</button>
 
+<h4>Saldo Devedor Total: {{saldo}}</h4>
 <table>
   <thead>
       <tr>
@@ -59,7 +68,7 @@ Total: {{ movimentos.length}} Movimentos.
       <td><i class="material-icons">phone_iphone</i>   {{ movimento.dataPagamento }}     </td>
       <td><i class="material-icons">phone_iphone</i>   {{ movimento.dataPagamentoII }}     </td>
       <td><i class="material-icons">phone_iphone</i>   {{ movimento.dataCadastro }}     </td>
-      <td><i class="material-icons">attach_money</i>   {{ movimento.saldo }}     </td>
+      <td><i class="material-icons">attach_money</i>   {{ movimento.valorCompra - movimento.valorRecebido }}     </td>
       <td>
           <a [routerLink]="['/movimento', movimento.id]">
             <i class="material-icons">mode_edit</i>
