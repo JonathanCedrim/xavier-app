@@ -23,7 +23,7 @@ export class Cliente {
     numero: number;
     referencia: string;
     observacao: string;
-    salario: string;    
+    salario: number;    
     dataCadastro: Date;
     selecionado: boolean;
     spc: boolean;

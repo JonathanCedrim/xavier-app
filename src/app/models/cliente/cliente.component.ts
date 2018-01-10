@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { Cliente } from './shared/cliente';
 import { ClienteService } from './shared/cliente.service';
+import { Movimento } from '../movimento/shared/movimento';
+import { MovimentoService } from '../movimento/shared/movimento.service';
 
 @Component({
   selector: 'app-cliente',
@@ -11,8 +13,14 @@ import { ClienteService } from './shared/cliente.service';
 export class ClienteComponent implements OnInit {
 
   clientes: Cliente[] = [];
+  movimentos: Movimento[] = [];
+  movimento: Movimento = new Movimento();
+  saldo: number = 0;
   busca;
-  constructor(private clienteService: ClienteService) { }
+  
+  constructor(
+    private clienteService: ClienteService,
+    private movimentoService: MovimentoService) { }
 
   ngOnInit() {
     this.clienteService.getClientes().subscribe(data => this.clientes = data);
@@ -21,6 +29,7 @@ export class ClienteComponent implements OnInit {
   buscaPorNome() {
     this.clienteService.getClienteByNome(this.busca).subscribe(
     data => {
+      this.clientes = [];
       if(data != null) {
         this.clientes = data;
       }
@@ -31,6 +40,7 @@ export class ClienteComponent implements OnInit {
   buscaPorRG() {
         this.clienteService.getClienteByRG(this.busca).subscribe(
         data => {
+          this.clientes = [];
           if(data != null) {
             this.clientes = [];
             this.clientes.push(data)
@@ -42,10 +52,10 @@ export class ClienteComponent implements OnInit {
   buscaPorCPF() {
     this.clienteService.getClienteByCPF(this.busca).subscribe(
     data => {
-      if(data != null) {
-        this.clientes = [];
-        this.clientes.push(data)
-      }
+      this.clientes = [];
+      if(data != null) {        
+        this.clientes.push(data)        
+      } 
   }
 );
 }
@@ -63,5 +73,38 @@ export class ClienteComponent implements OnInit {
                     this.clientes.splice(index, 0, cliente);
           });
     }
+  }
+
+  buscaMovimentos(codigoVendedor, codigoCliente) {
+    this.movimentoService.getMovimentosByCodigoVendedorAndCodigoCliente(codigoVendedor, codigoCliente)
+      .subscribe(data => {
+          if(data != null)
+          {
+            this.movimentos = [];
+            this.movimentos = data;
+
+            if(this.movimentos.length == 0) 
+            {
+              this.saldo = this.movimentos[0].valorCompra - this.movimento[0].valorRecebido;
+            } else
+            {
+              for(let movimento of this.movimentos) {
+                this.saldo += movimento.valorCompra - movimento.valorRecebido;
+                
+                console.log("valor saldo: " + this.saldo);
+                console.log("valor de compra: " + movimento.valorCompra);
+                console.log("valor recebido: " + movimento.valorRecebido);
+            }
+          }
+        }
+      });
+}
+
+  clear(){ this.saldo = 0; console.error("try");}//POG
+  
+  
+  
+  log(d, e) {
+    console.log("test: " + d + e);
   }
 }

@@ -14,6 +14,7 @@ export class MovimentoComponent implements OnInit {
   movimentos: Movimento[] = [];
   saldo: number = 0;
   busca;
+   
 
   constructor(private movimentoService: MovimentoService) { }
 
@@ -24,7 +25,7 @@ export class MovimentoComponent implements OnInit {
       data => {
           if(data != null) 
           {
-            this.movimentos = data;
+            this.movimentos = data;            
           }
       });
   }
@@ -46,6 +47,8 @@ export class MovimentoComponent implements OnInit {
       if(data != null) {
         this.movimentos = [];
         this.movimentos.push(data)
+      } else {
+        this.movimentos =[];
       }
     });
   }
@@ -56,6 +59,8 @@ export class MovimentoComponent implements OnInit {
       if(data != null) {
         this.movimentos = [];
         this.movimentos.push(data)
+      } else {
+        this.movimentos =[];
       }
     });
   }
@@ -79,13 +84,20 @@ export class MovimentoComponent implements OnInit {
       this.movimentoService.getMovimentosByCodigoVendedorAndCodigoCliente(this.movimento.vendedor.codigo, this.movimento.cliente.codigo)
         .subscribe(data => {
             if(data != null)
+            {
+              this.movimentos = [];
               this.movimentos = data;
 
-              for(let movimento of this.movimentos) {          
-                this.saldo += movimento.valorCompra - movimento.valorRecebido;
+              if(this.movimentos.length == 0) 
+              {
+                this.saldo = this.movimentos[0].valorCompra - this.movimento[0].valorRecebido;
+              } else
+              {
+                for(let movimento of this.movimentos) {
+                  this.saldo += movimento.valorCompra - movimento.valorRecebido;
               }
+            }
+          }
         });
-
-        
   }
 }

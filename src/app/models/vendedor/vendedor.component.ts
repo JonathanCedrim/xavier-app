@@ -24,6 +24,7 @@ export class VendedorComponent implements OnInit {
   buscaPorNome() {
     this.vendedorService.getVendedorByNome(this.busca).subscribe(
       data => {
+          this.vendedores = [];
           if(data != null) 
           {
             this.vendedores = data;
@@ -34,8 +35,8 @@ export class VendedorComponent implements OnInit {
   buscaPorRG() {
         this.vendedorService.getVendedorByRG(this.busca).subscribe(
         data => {
+          this.vendedores = [];
           if(data != null) {
-            this.vendedores = [];
             this.vendedores.push(data)
           }
       }
@@ -45,8 +46,8 @@ export class VendedorComponent implements OnInit {
   buscaPorCPF() {
     this.vendedorService.getVendedorByCPF(this.busca).subscribe(
     data => {
+      this.vendedores = [];
       if(data != null) {
-        this.vendedores = [];
         this.vendedores.push(data)
       }
   }
