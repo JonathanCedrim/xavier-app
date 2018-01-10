@@ -10,7 +10,7 @@ Total: {{ clientes.length}} Clientes.
 </p>
 
 <mat-form-field floatPlaceholder="never">
-  <input matInput placeholder="Insira os dados para realizar busca..." [(ngModel)]="busca"#filter/>
+  <input matInput placeholder="Filtro" [(ngModel)]="busca"#filter/>
 </mat-form-field>
 <br />
 <button mat-button color="primary" (click)="buscaPorNome()">Buscar por Nome</button>
@@ -30,12 +30,13 @@ Total: {{ clientes.length}} Clientes.
         <th>Operadora</th>
         <th>Celular</th>
         <th>Vendedor</th>
+        <th>Saldo</th>
       </tr>
   </thead>
 
-  <tbody>    
+  <tbody>
     <tr class="lista" *ngFor="let cliente of clientes">
-      <td>{{ cliente.codigo }}</td>
+      <td (mouseenter)="buscaMovimentos(cliente.codigo, cliente.vendedor.codigo)" (mouseout)="clear()">{{ cliente.codigo }}</td>
       <td><i class="material-icons">face</i>
         <a [routerLink]="['/cliente', cliente.id]">{{ cliente.nome }}</a>
       </td>
@@ -47,7 +48,8 @@ Total: {{ clientes.length}} Clientes.
       <td><i class="material-icons">sd_storage</i>{{ cliente.operadoraII }}</td>
       <td><i class="material-icons">phone_iphone</i>{{ cliente.celularII }}</td>
       <td *ngIf="cliente.vendedor.id!=undefinied">{{ cliente.vendedor.codigo }}</td>
-      <td *ngIf="cliente.vendedor.id==undefinied">{{ cliente.vendedor }}</td>
+      <td *ngIf="cliente.vendedor.id==undefinied">{{ cliente.vendedor }}</td>      
+      <td>{{ saldo | currency:'BRL':true:'2.2-2'}} </td>
       <td>
         <a [routerLink]="['/cliente', cliente.id]">
           <i class="material-icons">mode_edit</i>
@@ -61,4 +63,8 @@ Total: {{ clientes.length}} Clientes.
     </tr>
   </tbody>
 </table>
+</section>
+
+<section>
+  
 </section>

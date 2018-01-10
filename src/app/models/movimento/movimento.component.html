@@ -23,14 +23,14 @@ Total: {{ movimentos.length}} Movimentos.
 <br />
 <hr />
 <mat-form-field floatPlaceholder="never">
-<input matInput placeholder="Insira os dados para realizar busca..." [(ngModel)]="busca" #filter/>
+<input matInput placeholder="Busca" [(ngModel)]="busca" #filter/>
 </mat-form-field>
 <br />
 
 <button mat-button color="primary" (click)="buscaPorNumeroRecibo()">Buscar por Numero Recibo</button>
 <button mat-button color="primary" (click)="buscaPorNumeroPedido()">Buscar por Numero Pedido</button>
 
-<h4>Saldo Devedor Total: {{saldo}}</h4>
+<h4>Saldo Devedor Total: {{saldo| currency:'BRL':true:'2.2-2'}}</h4>
 <table>
   <thead>
       <tr>
@@ -40,35 +40,33 @@ Total: {{ movimentos.length}} Movimentos.
           <th>Cliente</th>
           <th>Nº Recibo</th>
           <th>Nº Pedido</th>
-          <th>Valor Da Compra</th>
-          <th>Valor Recebido</th>
-          <th>Observação</th>
-          <th>Saldo Devedor</th>
-          <th>1º Data De Pagamento</th>
-          <th>2º Data De Pagamento</th>
           <th>Data De Cadastro</th>
+          <th>Valor Da Compra</th>
+          <th>Valor Recebido</th>          
+          <th>Observação</th>
+          <th>1º Data De Pagamento</th>
+          <th>2º Data De Pagamento</th>          
           <th>Saldo</th>
       </tr>
   </thead>
 
   <tbody>    
     <tr class="lista" *ngFor="let movimento of movimentos">      
-      <td><i class="material-icons">account_box</i>
+      <td><i class="material-icons">vpn_key</i>
         <a [routerLink]="['/movimento', movimento.id]">{{ movimento.codigo }}</a>
       </td>
 
-      <td><i class="material-icons">account_box</i>{{ movimento.vendedor.nome }}</td>
-      <td><i class="material-icons">account_box</i>{{ movimento.cliente.nome }}</td>
-      <td><i class="material-icons">phone</i>          {{ movimento.numeroRecibo }}      </td>
-      <td><i class="material-icons">sd_storage</i>     {{ movimento.numeroPedido }}     </td>
-      <td><i class="material-icons">phone_iphone</i>   {{ movimento.dataCadastro }}       </td>
-      <td><i class="material-icons">sd_storage</i>     {{ movimento.valorCompra }}   </td>
-      <td><i class="material-icons">phone_iphone</i>   {{ movimento.valorRecebido }}     </td>
-      <td><i class="material-icons">phone_iphone</i>   {{ movimento.observacao }}     </td>
-      <td><i class="material-icons">phone_iphone</i>   {{ movimento.dataPagamento }}     </td>
-      <td><i class="material-icons">phone_iphone</i>   {{ movimento.dataPagamentoII }}     </td>
-      <td><i class="material-icons">phone_iphone</i>   {{ movimento.dataCadastro }}     </td>
-      <td><i class="material-icons">attach_money</i>   {{ movimento.valorCompra - movimento.valorRecebido }}     </td>
+      <td><i class="material-icons">face</i>{{ movimento.vendedor.nome }} </td>
+      <td><i class="material-icons">face</i>{{ movimento.cliente.nome }}  </td>
+      <td><i class="material-icons">receipt</i>          {{ movimento.numeroRecibo }}  </td>
+      <td><i class="material-icons">receipt</i>   {{ movimento.numeroPedido }}  </td>
+      <td><i class="material-icons">date_range</i>   {{ movimento.dataCadastro | date: 'dd/MM/yyyy'}}       </td>
+      <td><i class="material-icons">attach_money</i>     {{ movimento.valorCompra | currency:'BRL':true:'2.2-2'}}   </td>
+      <td><i class="material-icons">attach_money</i>    {{ movimento.valorRecebido | currency:'BRL':true:'2.2-2' }} </td>
+      <td><i class="material-icons">priority_high</i>   {{ movimento.observacao }}    </td>
+      <td><i class="material-icons">date_range</i>   {{ movimento.dataPagamento | date: 'dd/MM/yyyy'}}      </td>
+      <td><i class="material-icons">date_range</i>   {{ movimento.dataPagamentoII | date: 'dd/MM/yyyy'}}    </td>
+      <td><i class="material-icons">attach_money</i>   {{ movimento.valorCompra - movimento.valorRecebido | currency:'BRL':true:'2.2-2'}}  </td>
       <td>
           <a [routerLink]="['/movimento', movimento.id]">
             <i class="material-icons">mode_edit</i>
