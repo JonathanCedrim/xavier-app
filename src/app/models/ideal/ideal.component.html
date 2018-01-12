@@ -1,0 +1,70 @@
+<nav>
+  <a mat-raised-button routerLink="/ideal">Ideals</a>
+
+  <a mat-raised-button color="accent" routerLink="/ideal/novo">Novo Ideal</a>
+</nav>   
+
+<section>
+<p>
+Total: {{ clientes.length}} Ideals.
+</p>
+
+<mat-form-field floatPlaceholder="never">
+  <input matInput placeholder="Filtro" [(ngModel)]="busca"#filter/>
+</mat-form-field>
+<br />
+<button mat-button color="primary" (click)="buscaPorNome()">Buscar por Nome</button>
+<button mat-button color="primary" (click)="buscaPorRG()">Buscar por RG</button>
+<button mat-button color="primary" (click)="buscaPorCPF()">Buscar por CPF</button>
+
+<table>
+  <thead>
+      <tr>
+        <th>Código</th>
+        <th>Nome</th>
+        <th>RG</th>
+        <th>CPF</th>
+        <th>Telefone</th>
+        <th>Operadora</th>
+        <th>Celular</th>
+        <th>Operadora</th>
+        <th>Celular</th>
+        <th>Vendedor</th>
+        <th>Saldo</th>
+      </tr>
+  </thead>
+
+  <tbody>
+    <tr class="lista" *ngFor="let ideal of clientes">
+      <td (mouseenter)="buscaMovimentos(ideal.codigo, ideal.vendedor.codigo)" (mouseout)="clear()">{{ ideal.codigo }}</td>
+      <td><i class="material-icons">face</i>
+        <a [routerLink]="['/ideal', ideal.id]">{{ ideal.nome }}</a>
+      </td>
+      <td><i class="material-icons">account_box</i>{{ ideal.rg }}</td>
+      <td><i class="material-icons">account_box</i>{{ ideal.cpf }}</td>
+      <td><i class="material-icons">phone</i>{{ ideal.telefone }}</td>
+      <td><i class="material-icons">sd_storage</i>{{ ideal.operadora }}</td>
+      <td><i class="material-icons">phone_iphone</i>{{ ideal.celular }}</td>
+      <td><i class="material-icons">sd_storage</i>{{ ideal.operadoraII }}</td>
+      <td><i class="material-icons">phone_iphone</i>{{ ideal.celularII }}</td>
+      <td *ngIf="ideal.vendedor.id!=undefinied">{{ ideal.vendedor.codigo }}</td>
+      <td *ngIf="ideal.vendedor.id==undefinied">{{ ideal.vendedor }}</td>
+      <td>{{ saldo | currency:'BRL':true:'2.2-2'}} </td>
+      <td>
+        <a [routerLink]="['/ideal', ideal.id]">
+          <i class="material-icons">mode_edit</i>
+        </a>
+      </td>
+      <td>
+        <a (click)="deleteIdeal(ideal)">
+          <i class="material-icons">clear</i>
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</section>
+
+<section>
+  
+</section>

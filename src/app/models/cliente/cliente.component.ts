@@ -98,13 +98,5 @@ export class ClienteComponent implements OnInit {
           }
         }
       });
-}
-
-  clear(){ this.saldo = 0; console.error("try");}//POG
-  
-  
-  
-  log(d, e) {
-    console.log("test: " + d + e);
   }
 }

@@ -10,22 +10,21 @@ import { MatButtonToggleModule,  MatButtonModule } from '@angular/material';
 import { RoutingModule } from './app.routing';
 import { VendedorModule } from './models/vendedor/vendedor.module';
 import { ClienteModule } from './models/cliente/cliente.module';
-import { HomePageComponent } from './models/home-page/home-page.component';
 import { MovimentoModule } from './models/movimento/movimento.module';
+import { IdealModule } from './models/ideal/ideal.module';
+import { HomePageModule } from './models/home-page/home-page.module';
 
 import { AppComponent } from './app.component';
 import { NotFoundComponent } from './models/not-found/not-found.component';
-import { HomePageModule } from './models/home-page/home-page.module';
+import { HomePageComponent } from './models/home-page/home-page.component';
+
 import { VendedorRouting } from './models/vendedor/vendedor.routing';
 import { ClienteRouting } from './models/cliente/cliente.routing';
 import { MovimentoRouting} from './models/movimento/movimento.routing';
+import { IdealRouting} from './models/ideal/ideal.routing';
 
 import { LoginPageComponent } from './models/login-page/login-page.component';
-import { ClienteFormComponent } from './models/cliente/cliente-form/cliente-form.component';
-
 import { CepService } from './shared/cep.service';
-import { MovimentoComponent } from './models/movimento/movimento.component';
-import { MovimentoFormComponent } from './models/movimento/movimento-form/movimento-form.component';
 
 
 @NgModule({

@@ -5,9 +5,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
 
-import { ClienteComponent } from './cliente.component';
-import { ClienteService } from './shared/cliente.service';
-import { ClienteFormComponent } from './cliente-form/cliente-form.component';
+import { IdealComponent } from './ideal.component';
+import { IdealService } from './shared/ideal.service';
+import { IdealFormComponent } from './ideal-form/ideal-form.component';
 import { MatNativeDateModule, MatDatepickerModule, MatSelectModule, MatInputModule, MatStepperModule, MatButtonModule } from '@angular/material';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 
@@ -27,15 +27,15 @@ import { MomentDateAdapter } from '@angular/material-moment-adapter';
         MatNativeDateModule
     ],
     declarations: [
-        ClienteComponent,
-        ClienteFormComponent                
+        IdealComponent,
+        IdealFormComponent                
     ],
     exports: [
-        ClienteComponent
+        IdealComponent
     ],
     providers: [
-        ClienteService
+        IdealService
     ]
 })
 
-export class ClienteModule { }
+export class IdealModule { }
