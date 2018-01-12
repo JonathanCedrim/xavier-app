@@ -48,31 +48,14 @@ export class IdealFormComponent implements OnInit
     ) {    
         this.firstFormGroup = formBuilder.group({
             id:['', [Validators.minLength(0)]],
+            nome: [''],
             codigo: [''],
             vendedorCodigo: [''],
             vendedorNome: [''],
-            nome: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(70)]],
-            conjugue: ['', [ Validators.minLength(2), Validators.maxLength(70)]],
-            rg: ['', [Validators.minLength(9), Validators.maxLength(14)]],
-            cpf: ['', [Validators.minLength(11), Validators.maxLength(11)]],
-            email: ['', [BasicValidators.email] ],
-            dataNascimento: [''],
-            telefone: ['', [Validators.pattern('^([0-9]?){2}([0-9]){4}([-]?)([0-9]){4}$')]],
-            operadora: ['', [Validators.minLength(2), Validators.maxLength(10)]],
-            celular: ['', [Validators.pattern('^([0-9]?){2}([0-9]){5}([-]?)([0-9]){4}$')]],
-            operadoraII: ['', [Validators.minLength(2), Validators.maxLength(10)]],
-            celularII: ['', [Validators.pattern('^([0-9]?){2}([0-9]{5})([-]?)([0-9]){4}$')]],
-            municipio: ['', [Validators.minLength(3) ,Validators.maxLength(30)]],
-            sigla: ['', [Validators.minLength(2), Validators.maxLength(5)]],
-            cep: ['', [Validators.pattern('^([0-9]){5}([-]?)([0-9]){3}$')]],
-            bairro: ['', [Validators.minLength(2), Validators.maxLength(70)]],
-            endereco: ['', [Validators.minLength(2), Validators.maxLength(70)]],
-            numero: ['', [Validators.maxLength(10)]],
-            referencia: ['', [Validators.maxLength(70)]],
-            observacao: ['', [Validators.minLength(2), Validators.maxLength(70)]],
-            dataCadastro: ['', [Validators.minLength(1), Validators.maxLength(10)]],
-            spc: ['', [Validators.minLength(1), Validators.maxLength(10)]],
-            selecionado: ['', [Validators.minLength(1), Validators.maxLength(10)]],
+            dataInicial: [''],
+            dataFinal: [''],
+            dataLancamento: ['', [Validators.minLength(1), Validators.maxLength(10)]]
+            
         })
     }
 
@@ -83,14 +66,14 @@ export class IdealFormComponent implements OnInit
       {
         let id = params['id'];
         let data = new Date();
-        let dataCadastro = this.ideal.dataCadastro;
+        let dataLancamento = this.ideal.dataLancamento;
         this.title = id ? 'Editar Ideal': 'Novo Ideal';
         this.id = id ? id: null;
           
         if(!id)
         { 
           this.codigoWrite = true;
-          this.ideal.dataCadastro = new Date();
+          this.ideal.dataLancamento = new Date();
           return ;
         }
         this.idealService.getIdeal(id)
@@ -100,16 +83,20 @@ export class IdealFormComponent implements OnInit
               this.ideal = ideal
               this.vendedores = [];
               this.vendedores.push(this.ideal.vendedor);
-              if(this.ideal.dataCadastro == null || this.ideal.dataCadastro == undefined) 
+              if(this.ideal.dataLancamento == null || this.ideal.dataLancamento == undefined) 
               {
-                this.ideal.dataCadastro = new Date();        
+                this.ideal.dataLancamento = new Date();        
               } else 
               {
-                this.ideal.dataCadastro = new Date(this.ideal.dataCadastro);
+                this.ideal.dataLancamento = new Date(this.ideal.dataLancamento);
               }
-              if(this.ideal.dataNascimento != null || this.ideal.dataNascimento != undefined)
+              if(this.ideal.dataInicial != null || this.ideal.dataInicial != undefined)
               {
-                this.ideal.dataNascimento = new Date(this.ideal.dataNascimento);
+                this.ideal.dataInicial = new Date(this.ideal.dataInicial);
+              }
+              if(this.ideal.dataFinal != null || this.ideal.dataFinal != undefined)
+              {
+                this.ideal.dataFinal = new Date(this.ideal.dataFinal);
               }
             },
             response => 
@@ -145,37 +132,17 @@ export class IdealFormComponent implements OnInit
       console.log("Codigo : " + codigo);
     }
 
-    atualizaEnderecoViaCep(codigo: string) {
-      if(codigo.length == 8) 
-      {
-        this.cepService.getCep(codigo)
-            .subscribe(data =>
-              {
-                this.cep = data
-                this.setEndereco(this.cep);
-            });
-      } else 
-      {
-        console.log("invalido");
-      }
-    }
 
     atualizaCamposVendedor(codigo: number) 
     {
       this.vendedorService.getVendedorByCodigo(codigo)
-        .subscribe(data => this.ideal.vendedor = data);          
-    }
-
-    log() 
-    {
-        console.log("Data cadastro: " + this.ideal.dataCadastro);
-        console.log("Data nascimento: " + this.ideal.dataNascimento)
-    }
-
-    private setEndereco(cep: Cep) 
-    {
-        this.ideal.sigla = cep.uf;
-        this.ideal.bairro = cep.bairro;
-        this.ideal.endereco = cep.logradouro;
+        .subscribe(data => {
+                    
+          if(data == undefined || data == null) {
+            this.ideal.vendedor.nome = "Insira codigo do vendedor";
+            return null;
+          }
+          this.ideal.vendedor = data;          
+      });
     }
 }

@@ -29,33 +29,25 @@ export class IdealService {
              err => console.log(err));
   }
 
-  getIdealByNome(nome) {
-    return this.http.get(this.url + '/busca/nome/' + nome)
-        .map(res => JSON.parse(JSON.stringify(res)),
-            err => console.log(err));
-  }
-
-  getIdealByCodigo(codigoVendedor, codigoIdeal) {
-    return this.http.get(this.url + '/busca/codigo/ideal/' + codigoIdeal)
+  getIdealByCodigo(codigoIdeal) {
+    return this.http.get(this.url + '/busca/codigo/' + codigoIdeal)
             .map(res => JSON.parse(JSON.stringify(res)),
             err => console.log(err));
   }
 
-  getIdealByRG(rg) {
-    return this.http.get(this.url + '/busca/rg/' + rg)
-        .map(res => JSON.parse(JSON.stringify(res)),
+  getIdealsByVendedor(codigoVendedor) {
+    return this.http.get(this.url + '/busca/codigo/vendedor/' + codigoVendedor)
+      .map(res => JSON.parse(JSON.stringify(res)),
             err => console.log(err));
   }
 
-  getIdealByCPF(cpf) {
-    return this.http.get(this.url + '/busca/cpf/' + cpf)
+  getIdealByData(ideal) {
+    return this.http.post(this.url + '/busca/data', JSON.stringify(ideal))
         .map(res => JSON.parse(JSON.stringify(res)),
             err => console.log(err));
   }
-
 
   addIdeal(ideal) {
-    this.upCaseIdeal(ideal);
     return this.http.post(this.url, JSON.stringify(ideal),
   {
     headers: new HttpHeaders().set('Content-Type', 'application/json')
@@ -63,7 +55,6 @@ export class IdealService {
   }
 
   updateIdeal(ideal) {
-    this.upCaseIdeal(ideal);
     return this.http.put(this.url, JSON.stringify(ideal), 
     {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
@@ -76,28 +67,5 @@ export class IdealService {
       responseType: 'text'})
     .map(res => console.log("deletado com sucesso"),
          err => err);
-  }
-
-  private upCaseIdeal(ideal: Ideal) {
-    ideal.nome = ideal.nome.toUpperCase();
-    if(ideal.conjugue != undefined)
-      ideal.conjugue = ideal.conjugue.toUpperCase();
-    if(ideal.estadoCivil != undefined)
-      ideal.estadoCivil = ideal.estadoCivil.toUpperCase();
-    if(ideal.email != undefined)
-      ideal.email = ideal.email.toUpperCase();
-    if(ideal.operadora != undefined)
-      ideal.operadora = ideal.operadora.toUpperCase();
-    if(ideal.operadoraII != undefined)
-      ideal.operadoraII = ideal.operadoraII.toUpperCase();
-    if(ideal.municipio != undefined)
-      ideal.municipio = ideal.municipio.toUpperCase();    
-    
-    ideal.sigla = ideal.sigla.toUpperCase();    
-    ideal.bairro = ideal.bairro.toUpperCase();
-    ideal.endereco = ideal.endereco.toUpperCase();
-    
-    if(ideal.referencia != undefined)
-    ideal.referencia = ideal.referencia.toUpperCase();    
   }
 }

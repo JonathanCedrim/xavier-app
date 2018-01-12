@@ -12,6 +12,7 @@ import { MovimentoService } from '../movimento/shared/movimento.service';
 })
 export class IdealComponent implements OnInit {
 
+  ideal: Ideal = new Ideal();
   ideals: Ideal[] = [];
   movimentos: Movimento[] = [];
   movimento: Movimento = new Movimento();
@@ -28,19 +29,17 @@ export class IdealComponent implements OnInit {
   }
 
   buscaIdealPorCodigo() {
-    this.idealService.getIdealByCodigo(this.busca).subscribe(
-      {
-        data=> {
+    this.idealService.getIdealByCodigo(this.busca).subscribe( 
+        data => {
           this.ideals = [];
           if(data != null) {
-            this.ideals = this.busca;
-          }
-        }
+            this.ideals = data;
+          }        
       });
   }
 
   buscaIdealPorVendedor() {
-      this.idealService.getIdealsByVendedor(codigoVendedor).subscribe(
+      this.idealService.getIdealsByVendedor(this.busca).subscribe(
       data => {
         this.ideals = [];
         if(data != null) {
@@ -50,7 +49,7 @@ export class IdealComponent implements OnInit {
   }
 
   buscaIdealPorData() {
-        this.idealService.getIdealByData(dataInicio, dataFinal).subscribe(
+        this.idealService.getIdealByData(this.ideal).subscribe(
         data => {
           this.ideals = [];
           if(data != null) {
@@ -58,18 +57,7 @@ export class IdealComponent implements OnInit {
             this.ideals.push(data)
           }
       });
-  }  
-
-  buscaPorCPF() {
-    this.idealService.getIdealByCPF(this.busca).subscribe(
-    data => {
-      this.ideals = [];
-      if(data != null) {        
-        this.ideals.push(data)        
-      } 
-  }
-);
-}
+  }    
 
   deleteIdeal(ideal) {
     if(confirm("Tem certeza que deseja deletar: " + ideal.nome + "?")) {
@@ -86,8 +74,8 @@ export class IdealComponent implements OnInit {
     }
   }
 
-  buscaMovimentos(codigoVendedor, dataPagamento, dataPamentoII) {
-    this.movimentoService.getMovimentosByVendedorAndData(codigoVendedor, dataPagamento, dataPamentoII)
+  buscaMovimentos() {
+    this.movimentoService.getMovimentosByVendedorAndData(this.movimento)
       .subscribe(data => {
           if(data != null)
           {

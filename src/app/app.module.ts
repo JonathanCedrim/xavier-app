@@ -44,10 +44,12 @@ import { CepService } from './shared/cep.service';
     ClienteModule,
     VendedorModule,
     MovimentoModule,
+    IdealModule,
     ClienteRouting,
     VendedorRouting,
     MovimentoRouting,
-    HomePageModule,
+    IdealRouting,
+    HomePageModule,    
     RoutingModule
   ],
   exports: [],

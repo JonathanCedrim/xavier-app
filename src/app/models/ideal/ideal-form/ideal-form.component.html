@@ -18,6 +18,12 @@
             [class.invalid]="firstFormGroup.controls['codigo'].touched && !firstFormGroup.controls['codigo'].valid"  [readonly]="codigoWrite"/>
       </mat-form-field>
 
+    <mat-form-field>
+        <input matInput placeholder="Data Lançamento" formControlName="dataLancamento" [(ngModel)]="ideal.dataLancamento" [matDatepicker]="dataLancamento" disabled readonly/>
+        <mat-datepicker-toggle matSuffix [for]="dataLancamento"></mat-datepicker-toggle>
+        <mat-datepicker #dataLancamento></mat-datepicker>
+    </mat-form-field>
+
       <h4>Vendedor</h4>
 
         <mat-form-field>
@@ -25,265 +31,45 @@
                 [class.invalid]="firstFormGroup.controls['vendedorCodigo'].touched && !firstFormGroup.controls['vendedorCodigo'].valid"
                 (keyup)="atualizaCamposVendedor(firstFormGroup.controls['vendedorCodigo'].value)" autofocus required/>
         </mat-form-field>
+        
         <mat-form-field>
             <input matInput placeholder="Nome do Vendedor" class="vendedorNome" formControlName="vendedorNome" [(ngModel)]="ideal.vendedor.nome"
                 [class.invalid]="firstFormGroup.controls['vendedorNome'].touched && !firstFormGroup.controls['vendedorNome'].valid" maxRows="70" readonly="true"/>
-        </mat-form-field>
-
-    <h4>Informações Pessoais</h4>
-
-      <mat-form-field>
-            <input id="nome" matInput placeholder="Nome Completo" formControlName="nome" [(ngModel)]="ideal.nome" required/>
-            
-            <mat-error *ngIf="firstFormGroup.controls['nome'].touched && firstFormGroup.controls['nome'].dirty">
-              Nome deve conter entre 2 e 70 caracteres
-            </mat-error>
-            <mat-error *ngIf="firstFormGroup.controls['nome'].invalid && firstFormGroup.controls['nome'].pristine">
-               Nome é <strong>obrigatorio</strong>
-            </mat-error>
-      </mat-form-field>
-
-      <mat-form-field>
-        <input id="nome" matInput placeholder="Nome do Cônjugue" formControlName="conjugue" [(ngModel)]="ideal.conjugue"/>
-        
-        <mat-error *ngIf="firstFormGroup.controls['conjugue'].touched && firstFormGroup.controls['conjugue'].dirty">
-          Nome do Cônjugue deve conter entre 2 e 70 caracteres
-        </mat-error>
-        <mat-error *ngIf="firstFormGroup.controls['conjugue'].invalid && firstFormGroup.controls['conjugue'].pristine">
-           Nome do Cônjugue é <strong>obrigatorio</strong>
-        </mat-error>
-      </mat-form-field>
-
-      <br />
-      <mat-form-field>
-        <input matInput placeholder="RG" formControlName="rg" [(ngModel)]="ideal.rg"/>
-
-        <mat-error *ngIf="firstFormGroup.controls['rg'].touched && firstFormGroup.controls['rg'].dirty">
-            RG deve conter de 9 a 14 caracteres, sem pontuação.
-          </mat-error>
-          <mat-error *ngIf="firstFormGroup.controls['rg'].invalid && firstFormGroup.controls['rg'].pristine">
-             RG é <strong>obrigatorio</strong>
-          </mat-error>
-      </mat-form-field>
-
-      <mat-form-field>
-            <input matInput placeholder="CPF" formControlName="cpf" [(ngModel)]="ideal.cpf"/>
-
-            <mat-error *ngIf="firstFormGroup.controls['cpf'].touched && firstFormGroup.controls['cpf'].dirty">
-                CPF deve conter 11 caracteres, sem pontuação.
-            </mat-error>
-            <mat-error *ngIf="firstFormGroup.controls['cpf'].invalid && firstFormGroup.controls['cpf'].pristine">
-                CPF é <strong>obrigatorio</strong>
-            </mat-error>
-      </mat-form-field>
-
-      <mat-form-field>
-            <input matInput placeholder="Data de Nascimento"  formControlName="dataNascimento" [(ngModel)]="ideal.dataNascimento" [matDatepicker]="dataNascimento"/>
-            <mat-datepicker-toggle matSuffix [for]="dataNascimento"></mat-datepicker-toggle>
-            <mat-datepicker #dataNascimento startView="year" [startAt]="startDate" ></mat-datepicker >
-
-            <mat-error *ngIf="firstFormGroup.controls['dataNascimento'].touched && firstFormGroup.controls['dataNascimento'].dirty && firstFormGroup.controls['dataNascimento'].invalid">
-                Data invalida. EX: (28/9/1992)
-            </mat-error>
-            <mat-error *ngIf="firstFormGroup.controls['dataNascimento'].invalid && firstFormGroup.controls['dataNascimento'].pristine">
-                Data de nascimento é <strong>obrigatoria</strong>
-            </mat-error>
-      </mat-form-field>
-      <br />
-
-      <mat-form-field>
-            <input matInput placeholder="Email" formControlName="email" [(ngModel)]="ideal.email"/>
-
-            <mat-error *ngIf="firstFormGroup.controls['email'].touched && firstFormGroup.controls['email'].dirty && firstFormGroup.controls['email'].invalid">
-                  Email invalido, EX: (email@gmail.com)
-            </mat-error>
-            <mat-error *ngIf="firstFormGroup.controls['email'].invalid && firstFormGroup.controls['email'].pristine">
-                Email é <strong>obrigatorio</strong>
-            </mat-error>
-
-      </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Telefone" formControlName="telefone" [(ngModel)]="ideal.telefone"/>
-
-      <mat-error *ngIf="firstFormGroup.controls['telefone'].touched && firstFormGroup.controls['telefone'].dirty">
-          Deve conter DDD Sem pontuação. <strong>EX: (1127482929)</strong>
-        </mat-error>
-        <mat-error *ngIf="firstFormGroup.controls['telefone'].invalid && firstFormGroup.controls['telefone'].pristine">
-           Telefone é <strong>obrigatorio</strong>
-        </mat-error>
-    </mat-form-field>
-
-    <br />
-    <mat-form-field>
-        <mat-select placeholder="Operadora" formControlName="operadora" [(ngModel)]="ideal.operadora">
-            <mat-option *ngFor="let operadora of operadoras"  [value]="operadora">
-                {{ operadora }}
-            </mat-option>
-        </mat-select>
-        
-        <mat-error *ngIf="firstFormGroup.controls['operadora'].invalid && firstFormGroup.controls['operadora'].pristine">
-            Operadora é <strong>obrigatorio</strong>
-        </mat-error>
-      </mat-form-field>
+        </mat-form-field>    
+        <br />
+        <br />
+       
+    <h4>Data Para Realização Do Ideal</h4>
 
     <mat-form-field>
-      <input matInput placeholder="Celular" formControlName="celular" [(ngModel)]="ideal.celular"/>
+        <input matInput placeholder="Data Inicial"  formControlName="dataInicial" [(ngModel)]="ideal.dataInicial" [matDatepicker]="dataInicial" required/>
+        <mat-datepicker-toggle matSuffix [for]="dataInicial"></mat-datepicker-toggle>
+        <mat-datepicker #dataInicial startView="year" [startAt]="startDate" ></mat-datepicker >
 
-      <mat-error *ngIf="firstFormGroup.controls['celular'].touched && firstFormGroup.controls['celular'].dirty">
-          Nº do Celular com DDD Sem pontuação, EX: <strong>(11953878185)</strong>
+        <mat-error *ngIf="firstFormGroup.controls['dataInicial'].touched && firstFormGroup.controls['dataInicial'].dirty && firstFormGroup.controls['dataInicial'].invalid">
+            Data invalida. EX: (28/09/1992)
         </mat-error>
-        <mat-error *ngIf="firstFormGroup.controls['celular'].invalid && firstFormGroup.controls['celular'].pristine">
-           Celular é <strong>obrigatorio</strong>
-        </mat-error>
-    </mat-form-field>
-
-    <mat-form-field>
-        <mat-select placeholder="Operadora" formControlName="operadoraII" [(ngModel)]="ideal.operadoraII">
-            <mat-option *ngFor="let operadora of operadoras"  [value]="operadora">
-                {{ operadora }}
-            </mat-option>
-        </mat-select>
-
-    <mat-error *ngIf="firstFormGroup.controls['operadoraII'].touched && firstFormGroup.controls['operadoraII'].dirty">
-        Operadora deve está entre 2 a 10 caracteres.
-      </mat-error>
-      <mat-error *ngIf="firstFormGroup.controls['operadoraII'].invalid && firstFormGroup.controls['operadoraII'].pristine">
-          Operadora é <strong>obrigatorio</strong>
-      </mat-error>
-    </mat-form-field>
-
-    <mat-form-field>
-        <input matInput placeholder="Celular-II" formControlName="celularII" [(ngModel)]="ideal.celularII"/>
-
-        <mat-error *ngIf="firstFormGroup.controls['celularII'].touched && firstFormGroup.controls['celularII'].dirty">
-            Nº do Celular com DDD Sem pontuação, EX: <strong>(11953878185)</strong>
-          </mat-error>
-          <mat-error *ngIf="firstFormGroup.controls['celularII'].invalid && firstFormGroup.controls['celularII'].pristine">
-              Celular é <strong>obrigatorio</strong>
-          </mat-error>
-    </mat-form-field>
-
-  <h4>Endereço</h4>
-
-    <mat-form-field>
-        <input matInput placeholder="CEP" formControlName="cep" [(ngModel)]="ideal.cep" required
-        (blur)="atualizaEnderecoViaCep(firstFormGroup.controls['cep'].value)"/>
-        
-        <mat-error *ngIf="firstFormGroup.controls['cep'].touched && firstFormGroup.controls['cep'].dirty">
-            CEP deve conter entre 8 caracteres
-        </mat-error>
-        <mat-error *ngIf="firstFormGroup.controls['cep'].invalid && firstFormGroup.controls['cep'].pristine">
-            CEP é <strong>obrigatorio</strong>
-        </mat-error>    
-    </mat-form-field>    
-
-    <mat-form-field>
-      <input matInput placeholder="Municipio" formControlName="municipio" [(ngModel)]="ideal.municipio"required/>
-
-      <mat-error *ngIf="firstFormGroup.controls['municipio'].touched && firstFormGroup.controls['municipio'].dirty">
-          Municipio deve conter entre 3 a 30 caracteres
-        </mat-error>
-        <mat-error *ngIf="firstFormGroup.controls['municipio'].invalid && firstFormGroup.controls['municipio'].pristine">
-            Municipio é <strong>obrigatorio</strong>
-        </mat-error>
-    </mat-form-field>
-
-    <mat-form-field>
-      <input matInput placeholder="Sigla" formControlName="sigla" [(ngModel)]="ideal.sigla" required/>
-
-      <mat-error *ngIf="firstFormGroup.controls['sigla'].touched && firstFormGroup.controls['sigla'].dirty">
-          Sigla deve conter entre 2 a 5 caracteres
-        </mat-error>
-        <mat-error *ngIf="firstFormGroup.controls['sigla'].invalid && firstFormGroup.controls['sigla'].pristine">
-           Sigla é <strong>obrigatorio</strong>
-        </mat-error>
-    </mat-form-field>
-
-    <mat-form-field>
-      <input matInput placeholder="Bairro" formControlName="bairro" [(ngModel)]="ideal.bairro" required/>
-
-      <mat-error *ngIf="firstFormGroup.controls['bairro'].touched && firstFormGroup.controls['bairro'].dirty">
-          Bairro deve conter entre 2 a 70 caracteres
-        </mat-error>
-        <mat-error *ngIf="firstFormGroup.controls['bairro'].invalid && firstFormGroup.controls['bairro'].pristine">
-            Bairro é <strong>obrigatorio</strong>
-        </mat-error>
-    </mat-form-field>
-
-    <mat-form-field>
-      <input matInput placeholder="Endereco" formControlName="endereco" [(ngModel)]="ideal.endereco" required/>
-
-      <mat-error *ngIf="firstFormGroup.controls['endereco'].touched && firstFormGroup.controls['endereco'].dirty">
-          Endereco deve conter entre 2 e 70 caracteres
-        </mat-error>
-        <mat-error *ngIf="firstFormGroup.controls['endereco'].invalid && firstFormGroup.controls['endereco'].pristine">
-            Endereco é <strong>obrigatorio</strong>
-        </mat-error>
-    </mat-form-field>
-
-    <mat-form-field>
-        <input matInput placeholder="Numero" formControlName="numero" [(ngModel)]="ideal.numero" />
-  
-        <mat-error *ngIf="firstFormGroup.controls['numero'].touched && firstFormGroup.controls['numero'].dirty">
-            Numero deve conter entre 2 e 70 caracteres
-          </mat-error>
-          <mat-error *ngIf="firstFormGroup.controls['numero'].invalid && firstFormGroup.controls['numero'].pristine">
-              Numero é <strong>obrigatorio</strong>
-          </mat-error>
-      </mat-form-field>
-
-    <mat-form-field>
-      <input matInput placeholder="Observacao" formControlName="observacao"  [(ngModel)]="ideal.observacao"/>
-
-      <mat-error *ngIf="firstFormGroup.controls['observacao'].touched && firstFormGroup.controls['observacao'].dirty">
-          Observacao deve conter entre 2 e 70 caracteres
-        </mat-error>
-        <mat-error *ngIf="firstFormGroup.controls['observacao'].invalid && firstFormGroup.controls['observacao'].pristine">
-          Observacao é <strong>obrigatorio</strong>
-        </mat-error>
-    </mat-form-field>
-
-    <mat-form-field>
-        <input matInput placeholder="Referencia do local" formControlName="referencia"  [(ngModel)]="ideal.referencia"/>
-  
-        <mat-error *ngIf="firstFormGroup.controls['referencia'].touched && firstFormGroup.controls['referencia'].dirty">
-            Referencia deve conter entre 2 e 70 caracteres
-          </mat-error>
-          <mat-error *ngIf="firstFormGroup.controls['referencia'].invalid && firstFormGroup.controls['referencia'].pristine">
-            Referencia é <strong>obrigatorio</strong>
-          </mat-error>
-      </mat-form-field>
-    
-    <h4>Status</h4>
-    <mat-form-field>
-            <input matInput placeholder="Data De Cadastro" formControlName="dataCadastro" [(ngModel)]="ideal.dataCadastro" [matDatepicker]="dataCadastro" disabled readonly/>
-            <mat-datepicker-toggle matSuffix [for]="dataCadastro"></mat-datepicker-toggle>
-            <mat-datepicker #dataCadastro></mat-datepicker>
-        </mat-form-field>
-    
-    <mat-form-field>
-      <input matInput placeholder="S.P.C" formControlName="spc"  [(ngModel)]="ideal.spc"/>
-
-        <mat-error *ngIf="firstFormGroup.controls['spc'].touched && firstFormGroup.controls['spc'].dirty">
-          S.PC deve conter valor verdadeiro ou falso
-        </mat-error>
-        <mat-error *ngIf="firstFormGroup.controls['spc'].invalid && firstFormGroup.controls['spc'].pristine">
-          SPC é <strong>obrigatorio</strong>
-        </mat-error>
-    </mat-form-field>
-
-
-    <mat-form-field>
-      <input matInput placeholder="Selecionado" formControlName="selecionado"  [(ngModel)]="ideal.selecionado"/>
-
-      <mat-error *ngIf="firstFormGroup.controls['selecionado'].touched && firstFormGroup.controls['selecionado'].dirty">
-          Selecionado deve ser verdadeiro ou falso.
-        </mat-error>
-        <mat-error *ngIf="firstFormGroup.controls['selecionado'].invalid && firstFormGroup.controls['selecionado'].pristine">
-          Selecionado é <strong>obrigatorio</strong>
+        <mat-error *ngIf="firstFormGroup.controls['dataInicial'].invalid && firstFormGroup.controls['dataInicial'].pristine">
+            Data de lancamento é <strong>obrigatoria</strong>
         </mat-error>
     </mat-form-field>
     
+
+    <mat-form-field>
+        <input matInput placeholder="Data Final"  formControlName="dataFinal" [(ngModel)]="ideal.dataFinal" [matDatepicker]="dataFinal" required/>
+        <mat-datepicker-toggle matSuffix [for]="dataFinal"></mat-datepicker-toggle>
+        <mat-datepicker #dataFinal startView="year" [startAt]="startDate" ></mat-datepicker >
+
+        <mat-error *ngIf="firstFormGroup.controls['dataFinal'].touched && firstFormGroup.controls['dataFinal'].dirty && firstFormGroup.controls['dataFinal'].invalid">
+            Data invalida. EX: (28/09/1992)
+        </mat-error>
+        <mat-error *ngIf="firstFormGroup.controls['dataFinal'].invalid && firstFormGroup.controls['dataFinal'].pristine">
+            Data Final é <strong>obrigatoria</strong>
+        </mat-error>
+    </mat-form-field>
+
+    
+
     <hr/>
     <div>
         <button mat-raised-button color="primary" (click)="save()" [disabled]="!firstFormGroup.valid">Salvar</button>

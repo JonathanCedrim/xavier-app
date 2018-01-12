@@ -59,6 +59,14 @@ export class MovimentoService {
             err => console.log(err));
   }
 
+  getMovimentosByVendedorAndData(movimento) {
+      return this.http.post(this.url + '/busca/data', JSON.stringify(movimento),
+      {
+        headers: new HttpHeaders().set('Content-Type', 'application/json')
+      }).map(res => JSON.parse(JSON.stringify(res)),
+              err => console.log(err));
+  }
+
   addMovimento(movimento: Movimento) {
     this.upCaseMovimento(movimento);
     return this.http.post(this.url, JSON.stringify(movimento),
