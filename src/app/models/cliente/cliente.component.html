@@ -48,7 +48,7 @@ Total: {{ clientes.length}} Clientes.
       <td><i class="material-icons">sd_storage</i>{{ cliente.operadoraII }}</td>
       <td><i class="material-icons">phone_iphone</i>{{ cliente.celularII }}</td>
       <td *ngIf="cliente.vendedor.id!=undefinied">{{ cliente.vendedor.codigo }}</td>
-      <td *ngIf="cliente.vendedor.id==undefinied">{{ cliente.vendedor }}</td>      
+      <td *ngIf="cliente.vendedor.id==undefinied">{{ cliente.vendedor }}</td>
       <td>{{ saldo | currency:'BRL':true:'2.2-2'}} </td>
       <td>
         <a [routerLink]="['/cliente', cliente.id]">
