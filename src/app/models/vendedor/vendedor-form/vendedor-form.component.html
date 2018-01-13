@@ -65,8 +65,10 @@
             <mat-error *ngIf="firstFormGroup.controls['dataNascimento'].invalid && firstFormGroup.controls['dataNascimento'].pristine">
                 Data de nascimento é <strong>obrigatoria</strong>
             </mat-error>
-      </mat-form-field>
+        </mat-form-field>
 
+    <br />
+        
         <mat-form-field>
               <input matInput placeholder="Email" formControlName="email" [(ngModel)]="vendedor.email"/>
 
@@ -76,9 +78,10 @@
             <mat-error *ngIf="firstFormGroup.controls['email'].invalid && firstFormGroup.controls['email'].pristine">
                 Email é <strong>obrigatorio</strong>
              </mat-error>
-
+        
+    <br />
         </mat-form-field>
-      <mat-form-field>
+        <mat-form-field>
         <input matInput placeholder="Telefone" formControlName="telefone" [(ngModel)]="vendedor.telefone"/>
 
         <mat-error *ngIf="firstFormGroup.controls['telefone'].touched && firstFormGroup.controls['telefone'].dirty">
@@ -87,7 +90,7 @@
           <mat-error *ngIf="firstFormGroup.controls['telefone'].invalid && firstFormGroup.controls['telefone'].pristine">
              Telefone é <strong>obrigatorio</strong>
           </mat-error>
-      </mat-form-field>
+        </mat-form-field>
 
       <mat-form-field>
         <mat-select placeholder="Operadora" formControlName="operadora" [(ngModel)]="vendedor.operadora">
@@ -203,7 +206,7 @@
             <input matInput placeholder="Numero" formControlName="numero" [(ngModel)]="vendedor.numero"/>
       
             <mat-error *ngIf="firstFormGroup.controls['numero'].touched && firstFormGroup.controls['numero'].dirty">
-                Numero deve conter entre 2 e 70 caracteres
+                Numero deve conter entre 2 e 10 caracteres
               </mat-error>
               <mat-error *ngIf="firstFormGroup.controls['numero'].invalid && firstFormGroup.controls['numero'].pristine">
                   Numero é <strong>obrigatorio</strong>

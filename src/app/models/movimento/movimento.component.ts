@@ -88,8 +88,11 @@ export class MovimentoComponent implements OnInit {
               this.movimentos = [];
               this.movimentos = data;
 
+              this.movimento.vendedor.nome = this.movimentos[0].vendedor.nome;
+              this.movimento.cliente.nome = this.movimentos[0].cliente.nome;
+
               if(this.movimentos.length == 0) 
-              {
+              {                
                 this.saldo = this.movimentos[0].valorCompra - this.movimento[0].valorRecebido;
               } else
               {

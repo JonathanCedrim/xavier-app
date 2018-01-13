@@ -24,8 +24,6 @@ export class Cliente {
     referencia: string;
     observacao: string;
     salario: number;    
-    dataCadastro: Date;
-    selecionado: boolean;
-    spc: boolean;
+    dataCadastro: Date;    
     vendedor: Vendedor = new Vendedor();
 }

@@ -11,6 +11,7 @@ import { Cep } from '../../../shared/cep';
 import { VendedorService } from '../../vendedor/shared/vendedor.service';
 import { CepService } from '../../../shared/cep.service';
 import { BasicValidators } from '../../../shared/basic-validators';
+import { empty } from 'rxjs/observable/empty';
 
 @Component({
   selector: 'app-cliente-form',
@@ -40,7 +41,7 @@ export class ClienteFormComponent implements OnInit
     constructor(
       formBuilder: FormBuilder,
       private router: Router,
-      private route: ActivatedRoute,        
+      private route: ActivatedRoute,
       private adapter: DateAdapter<any>,
       private clienteService: ClienteService,
       private vendedorService: VendedorService,
@@ -67,12 +68,10 @@ export class ClienteFormComponent implements OnInit
             cep: ['', [Validators.pattern('^([0-9]){5}([-]?)([0-9]){3}$')]],
             bairro: ['', [Validators.minLength(2), Validators.maxLength(70)]],
             endereco: ['', [Validators.minLength(2), Validators.maxLength(70)]],
-            numero: ['', [Validators.maxLength(10)]],
+            numero: ['', [Validators.minLength(1), Validators.maxLength(10)]],
             referencia: ['', [Validators.maxLength(70)]],
             observacao: ['', [Validators.minLength(2), Validators.maxLength(70)]],
             dataCadastro: ['', [Validators.minLength(1), Validators.maxLength(10)]],
-            spc: ['', [Validators.minLength(1), Validators.maxLength(10)]],
-            selecionado: ['', [Validators.minLength(1), Validators.maxLength(10)]],
         })
     }
 
@@ -156,14 +155,20 @@ export class ClienteFormComponent implements OnInit
             });
       } else 
       {
-        console.log("invalido");
+        console.log("invalido");        
       }
     }
 
-    atualizaCamposVendedor(codigo: number) 
+    atualizaCamposVendedor(codigo) 
     {
       this.vendedorService.getVendedorByCodigo(codigo)
-        .subscribe(data => this.cliente.vendedor = data);          
+        .subscribe(data => {
+          if(data == null || data == undefined || codigo == NaN) {
+            this.cliente.vendedor.nome = "INVALIDO";         
+            return null;
+          }
+          this.cliente.vendedor = data
+        });
     }
 
     log() 

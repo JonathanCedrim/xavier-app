@@ -11,30 +11,41 @@ Total: {{ movimentos.length}} Movimentos.
 
 
 <mat-form-field floatPlaceholder="never">
-  <input matInput placeholder="Codigo Do Vendedor" [(ngModel)]="movimento.vendedor.codigo" autofocus />
+  <input matInput placeholder="Codigo Do Vendedor" [(ngModel)]="movimento.vendedor.codigo" tabindex="1" autofocus />
 </mat-form-field>
 
+<mat-form-field>
+  <input matInput placeholder="Nome do Vendedor" class="vendedorNome" [(ngModel)]="movimento.vendedor.nome"
+            maxRows="70" readonly="true"/>
+</mat-form-field>
+<br />
 <mat-form-field floatPlaceholder="never">
-  <input matInput placeholder="Codigo Do Cliente" [(ngModel)]="movimento.cliente.codigo"/>
+  <input matInput placeholder="Codigo Do Cliente" [(ngModel)]="movimento.cliente.codigo" tabindex="2"/>
 </mat-form-field>
 
-<button mat-button color="primary" (click)="buscaMovimentos()">Buscar Movimentos</button>
+<mat-form-field>
+  <input matInput placeholder="Nome do Cliente" class="vendedorNome" [(ngModel)]="movimento.vendedor.nome"
+            maxRows="70" readonly="true"/>
+</mat-form-field>
+<br />
+<button mat-button color="primary" (click)="buscaMovimentos()" tabindex="3">Buscar Movimentos</button>
 
 <br />
 <hr />
+
 <mat-form-field floatPlaceholder="never">
-<input matInput placeholder="Busca" [(ngModel)]="busca" #filter/>
+  <input matInput placeholder="Filtro" [(ngModel)]="busca" tabindex="4" #filter/>
 </mat-form-field>
+
 <br />
 
-<button mat-button color="primary" (click)="buscaPorNumeroRecibo()">Buscar por Numero Recibo</button>
-<button mat-button color="primary" (click)="buscaPorNumeroPedido()">Buscar por Numero Pedido</button>
+<button mat-button color="primary" (click)="buscaPorNumeroRecibo()" tabindex="5">Buscar por Numero Recibo</button>
+<button mat-button color="primary" (click)="buscaPorNumeroPedido()" tabindex="6">Buscar por Numero Pedido</button>
 
 <h4>Saldo Devedor Total: {{saldo| currency:'BRL':true:'2.2-2'}}</h4>
 <table>
   <thead>
       <tr>
-
           <th>Código</th>
           <th>Vendedor</th>
           <th>Cliente</th>
@@ -42,11 +53,11 @@ Total: {{ movimentos.length}} Movimentos.
           <th>Nº Pedido</th>
           <th>Data De Cadastro</th>
           <th>Valor Da Compra</th>
-          <th>Valor Recebido</th>          
+          <th>Valor Recebido</th>
           <th>Observação</th>
           <th>1º Data De Pagamento</th>
-          <th>2º Data De Pagamento</th>          
-          <th>Saldo</th>
+          <th>2º Data De Pagamento</th>
+          <th>Saldo Devedor</th>
       </tr>
   </thead>
 

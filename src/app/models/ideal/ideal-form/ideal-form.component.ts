@@ -33,9 +33,8 @@ export class IdealFormComponent implements OnInit
     vendedor: Vendedor = new Vendedor();
     cep: Cep = new Cep();
     vendedores: Vendedor[] = [];
-    data: Date;
-    operadoras: string[] = ['TIM', 'VIVO', 'OI', 'CLARO', 'NEXTEL', 'ALGAR'];
-    startDate = new Date(1970, 0, 1);
+    data: Date;    
+    startDate = new Date(2018, 0, 1);
 
     constructor(
       formBuilder: FormBuilder,
@@ -133,16 +132,15 @@ export class IdealFormComponent implements OnInit
     }
 
 
-    atualizaCamposVendedor(codigo: number) 
+    atualizaCamposVendedor(codigo) 
     {
       this.vendedorService.getVendedorByCodigo(codigo)
         .subscribe(data => {
-                    
-          if(data == undefined || data == null) {
-            this.ideal.vendedor.nome = "Insira codigo do vendedor";
+          if(data == null || data == undefined || codigo == NaN) {
+            this.ideal.vendedor.nome = "INVALIDO";         
             return null;
           }
-          this.ideal.vendedor = data;          
-      });
+          this.ideal.vendedor = data
+        });
     }
 }

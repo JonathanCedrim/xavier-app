@@ -47,7 +47,8 @@ export class IdealService {
             err => console.log(err));
   }
 
-  addIdeal(ideal) {
+  addIdeal(ideal: Ideal) {
+    this.upCaseIdeal(ideal);
     return this.http.post(this.url, JSON.stringify(ideal),
   {
     headers: new HttpHeaders().set('Content-Type', 'application/json')
@@ -55,6 +56,7 @@ export class IdealService {
   }
 
   updateIdeal(ideal) {
+    this.upCaseIdeal(ideal);
     return this.http.put(this.url, JSON.stringify(ideal), 
     {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
@@ -67,5 +69,10 @@ export class IdealService {
       responseType: 'text'})
     .map(res => console.log("deletado com sucesso"),
          err => err);
+  }
+
+  private upCaseIdeal(ideal: Ideal) {
+    ideal.vendedor.nome.toUpperCase();
+    ideal.responsavel.toUpperCase();
   }
 }

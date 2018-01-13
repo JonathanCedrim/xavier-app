@@ -188,6 +188,7 @@
         </mat-error>
     </mat-form-field>
 
+    <br />
     <mat-form-field>
       <input matInput placeholder="Sigla" formControlName="sigla" [(ngModel)]="cliente.sigla" required/>
 
@@ -230,17 +231,6 @@
           <mat-error *ngIf="firstFormGroup.controls['numero'].invalid && firstFormGroup.controls['numero'].pristine">
               Numero é <strong>obrigatorio</strong>
           </mat-error>
-      </mat-form-field>
-
-    <mat-form-field>
-      <input matInput placeholder="Observacao" formControlName="observacao"  [(ngModel)]="cliente.observacao"/>
-
-      <mat-error *ngIf="firstFormGroup.controls['observacao'].touched && firstFormGroup.controls['observacao'].dirty">
-          Observacao deve conter entre 2 e 70 caracteres
-        </mat-error>
-        <mat-error *ngIf="firstFormGroup.controls['observacao'].invalid && firstFormGroup.controls['observacao'].pristine">
-          Observacao é <strong>obrigatorio</strong>
-        </mat-error>
     </mat-form-field>
 
     <mat-form-field>
@@ -253,6 +243,18 @@
             Referencia é <strong>obrigatorio</strong>
           </mat-error>
       </mat-form-field>
+
+
+    <mat-form-field>
+        <input matInput placeholder="Observacao" formControlName="observacao"  [(ngModel)]="cliente.observacao"/>
+  
+        <mat-error *ngIf="firstFormGroup.controls['observacao'].touched && firstFormGroup.controls['observacao'].dirty">
+            Observacao deve conter entre 2 e 70 caracteres
+          </mat-error>
+          <mat-error *ngIf="firstFormGroup.controls['observacao'].invalid && firstFormGroup.controls['observacao'].pristine">
+            Observacao é <strong>obrigatorio</strong>
+          </mat-error>
+      </mat-form-field>
     
     <h4>Status</h4>
     <mat-form-field>
@@ -260,30 +262,6 @@
             <mat-datepicker-toggle matSuffix [for]="dataCadastro"></mat-datepicker-toggle>
             <mat-datepicker #dataCadastro></mat-datepicker>
         </mat-form-field>
-    
-    <mat-form-field>
-      <input matInput placeholder="S.P.C" formControlName="spc"  [(ngModel)]="cliente.spc"/>
-
-        <mat-error *ngIf="firstFormGroup.controls['spc'].touched && firstFormGroup.controls['spc'].dirty">
-          S.PC deve conter valor verdadeiro ou falso
-        </mat-error>
-        <mat-error *ngIf="firstFormGroup.controls['spc'].invalid && firstFormGroup.controls['spc'].pristine">
-          SPC é <strong>obrigatorio</strong>
-        </mat-error>
-    </mat-form-field>
-
-
-    <mat-form-field>
-      <input matInput placeholder="Selecionado" formControlName="selecionado"  [(ngModel)]="cliente.selecionado"/>
-
-      <mat-error *ngIf="firstFormGroup.controls['selecionado'].touched && firstFormGroup.controls['selecionado'].dirty">
-          Selecionado deve ser verdadeiro ou falso.
-        </mat-error>
-        <mat-error *ngIf="firstFormGroup.controls['selecionado'].invalid && firstFormGroup.controls['selecionado'].pristine">
-          Selecionado é <strong>obrigatorio</strong>
-        </mat-error>
-    </mat-form-field>
-    
     <hr/>
     <div>
         <button mat-raised-button color="primary" (click)="save()" [disabled]="!firstFormGroup.valid">Salvar</button>
