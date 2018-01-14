@@ -73,6 +73,5 @@ export class IdealService {
 
   private upCaseIdeal(ideal: Ideal) {
     ideal.vendedor.nome.toUpperCase();
-    ideal.responsavel.toUpperCase();
   }
 }

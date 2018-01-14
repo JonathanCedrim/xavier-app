@@ -7,10 +7,13 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Ideal } from '../shared/ideal';
 import { IdealService } from '../shared/ideal.service';
 import { Vendedor } from '../../vendedor/shared/vendedor';
+import { Movimento } from '../../movimento/shared/movimento';
 import { Cep } from '../../../shared/cep';
 import { VendedorService } from '../../vendedor/shared/vendedor.service';
+import { MovimentoService } from '../../movimento/shared/movimento.service';
 import { CepService } from '../../../shared/cep.service';
 import { BasicValidators } from '../../../shared/basic-validators';
+
 
 @Component({
   selector: 'app-ideal-form',
@@ -31,9 +34,12 @@ export class IdealFormComponent implements OnInit
     codigoWrite: boolean = false;
     ideal: Ideal = new Ideal();
     vendedor: Vendedor = new Vendedor();
+    movimento: Movimento = new Movimento();
+    movimentos: Movimento[] = [];
     cep: Cep = new Cep();
     vendedores: Vendedor[] = [];
-    data: Date;    
+    data: Date;
+    saldo: number;
     startDate = new Date(2018, 0, 1);
 
     constructor(
@@ -43,6 +49,7 @@ export class IdealFormComponent implements OnInit
       private adapter: DateAdapter<any>,
       private idealService: IdealService,
       private vendedorService: VendedorService,
+      private movimentoService: MovimentoService,
       private cepService: CepService
     ) {    
         this.firstFormGroup = formBuilder.group({
@@ -51,10 +58,12 @@ export class IdealFormComponent implements OnInit
             codigo: [''],
             vendedorCodigo: [''],
             vendedorNome: [''],
+            dataLancamento: ['', [Validators.minLength(1), Validators.maxLength(10)]],
             dataInicial: [''],
             dataFinal: [''],
-            dataLancamento: ['', [Validators.minLength(1), Validators.maxLength(10)]]
-            
+            totalRecebido: [''],
+            ideal: [''],
+            sobra: ['']
         })
     }
 
@@ -79,7 +88,7 @@ export class IdealFormComponent implements OnInit
           .subscribe(
             ideal => 
             {
-              this.ideal = ideal
+              this.ideal = ideal;
               this.vendedores = [];
               this.vendedores.push(this.ideal.vendedor);
               if(this.ideal.dataLancamento == null || this.ideal.dataLancamento == undefined) 
@@ -137,10 +146,35 @@ export class IdealFormComponent implements OnInit
       this.vendedorService.getVendedorByCodigo(codigo)
         .subscribe(data => {
           if(data == null || data == undefined || codigo == NaN) {
-            this.ideal.vendedor.nome = "INVALIDO";         
+            this.ideal.vendedor.nome = "INVALIDO";
+            this.ideal.vendedor.codigo = null;
             return null;
           }
           this.ideal.vendedor = data
         });
     }
+
+    buscaMovimentos() {
+      let movimento = this.movimento;
+
+      movimento.vendedor = this.ideal.vendedor;
+      movimento.dataPagamento = this.ideal.dataInicial;
+      movimento.dataPagamentoII = this.ideal.dataFinal;
+
+      this.ideal.totalRecebido = 0;
+      this.ideal.ideal = 0;
+      this.ideal.sobra = 0;
+
+      this.movimentoService.getMovimentosByVendedorAndData(movimento)      
+      .subscribe(data => {
+        this.movimentos = data;
+        
+        for(movimento of this.movimentos) {
+          this.ideal.totalRecebido += movimento.valorRecebido;          
+        }
+
+        this.ideal.ideal = this.ideal.totalRecebido / 2;
+        this.ideal.sobra = this.ideal.ideal * 100;
+      });
+    }       
 }

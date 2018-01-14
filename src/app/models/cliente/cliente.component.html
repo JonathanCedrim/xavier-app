@@ -39,7 +39,7 @@ Total: {{ clientes.length}} Clientes.
       <td><i class="material-icons">face</i>
         <a [routerLink]="['/cliente', cliente.id]">{{ cliente.nome }}</a>
       </td>
-      <td><i class="material-icons">receipt</i>{{ cliente.rg || number: 2.3.3-2}}</td>
+      <td><i class="material-icons">receipt</i>{{ cliente.rg }}</td>
       <td><i class="material-icons">receipt</i>{{ cliente.cpf }}</td>
       <td><i class="material-icons">phone</i>{{ cliente.telefone }}</td>
       <td><i class="material-icons">sd_storage</i>{{ cliente.operadora }}</td>
