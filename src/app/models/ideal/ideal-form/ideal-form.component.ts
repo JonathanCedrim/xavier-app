@@ -156,10 +156,24 @@ export class IdealFormComponent implements OnInit
 
     buscaMovimentos() {
       let movimento = this.movimento;
+      let dataAtual = new Date(this.ideal.dataInicial);
+      let dataInicial = new Date(this.ideal.dataInicial);
+      let dataFinal = new Date(this.ideal.dataInicial);
 
       movimento.vendedor = this.ideal.vendedor;
-      movimento.dataPagamento = this.ideal.dataInicial;
-      movimento.dataPagamentoII = this.ideal.dataFinal;
+           
+      dataInicial.setDate(1);
+      dataInicial.setMonth(dataInicial.getMonth()-2);
+
+      dataFinal.setDate(0);
+      dataFinal.setMonth(dataFinal.getMonth()-1);
+
+
+      this.ideal.dataInicial = dataInicial;
+      this.ideal.dataFinal = dataFinal;
+
+      movimento.dataPagamento = dataInicial;
+      movimento.dataPagamentoII = dataFinal;
 
       this.ideal.totalRecebido = 0;
       this.ideal.ideal = 0;
