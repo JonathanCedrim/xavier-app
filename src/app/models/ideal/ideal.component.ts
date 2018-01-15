@@ -4,11 +4,18 @@ import { Ideal } from './shared/ideal';
 import { IdealService } from './shared/ideal.service';
 import { Movimento } from '../movimento/shared/movimento';
 import { MovimentoService } from '../movimento/shared/movimento.service';
+import { MAT_MOMENT_DATE_FORMATS, MomentDateAdapter } from '@angular/material-moment-adapter';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 
 @Component({
   selector: 'app-ideal',
   templateUrl: './ideal.component.html',
-  styleUrls: ['./ideal.component.css']
+  styleUrls: ['./ideal.component.css'],
+  providers: [
+    {provide: MAT_DATE_LOCALE, useValue: 'pt-BR'},
+    {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
+  ],
 })
 export class IdealComponent implements OnInit {
 
@@ -21,11 +28,17 @@ export class IdealComponent implements OnInit {
   buscaII;
   
   constructor(
+    private adapter: DateAdapter<any>,
     private idealService: IdealService,
     private movimentoService: MovimentoService) { }
 
   ngOnInit() {
-    this.idealService.getIdeals().subscribe(data => this.ideals = data);
+    this.adapter.setLocale('pt-BR');
+    this.idealService.getIdeals().subscribe(
+      data => {
+        this.ideals = [];
+        this.ideals = data;
+      });
   }
 
   buscaIdealPorCodigo() {
@@ -48,13 +61,13 @@ export class IdealComponent implements OnInit {
     });
   }
 
-  buscaIdealPorData() {
-        this.idealService.getIdealByData(this.ideal).subscribe(
+  buscaIdealPorVendedorEData() {
+        this.idealService.getIdealByData(this.ideal).subscribe(        
         data => {
-          this.ideals = [];
-          if(data != null) {
-            this.ideals = [];
-            this.ideals.push(data)
+          this.ideals = [];        
+          if(data != null && this.ideal.vendedor.codigo != null || this.ideal.vendedor.codigo != undefined) {            
+            this.ideals = data;
+            return null;
           }
       });
   }    
@@ -76,9 +89,7 @@ export class IdealComponent implements OnInit {
 
   buscaMovimentos() {
     this.movimentoService.getMovimentosByVendedorAndData(this.movimento)
-      .subscribe(data => {
-          if(data != null)
-          {
+      .subscribe(data => {                
             this.movimentos = [];
             this.movimentos = data;
 
@@ -94,8 +105,7 @@ export class IdealComponent implements OnInit {
                 console.log("valor de compra: " + movimento.valorCompra);
                 console.log("valor recebido: " + movimento.valorRecebido);
             }
-          }
-        }
+          }        
     });
   }
 }

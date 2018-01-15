@@ -129,9 +129,9 @@
         <mat-error *ngIf="firstFormGroup.controls['dataPagamento'].invalid && firstFormGroup.controls['dataPagamento'].pristine">
             Data de Pagamento é <strong>obrigatoria</strong>
         </mat-error>
-      </mat-form-field>
+    </mat-form-field>
 
-      <mat-form-field>
+    <mat-form-field>
           <input matInput placeholder="Data de PagamentoII"  formControlName="dataPagamentoII" [(ngModel)]="movimento.dataPagamentoII" [matDatepicker]="dataPagamentoII"/>
           <mat-datepicker-toggle matSuffix [for]="dataPagamentoII"></mat-datepicker-toggle>
           <mat-datepicker #dataPagamentoII startView="year" [startAt]="startDate" ></mat-datepicker >
@@ -142,7 +142,7 @@
           <mat-error *ngIf="firstFormGroup.controls['dataPagamentoII'].invalid && firstFormGroup.controls['dataPagamentoII'].pristine">
               Data de Pagamento é <strong>obrigatoria</strong>
           </mat-error>
-        </mat-form-field>
+    </mat-form-field>
 
         <br />
         

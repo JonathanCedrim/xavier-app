@@ -41,10 +41,11 @@ export class IdealService {
             err => console.log(err));
   }
 
-  getIdealByData(ideal) {
-    return this.http.post(this.url + '/busca/data', JSON.stringify(ideal))
-        .map(res => JSON.parse(JSON.stringify(res)),
-            err => console.log(err));
+  getIdealByData(ideal: Ideal) {
+    return this.http.post(this.url + '/busca/data', JSON.stringify(ideal),
+    {
+      headers: new HttpHeaders().set('Content-Type', 'application/json')
+    }).map(res => JSON.parse(JSON.stringify(res)));
   }
 
   addIdeal(ideal: Ideal) {

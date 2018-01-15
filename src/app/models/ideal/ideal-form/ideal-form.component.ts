@@ -40,6 +40,8 @@ export class IdealFormComponent implements OnInit
     vendedores: Vendedor[] = [];
     data: Date;
     saldo: number;
+    test: Date;
+    testII: Date;
     startDate = new Date(2018, 0, 1);
 
     constructor(
@@ -60,7 +62,6 @@ export class IdealFormComponent implements OnInit
             vendedorNome: [''],
             dataLancamento: ['', [Validators.minLength(1), Validators.maxLength(10)]],
             dataInicial: [''],
-            dataFinal: [''],
             totalRecebido: [''],
             ideal: [''],
             sobra: ['']
@@ -101,6 +102,7 @@ export class IdealFormComponent implements OnInit
               if(this.ideal.dataInicial != null || this.ideal.dataInicial != undefined)
               {
                 this.ideal.dataInicial = new Date(this.ideal.dataInicial);
+                this.buscaMovimentos();
               }
               if(this.ideal.dataFinal != null || this.ideal.dataFinal != undefined)
               {
@@ -161,34 +163,36 @@ export class IdealFormComponent implements OnInit
       let dataFinal = new Date(this.ideal.dataInicial);
 
       movimento.vendedor = this.ideal.vendedor;
-           
+
+      dataInicial.setMonth(dataInicial.getMonth() - 2);
       dataInicial.setDate(1);
-      dataInicial.setMonth(dataInicial.getMonth()-2);
-
+      
+      dataFinal.setMonth(dataFinal.getMonth());
       dataFinal.setDate(0);
-      dataFinal.setMonth(dataFinal.getMonth()-1);
-
-
-      this.ideal.dataInicial = dataInicial;
-      this.ideal.dataFinal = dataFinal;
+      
+      this.test = dataInicial;
+      this.testII = dataFinal;
 
       movimento.dataPagamento = dataInicial;
       movimento.dataPagamentoII = dataFinal;
 
+      
       this.ideal.totalRecebido = 0;
       this.ideal.ideal = 0;
       this.ideal.sobra = 0;
 
       this.movimentoService.getMovimentosByVendedorAndData(movimento)      
       .subscribe(data => {
+        this.movimentos = [];
         this.movimentos = data;
         
         for(movimento of this.movimentos) {
-          this.ideal.totalRecebido += movimento.valorRecebido;          
+          this.ideal.ideal += movimento.valorCompra;
+          this.ideal.totalRecebido += movimento.valorRecebido;
         }
-
-        this.ideal.ideal = this.ideal.totalRecebido / 2;
-        this.ideal.sobra = this.ideal.ideal * 100;
+        
+        this.ideal.ideal = this.ideal.ideal / 2;
+        this.ideal.sobra = this.ideal.totalRecebido / this.ideal.ideal * 100;
       });
     }       
 }
