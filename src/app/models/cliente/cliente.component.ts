@@ -23,7 +23,7 @@ export class ClienteComponent implements OnInit {
     private movimentoService: MovimentoService) { }
 
   ngOnInit() {
-    this.clienteService.getClientes().subscribe(data => this.clientes = data);
+
   }
 
   buscaPorNome() {

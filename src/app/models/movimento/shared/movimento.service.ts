@@ -60,7 +60,7 @@ export class MovimentoService {
   }
 
   getMovimentosByVendedorAndData(movimento) {
-      return this.http.post(this.url + '/busca/data', JSON.stringify(movimento),
+      return this.http.post(this.url + '/busca/vendedor/data', JSON.stringify(movimento),
       {
         headers: new HttpHeaders().set('Content-Type', 'application/json')
       }).map(res => JSON.parse(JSON.stringify(res)),

@@ -40,8 +40,8 @@ export class IdealFormComponent implements OnInit
     vendedores: Vendedor[] = [];
     data: Date;
     saldo: number;
-    test: Date;
-    testII: Date;
+    dataInicialAux: Date;
+    dataFinalAux: Date;
     startDate = new Date(2018, 0, 1);
 
     constructor(
@@ -125,9 +125,13 @@ export class IdealFormComponent implements OnInit
     save() {
       let resultado, ideal = this.ideal;
 
+      ideal.dataInicial = this.dataInicialAux;      
+      ideal.dataFinal = this.dataFinalAux;
+
       if(this.id) 
       {
         ideal.id = this.id;
+        
         resultado = this.idealService.updateIdeal(ideal);
       } else 
       {
@@ -170,12 +174,11 @@ export class IdealFormComponent implements OnInit
       dataFinal.setMonth(dataFinal.getMonth());
       dataFinal.setDate(0);
       
-      this.test = dataInicial;
-      this.testII = dataFinal;
+      this.dataInicialAux = dataInicial;
+      this.dataFinalAux = dataFinal;
 
       movimento.dataPagamento = dataInicial;
       movimento.dataPagamentoII = dataFinal;
-
       
       this.ideal.totalRecebido = 0;
       this.ideal.ideal = 0;

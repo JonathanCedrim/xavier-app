@@ -26,7 +26,8 @@ export class IdealComponent implements OnInit {
   saldo: number = 0;
   busca;
   buscaII;
-  
+  startDate = new Date(2018, 0, 1);  
+
   constructor(
     private adapter: DateAdapter<any>,
     private idealService: IdealService,
@@ -34,11 +35,20 @@ export class IdealComponent implements OnInit {
 
   ngOnInit() {
     this.adapter.setLocale('pt-BR');
-    this.idealService.getIdeals().subscribe(
+    let dataAtual = new Date();
+    let ideal = new Ideal();
+
+    dataAtual.setMonth(dataAtual.getMonth() - 1);
+  
+    ideal.dataInicial = dataAtual;
+    ideal.dataFinal = new Date();
+
+    this.idealService.getIdealsByData(ideal).subscribe(
       data => {
-        this.ideals = [];
-        this.ideals = data;
+        this.ideals = [];        
+        this.ideals = data;              
       });
+      
   }
 
   buscaIdealPorCodigo() {
@@ -62,12 +72,11 @@ export class IdealComponent implements OnInit {
   }
 
   buscaIdealPorVendedorEData() {
-        this.idealService.getIdealByData(this.ideal).subscribe(        
+        this.idealService.getIdealByVendedorEData(this.ideal).subscribe(        
         data => {
           this.ideals = [];        
           if(data != null && this.ideal.vendedor.codigo != null || this.ideal.vendedor.codigo != undefined) {            
             this.ideals = data;
-            return null;
           }
       });
   }    
