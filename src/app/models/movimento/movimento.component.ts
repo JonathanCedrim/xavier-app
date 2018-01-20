@@ -29,7 +29,7 @@ export class MovimentoComponent implements OnInit {
   buscaPorCodigo() {
     this.movimentoService.getMovimentoByCodigo(this.busca).subscribe(
       data => {
-          if(data != null) 
+          if(data != null)
           {
             this.movimentos = data;            
           }
@@ -134,5 +134,4 @@ export class MovimentoComponent implements OnInit {
             }   
         });    
   }
-
 }

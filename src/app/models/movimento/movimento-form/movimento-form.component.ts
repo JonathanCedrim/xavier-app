@@ -107,12 +107,13 @@ export class MovimentoFormComponent implements OnInit {
     if(this.id) 
     {
       movimento.id = this.id;
+      movimento.codigoCliente = movimento.cliente.codigo;
       resultado = this.movimentoService.updateMovimento(movimento);
     } else 
     {
+      movimento.codigoCliente = movimento.cliente.codigo;
       resultado = this.movimentoService.addMovimento(movimento);
     }
-
     resultado.subscribe(data => this.router.navigate(['movimento']));
   }
 
@@ -136,7 +137,7 @@ export class MovimentoFormComponent implements OnInit {
           this.movimento.cliente.nome = "Insira o codigo do vendedor";
             if(data != null && data != undefined) {
               this.movimento.cliente = data;
-            }   
-        });    
+            }
+        });
   }
 }

@@ -6,6 +6,7 @@ export class Movimento {
     codigo:number;
     vendedor: Vendedor = new Vendedor();
     cliente: Cliente = new Cliente();
+    codigoCliente: number;
     dataCadastro: Date;
     numeroRecibo: number;
     numeroPedido: number;

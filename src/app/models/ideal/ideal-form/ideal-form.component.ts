@@ -169,10 +169,10 @@ export class IdealFormComponent implements OnInit
       movimento.vendedor = this.ideal.vendedor;
 
       dataInicial.setMonth(dataInicial.getMonth() - 2);
-      dataInicial.setDate(1);
+      dataInicial.setDate(2);
       
       dataFinal.setMonth(dataFinal.getMonth());
-      dataFinal.setDate(0);
+      dataFinal.setDate(1);
       
       this.dataInicialAux = dataInicial;
       this.dataFinalAux = dataFinal;

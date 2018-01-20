@@ -68,7 +68,7 @@ export class MovimentoService {
   }
 
   addMovimento(movimento: Movimento) {
-    this.upCaseMovimento(movimento);
+    this.upCaseMovimento(movimento);    
     return this.http.post(this.url, JSON.stringify(movimento),
   {
     headers: new HttpHeaders().set('Content-Type', 'application/json')
