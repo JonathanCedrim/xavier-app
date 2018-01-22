@@ -48,6 +48,13 @@ export class IdealService {
   }).map(res => JSON.parse(JSON.stringify(res)));
   }
 
+  getIdealByDataLancamento(ideal:Ideal) {
+    return this.http.post(this.url + '/busca/dataLancamento', JSON.stringify(ideal),
+    {
+      headers: new HttpHeaders().set('Content-Type', 'application/json')
+    }).map(res => JSON.parse(JSON.stringify(res)));
+  }
+
   getIdealByVendedorEData(ideal: Ideal) {
     return this.http.post(this.url + '/busca/vendedor/data', JSON.stringify(ideal),
     {

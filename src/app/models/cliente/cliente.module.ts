@@ -8,7 +8,7 @@ import { HttpModule } from '@angular/http';
 import { ClienteComponent } from './cliente.component';
 import { ClienteService } from './shared/cliente.service';
 import { ClienteFormComponent } from './cliente-form/cliente-form.component';
-import { MatNativeDateModule, MatDatepickerModule, MatSelectModule, MatInputModule, MatStepperModule, MatButtonModule } from '@angular/material';
+import { MatPaginatorModule, MatNativeDateModule, MatDatepickerModule, MatSelectModule, MatInputModule, MatStepperModule, MatButtonModule } from '@angular/material';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 
 @NgModule({
@@ -24,7 +24,8 @@ import { MomentDateAdapter } from '@angular/material-moment-adapter';
         MatButtonModule,
         MatInputModule,
         MatDatepickerModule,
-        MatNativeDateModule
+        MatNativeDateModule,
+        MatPaginatorModule
     ],
     declarations: [
         ClienteComponent,

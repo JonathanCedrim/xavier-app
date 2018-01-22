@@ -35,20 +35,20 @@ export class IdealComponent implements OnInit {
 
   ngOnInit() {
     this.adapter.setLocale('pt-BR');
-    let dataAtual = new Date();
+    let dataInicial = new Date();    
     let ideal = new Ideal();
 
-    dataAtual.setMonth(dataAtual.getMonth() - 1);
-  
-    ideal.dataInicial = dataAtual;
+    dataInicial.setMonth(dataInicial.getMonth() - 1);
+    dataInicial.setDate(1);
+
+    ideal.dataInicial = dataInicial;
     ideal.dataFinal = new Date();
 
-    this.idealService.getIdealsByData(ideal).subscribe(
+    this.idealService.getIdealByDataLancamento(ideal).subscribe(
       data => {
         this.ideals = [];        
-        this.ideals = data;              
+        this.ideals = data;
       });
-      
   }
 
   buscaIdealPorCodigo() {

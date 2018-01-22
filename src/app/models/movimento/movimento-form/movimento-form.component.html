@@ -20,7 +20,8 @@
         </mat-form-field>
 
         <mat-form-field>
-            <input matInput placeholder="Data de Cadastro"  formControlName="dataCadastro" [(ngModel)]="movimento.dataCadastro" [matDatepicker]="dataCadastro"/>
+            <input matInput placeholder="Data de Cadastro"  formControlName="dataCadastro" [(ngModel)]="movimento.dataCadastro" [matDatepicker]="dataCadastro"
+            disabled readonly/>
             <mat-datepicker-toggle matSuffix [for]="dataCadastro"></mat-datepicker-toggle>
             <mat-datepicker #dataCadastro startView="year" [startAt]="startDate" ></mat-datepicker >
         </mat-form-field>
@@ -132,7 +133,8 @@
     </mat-form-field>
 
     <mat-form-field>
-          <input matInput placeholder="Data de PagamentoII"  formControlName="dataPagamentoII" [(ngModel)]="movimento.dataPagamentoII" [matDatepicker]="dataPagamentoII"/>
+          <input matInput placeholder="Data de PagamentoII"  formControlName="dataPagamentoII" [(ngModel)]="movimento.dataPagamentoII" [matDatepicker]="dataPagamentoII"
+            disabled readonly/>
           <mat-datepicker-toggle matSuffix [for]="dataPagamentoII"></mat-datepicker-toggle>
           <mat-datepicker #dataPagamentoII startView="year" [startAt]="startDate" ></mat-datepicker >
       

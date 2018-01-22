@@ -55,7 +55,7 @@ Total: {{ ideals.length}} Ideals.
       <td><i class="material-icons">date_range</i>{{ ideal.dataFinal | date: 'dd/MM/yyyy' }}</td>
       <td><i class="material-icons">attach_money</i>{{ ideal.totalRecebido | currency:'BRL':true:'2.2-2' }}</td>
       <td><i class="material-icons">attach_money</i>{{ ideal.ideal | currency:'BRL':true:'2.2-2' }}</td>
-      <td><i class="material-icons">grade</i>{{ ideal.sobra | number }}</td>            
+      <td><i class="material-icons">grade</i>{{ ideal.sobra | number }}</td>
       <td>
         <a [routerLink]="['/ideal', ideal.id]">
           <i class="material-icons">mode_edit</i>

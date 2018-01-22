@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PageEvent } from '@angular/material';
 
 import { Cliente } from './shared/cliente';
 import { ClienteService } from './shared/cliente.service';
@@ -17,13 +18,39 @@ export class ClienteComponent implements OnInit {
   movimento: Movimento = new Movimento();
   saldo: number = 0;
   busca;
+
+  length = 0;
+  pageSize = 50;
+  pageSizeOptions = [50, 100, 200];
+  pageEvent: PageEvent = new PageEvent;
   
+
   constructor(
     private clienteService: ClienteService,
     private movimentoService: MovimentoService) { }
 
-  ngOnInit() {
+  ngOnInit() {        
+    this.pageEvent.pageIndex = 0;
+    this.pageEvent.pageSize = this.pageSize;
 
+    this.clienteService.getTotalClientes().subscribe(data => {
+      this.length = data;
+    });
+
+    this.clienteService.getClientes(this.pageEvent.pageIndex, this.pageEvent.pageSize)
+      .subscribe(data => this.clientes = data);
+  }
+
+  setPageSizeOptions(setPageSizeOptions: string) {
+    console.log("vish");
+    this.pageSizeOptions = setPageSizeOptions.split(',').map(str => +str);
+  }
+
+  atualizaClientes(pageEvent: PageEvent) {
+    this.pageEvent = pageEvent;
+    console.log("oi");
+    this.clienteService.getClientes(this.pageEvent.pageIndex, this.pageEvent.pageSize)
+      .subscribe(data => this.clientes = data);
   }
 
   buscaPorNome() {
@@ -33,8 +60,7 @@ export class ClienteComponent implements OnInit {
       if(data != null) {
         this.clientes = data;
       }
-  }
-);
+  });
 }
 
   buscaPorRG() {
@@ -45,8 +71,7 @@ export class ClienteComponent implements OnInit {
             this.clientes = [];
             this.clientes.push(data)
           }
-      }
-    );
+      });
   }
 
   buscaPorCPF() {
@@ -56,9 +81,15 @@ export class ClienteComponent implements OnInit {
       if(data != null) {        
         this.clientes.push(data)        
       } 
-  }
-);
+  });
 }
+
+  buscaPorVendedor() {
+    this.clienteService.getClientesPorVendedor(this.busca, this.pageEvent.pageIndex, this.pageEvent.pageSize)
+        .subscribe(data => {
+            this.clientes = data;
+        });
+  }
 
   deleteCliente(cliente) {
     if(confirm("Tem certeza que deseja deletar: " + cliente.nome + "?")) {
