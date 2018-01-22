@@ -39,6 +39,8 @@ export class ClienteComponent implements OnInit {
 
     this.clienteService.getClientes(this.pageEvent.pageIndex, this.pageEvent.pageSize)
       .subscribe(data => this.clientes = data);
+
+    setTimeout(document.getElementById("filter").focus(), 200);
   }
 
   setPageSizeOptions(setPageSizeOptions: string) {

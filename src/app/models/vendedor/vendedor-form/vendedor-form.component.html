@@ -22,7 +22,7 @@
         <h4>Informações Pessoais</h4>
 
         <mat-form-field>
-              <input id="nome" matInput placeholder="Nome Completo" formControlName="nome" [(ngModel)]="vendedor.nome" autofocus required/>
+              <input matInput placeholder="Nome Completo" formControlName="nome" [(ngModel)]="vendedor.nome" autofocus required/>
               
               <mat-error *ngIf="firstFormGroup.controls['nome'].touched && firstFormGroup.controls['nome'].dirty">
                 Nome deve conter entre 2 e 70 caracteres

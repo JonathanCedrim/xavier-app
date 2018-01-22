@@ -10,7 +10,7 @@ Total: {{ clientes.length}} Clientes.
 </p>
 
 <mat-form-field floatPlaceholder="never">
-  <input matInput placeholder="Filtro" [(ngModel)]="busca"#filter/>
+  <input id="filter" matInput placeholder="Filtro" [(ngModel)]="busca"#filter/>
 </mat-form-field>
 <br />
 <button mat-button color="primary" (click)="buscaPorVendedor()">Buscar por Vendedor</button>

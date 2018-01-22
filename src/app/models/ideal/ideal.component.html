@@ -10,7 +10,7 @@ Total: {{ ideals.length}} Ideals.
 </p>
 
 <mat-form-field>
-  <input matInput placeholder="Codigo do Vendedor" name="vendedorCodigo" [(ngModel)]="ideal.vendedor.codigo"
+  <input id="primeiroInput" matInput placeholder="Codigo do Vendedor" name="vendedorCodigo" [(ngModel)]="ideal.vendedor.codigo"
       (keyup)="buscaIdealPorVendedorEData()" autofocus required/>
 </mat-form-field>
 

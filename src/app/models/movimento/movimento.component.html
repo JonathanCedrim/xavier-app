@@ -11,7 +11,7 @@ Total: {{ movimentos.length}} Movimentos.
 
 
 <mat-form-field floatPlaceholder="never">
-  <input matInput placeholder="Codigo Do Vendedor" [(ngModel)]="movimento.vendedor.codigo" tabindex="1" 
+  <input id="primeiroInput" matInput placeholder="Codigo Do Vendedor" [(ngModel)]="movimento.vendedor.codigo" tabindex="1" 
   (keyup)="atualizaCamposVendedor(codigo.value)" (blur)="buscaMovimentos()" #codigo autofocus/>
 </mat-form-field>
 
@@ -56,8 +56,7 @@ Total: {{ movimentos.length}} Movimentos.
           <th>Valor Recebido</th>
           <th>Observação</th>
           <th>1º Data De Pagamento</th>
-          <th>2º Data De Pagamento</th>
-          <th>Saldo Devedor</th>
+          <th>2º Data De Pagamento</th>          
       </tr>
   </thead>
 
@@ -76,8 +75,7 @@ Total: {{ movimentos.length}} Movimentos.
       <td><i class="material-icons">attach_money</i>    {{ movimento.valorRecebido | currency:'BRL':true:'2.2-2' }} </td>
       <td><i class="material-icons">priority_high</i>   {{ movimento.observacao }}    </td>
       <td><i class="material-icons">date_range</i>   {{ movimento.dataPagamento | date: 'dd/MM/yyyy'}}      </td>
-      <td><i class="material-icons">date_range</i>   {{ movimento.dataPagamentoII | date: 'dd/MM/yyyy'}}    </td>
-      <td><i class="material-icons">attach_money</i>   {{ movimento.valorCompra - movimento.valorRecebido | currency:'BRL':true:'2.2-2'}}  </td>
+      <td><i class="material-icons">date_range</i>   {{ movimento.dataPagamentoII | date: 'dd/MM/yyyy'}}    </td>      
       <td>
           <a [routerLink]="['/movimento', movimento.id]">
             <i class="material-icons">mode_edit</i>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Vendedor } from './shared/vendedor';
 import { VendedorService } from './shared/vendedor.service';
+import { setTimeout } from 'timers';
 
 @Component({
   selector: 'app-vendedor',
@@ -19,7 +20,9 @@ export class VendedorComponent implements OnInit {
       {
         this.vendedores = data;
       });
-  }
+
+      setTimeout(()=> document.getElementById("filtro").focus(), 200);
+  }  
 
   buscaPorNome() {
     this.vendedorService.getVendedorByNome(this.busca).subscribe(

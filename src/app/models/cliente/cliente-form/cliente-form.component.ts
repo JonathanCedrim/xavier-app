@@ -109,7 +109,7 @@ export class ClienteFormComponent implements OnInit
               if(this.cliente.dataNascimento != null || this.cliente.dataNascimento != undefined)
               {
                 this.cliente.dataNascimento = new Date(this.cliente.dataNascimento);
-              }
+              }                            
             },
             response => 
             {
@@ -117,7 +117,7 @@ export class ClienteFormComponent implements OnInit
               {
                 this.router.navigate(['NotFound']);
               }
-            });
+            });            
       });
 
       this.vendedorService.getVendedores() //arrumar

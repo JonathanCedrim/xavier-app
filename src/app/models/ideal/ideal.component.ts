@@ -49,6 +49,8 @@ export class IdealComponent implements OnInit {
         this.ideals = [];        
         this.ideals = data;
       });
+
+    setTimeout(document.getElementById("primeiroInput").focus(), 200);
   }
 
   buscaIdealPorCodigo() {

@@ -88,15 +88,15 @@ export class VendedorFormComponent implements OnInit {
               if(this.vendedor.dataNascimento != null || this.vendedor.dataNascimento != undefined)
               {
                 this.vendedor.dataNascimento = new Date(this.vendedor.dataNascimento);
-              }          
+              }
           },
         response => {
           if(response.status == 404) 
           {
             this.router.navigate(['NotFound']);
           }
-      });
-    });
+      });      
+    });    
   }
 
   save() {

@@ -24,7 +24,9 @@ export class MovimentoComponent implements OnInit {
     private clienteService: ClienteService, 
     private vendedorService: VendedorService) { }
 
-  ngOnInit() { }
+  ngOnInit() { 
+    setTimeout(document.getElementById("primeiroInput").focus(), 200);
+  }
 
   buscaPorCodigo() {
     this.movimentoService.getMovimentoByCodigo(this.busca).subscribe(

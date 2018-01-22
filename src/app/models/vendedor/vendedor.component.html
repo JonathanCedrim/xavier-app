@@ -9,10 +9,8 @@
   Total: {{ vendedores.length}} Vendedores.
 </p>
 
-
-
 <mat-form-field floatPlaceholder="never">
-  <input matInput placeholder="Filtro" [(ngModel)]="busca" tabindex="1" #filter/>
+  <input matInput id="filtro" placeholder="Filtro" [(ngModel)]="busca" tabindex="1" #filter autofocus/>
 </mat-form-field>
 <br />
 

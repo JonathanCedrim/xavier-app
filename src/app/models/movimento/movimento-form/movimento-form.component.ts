@@ -50,9 +50,9 @@ export class MovimentoFormComponent implements OnInit {
           dataCadastro: [''],
           numeroRecibo: ['', [Validators.min(0), Validators.maxLength(70)]],
           numeroPedido: ['', [Validators.min(0), Validators.maxLength(70)]],
-          valorCompra: ['', [Validators.min(2), Validators.maxLength(70)]],
-          valorRecebido: ['', [Validators.min(2), Validators.maxLength(70)]],
-          observacao: ['', [Validators.min(2), Validators.maxLength(70)]],          
+          valorCompra: ['', [Validators.min(0), Validators.maxLength(70)]],
+          valorRecebido: ['', [Validators.min(0), Validators.maxLength(70)]],
+          observacao: ['', [Validators.min(0), Validators.maxLength(70)]],          
           dataPagamento: [''],
           dataPagamentoII: ['']
       })
