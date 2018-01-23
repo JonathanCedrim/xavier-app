@@ -17,8 +17,8 @@ export class ClienteService {
 
   constructor(private http: HttpClient) { }
 
-  getClientes() {
-    return this.http.get(this.url)
+  getClientes(pagina: number, tamanho: number) {
+    return this.http.get(this.url + '/pagina/' + pagina + '/tamanho/' + tamanho)
       .map(res => JSON.parse(JSON.stringify(res)),
            err => console.log(err));
   }
@@ -35,9 +35,9 @@ export class ClienteService {
             err => console.log(err));
   }
 
-  getClienteByCodigo(codigo) {
-    return this.http.get(this.url + '/busca/codigo/' + codigo)
-        .map(res => JSON.parse(JSON.stringify(res)),
+  getClienteByCodigo(codigoVendedor, codigoCliente) {
+    return this.http.get(this.url + '/busca/codigo/vendedor/' + codigoVendedor + '/cliente/' + codigoCliente)
+            .map(res => JSON.parse(JSON.stringify(res)),
             err => console.log(err));
   }
 
@@ -53,6 +53,17 @@ export class ClienteService {
             err => console.log(err));
   }
 
+  getClientesPorVendedor(codigo, pagina, tamanho)  {
+    return this.http.get(this.url + '/busca/vendedor/' + codigo + '/pagina/' + pagina + '/tamanho/' + tamanho)
+          .map(res => JSON.parse(JSON.stringify(res)),
+                err => console.log(err));
+  }
+
+  getTotalClientes() {
+    return this.http.get(this.url + '/total')
+      .map(res => JSON.parse(JSON.stringify(res)),
+           err => console.log(err));
+  }
 
   addCliente(cliente) {
     this.upCaseCliente(cliente);

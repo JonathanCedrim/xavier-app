@@ -1,0 +1,92 @@
+<nav>
+  <a mat-raised-button routerLink="/movimento">Movimentos</a>
+
+  <a mat-raised-button color="accent" routerLink="/movimento/novo">Novo Movimento</a>
+</nav>   
+
+<section>
+<p>
+Total: {{ movimentos.length}} Movimentos.
+</p>
+
+
+<mat-form-field floatPlaceholder="never">
+  <input id="primeiroInput" matInput placeholder="Codigo Do Vendedor" [(ngModel)]="movimento.vendedor.codigo" tabindex="1" 
+  (keyup)="atualizaCamposVendedor(codigo.value)" (blur)="buscaMovimentos()" #codigo autofocus/>
+</mat-form-field>
+
+<mat-form-field>
+  <input matInput placeholder="Nome do Vendedor" class="vendedorNome" [(ngModel)]="movimento.vendedor.nome"
+            maxRows="70" readonly="true"/>
+</mat-form-field>
+<br />
+<mat-form-field floatPlaceholder="never">
+  <input matInput placeholder="Codigo Do Cliente" [(ngModel)]="movimento.cliente.codigo" 
+  (keyup)="atualizaCamposCliente()" (blur)="buscaMovimentos()" tabindex="2"/>
+</mat-form-field>
+
+<mat-form-field>
+  <input matInput placeholder="Nome do Cliente" class="clienteNome" [(ngModel)]="movimento.cliente.nome"
+            maxRows="70" readonly="true"/>
+</mat-form-field>
+<br />
+<br />
+<hr />
+
+<mat-form-field floatPlaceholder="never">
+  <input matInput placeholder="Filtro" [(ngModel)]="busca" tabindex="4" #filter/>
+</mat-form-field>
+
+<br />
+
+<button mat-button color="primary" (click)="buscaPorNumeroRecibo()" tabindex="5">Buscar por Numero Recibo</button>
+<button mat-button color="primary" (click)="buscaPorNumeroPedido()" tabindex="6">Buscar por Numero Pedido</button>
+
+<h4>Saldo Devedor Total: {{saldo| currency:'BRL':true:'2.2-2'}}</h4>
+<table>
+  <thead>
+      <tr>
+          <th>Código</th>
+          <th>Vendedor</th>
+          <th>Cliente</th>
+          <th>Nº Recibo</th>
+          <th>Nº Pedido</th>
+          <th>Data De Cadastro</th>
+          <th>Valor Da Compra</th>
+          <th>Valor Recebido</th>
+          <th>Observação</th>
+          <th>1º Data De Pagamento</th>
+          <th>2º Data De Pagamento</th>          
+      </tr>
+  </thead>
+
+  <tbody>    
+    <tr class="lista" *ngFor="let movimento of movimentos">      
+      <td><i class="material-icons">vpn_key</i>
+        <a [routerLink]="['/movimento', movimento.id]">{{ movimento.codigo }}</a>
+      </td>
+
+      <td><i class="material-icons">face</i>{{ movimento.vendedor.nome }} </td>
+      <td><i class="material-icons">face</i>{{ movimento.cliente.nome }}  </td>
+      <td><i class="material-icons">receipt</i>          {{ movimento.numeroRecibo }}  </td>
+      <td><i class="material-icons">receipt</i>   {{ movimento.numeroPedido }}  </td>
+      <td><i class="material-icons">date_range</i>   {{ movimento.dataCadastro | date: 'dd/MM/yyyy'}}       </td>
+      <td><i class="material-icons">attach_money</i>     {{ movimento.valorCompra | currency:'BRL':true:'2.2-2'}}   </td>
+      <td><i class="material-icons">attach_money</i>    {{ movimento.valorRecebido | currency:'BRL':true:'2.2-2' }} </td>
+      <td><i class="material-icons">priority_high</i>   {{ movimento.observacao }}    </td>
+      <td><i class="material-icons">date_range</i>   {{ movimento.dataPagamento | date: 'dd/MM/yyyy'}}      </td>
+      <td><i class="material-icons">date_range</i>   {{ movimento.dataPagamentoII | date: 'dd/MM/yyyy'}}    </td>      
+      <td>
+          <a [routerLink]="['/movimento', movimento.id]">
+            <i class="material-icons">mode_edit</i>
+          </a>
+        </td>
+        <td>
+          <a (click)="deleteMovimento(movimento)">
+            <i class="material-icons">clear</i>
+          </a>
+        </td>
+    </tr>
+  </tbody>
+</table>
+</section>

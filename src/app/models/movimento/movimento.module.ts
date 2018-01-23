@@ -5,11 +5,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
 
-import { ClienteComponent } from './cliente.component';
-import { ClienteService } from './shared/cliente.service';
-import { ClienteFormComponent } from './cliente-form/cliente-form.component';
-import { MatPaginatorModule, MatNativeDateModule, MatDatepickerModule, MatSelectModule, MatInputModule, MatStepperModule, MatButtonModule } from '@angular/material';
-import { MomentDateAdapter } from '@angular/material-moment-adapter';
+import { MovimentoComponent } from './movimento.component';
+import { MovimentoService } from './shared/movimento.service';
+import { MovimentoFormComponent } from './movimento-form/movimento-form.component';
+import { MatTableModule, MatNativeDateModule, MatDatepickerModule, MatSelectModule, MatInputModule, MatStepperModule, MatButtonModule } from '@angular/material';
 
 @NgModule({
     imports: [
@@ -19,24 +18,25 @@ import { MomentDateAdapter } from '@angular/material-moment-adapter';
         RouterModule,
         HttpModule,
         BrowserAnimationsModule,
-        MatSelectModule,
+        MatTableModule,
+        MatSelectModule,        
         MatStepperModule,
         MatButtonModule,
         MatInputModule,
         MatDatepickerModule,
-        MatNativeDateModule,
-        MatPaginatorModule
+        MatNativeDateModule
     ],
     declarations: [
-        ClienteComponent,
-        ClienteFormComponent                
+        MovimentoComponent,
+        MovimentoFormComponent
     ],
     exports: [
-        ClienteComponent
+        MovimentoComponent
     ],
     providers: [
-        ClienteService
+        MovimentoService
     ]
 })
 
-export class ClienteModule { }
+
+export class MovimentoModule { }

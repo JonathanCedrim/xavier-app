@@ -1,0 +1,168 @@
+<nav>
+  <a mat-raised-button routerLink="/movimento">Movimentos</a>
+
+  <a mat-raised-button color="accent" routerLink="/movimento/novo">Novo Movimento</a>
+</nav>   
+
+
+<h5>{{ title }}</h5>
+
+<mat-horizontal-stepper>
+<mat-step [stepControl]="firstFormGroup">
+
+<form [formGroup]="firstFormGroup" >      
+<ng-template matStepLabel>Por favor, preencha os dados do Movimento</ng-template>
+      
+ 
+        <mat-form-field>
+            <input matInput placeholder="Codigo" name="codigo" formControlName="codigo" [(ngModel)]="movimento.codigo"
+                [class.invalid]="firstFormGroup.controls['codigo'].touched && !firstFormGroup.controls['codigo'].valid" [readonly]="codigoWrite"/>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput placeholder="Data de Cadastro"  formControlName="dataCadastro" [(ngModel)]="movimento.dataCadastro" [matDatepicker]="dataCadastro"
+            disabled readonly/>
+            <mat-datepicker-toggle matSuffix [for]="dataCadastro"></mat-datepicker-toggle>
+            <mat-datepicker #dataCadastro startView="year" [startAt]="startDate" ></mat-datepicker >
+        </mat-form-field>
+
+
+      <h4>Informações Pessoais</h4>
+
+        <mat-form-field>
+            <input id="codigoVendedor" matInput placeholder="Codigo Vendedor" formControlName="vendedorCodigo" [(ngModel)]="movimento.vendedor.codigo" 
+            (keyup)="atualizaCamposVendedor(firstFormGroup.controls['vendedorCodigo'].value)" autofocus required/>
+            
+            <mat-error *ngIf="firstFormGroup.controls['vendedorCodigo'].touched && firstFormGroup.controls['vendedorCodigo'].dirty">
+              Codigo Vendedor deve conter entre 1 a 10 digitos
+            </mat-error>
+            <mat-error *ngIf="firstFormGroup.controls['vendedorCodigo'].invalid && firstFormGroup.controls['vendedorCodigo'].pristine">
+               Codigo Vendedor é <strong>obrigatorio</strong>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput placeholder="Nome do Vendedor" class="vendedorNome" formControlName="vendedorNome" [(ngModel)]="movimento.vendedor.nome"
+                [class.invalid]="firstFormGroup.controls['vendedorNome'].touched && !firstFormGroup.controls['vendedorNome'].valid" maxRows="70" readonly="true"/>
+        </mat-form-field>
+
+      <br />
+
+    <mat-form-field>
+        <input id="codigoCliente" matInput placeholder="Codigo Cliente" formControlName="clienteCodigo" [(ngModel)]="movimento.cliente.codigo"
+        (keyup)="atualizaCamposCliente()" required/>
+        
+        <mat-error *ngIf="firstFormGroup.controls['clienteCodigo'].touched && firstFormGroup.controls['clienteCodigo'].dirty">
+          Codigo Cliente deve conter entre 1 a 10 digitos
+        </mat-error>
+        <mat-error *ngIf="firstFormGroup.controls['clienteCodigo'].invalid && firstFormGroup.controls['clienteCodigo'].pristine">
+           Codigo Vendedor é <strong>obrigatorio</strong>
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput placeholder="Nome do Cliente" class="clienteNome" formControlName="clienteNome" [(ngModel)]="movimento.cliente.nome"
+            [class.invalid]="firstFormGroup.controls['clienteNome'].touched && !firstFormGroup.controls['clienteNome'].valid" maxRows="70" readonly="true"/>
+    </mat-form-field>
+
+  <br />
+
+  
+
+      <mat-form-field>
+            <input matInput placeholder="Numero Do Recibo" formControlName="numeroRecibo" [(ngModel)]="movimento.numeroRecibo"/>
+
+            <mat-error *ngIf="firstFormGroup.controls['numeroRecibo'].touched && firstFormGroup.controls['numeroRecibo'].dirty">
+                Numero do Recibo deve conter ao menos 1 caracterer.
+            </mat-error>
+            <mat-error *ngIf="firstFormGroup.controls['numeroRecibo'].invalid && firstFormGroup.controls['numeroRecibo'].pristine">
+                Numero do Recibo é <strong>obrigatorio</strong>
+            </mat-error>
+      </mat-form-field>
+
+    <mat-form-field>
+        <input matInput placeholder="Numero Do Pedido" formControlName="numeroPedido" [(ngModel)]="movimento.numeroPedido"/>
+
+        <mat-error *ngIf="firstFormGroup.controls['numeroPedido'].touched && firstFormGroup.controls['numeroPedido'].dirty">
+            Numero do Pedido deve conter ao menos 1 caracterer.
+        </mat-error>
+        <mat-error *ngIf="firstFormGroup.controls['numeroPedido'].invalid && firstFormGroup.controls['numeroPedido'].pristine">
+            Numero do Pedido é <strong>obrigatorio</strong>
+        </mat-error>
+    </mat-form-field>
+  
+  <br />
+    
+
+    <mat-form-field>
+        <input matInput placeholder="Valor Da Compra" formControlName="valorCompra" [(ngModel)]="movimento.valorCompra"/>
+
+        <mat-error *ngIf="firstFormGroup.controls['valorCompra'].touched && firstFormGroup.controls['valorCompra'].dirty">
+            Valor Da Compra deve conter ao menos 1 caracterer.
+        </mat-error>
+        <mat-error *ngIf="firstFormGroup.controls['valorCompra'].invalid && firstFormGroup.controls['valorCompra'].pristine">
+            Valor Da Compra é <strong>obrigatorio</strong>
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput placeholder="Valor Recebido" formControlName="valorRecebido" [(ngModel)]="movimento.valorRecebido"/>
+
+        <mat-error *ngIf="firstFormGroup.controls['valorRecebido'].touched && firstFormGroup.controls['valorRecebido'].dirty">
+            Valor recebido deve conter ao menos 1 caracterer.
+        </mat-error>
+        <mat-error *ngIf="firstFormGroup.controls['valorRecebido'].invalid && firstFormGroup.controls['valorRecebido'].pristine">
+            Valor recebido é <strong>obrigatorio</strong>
+        </mat-error>
+    </mat-form-field>
+
+    <br />
+    <br />
+
+    <mat-form-field>
+        <input matInput placeholder="Data de Pagamento"  formControlName="dataPagamento" [(ngModel)]="movimento.dataPagamento" [matDatepicker]="dataPagamento"/>
+        <mat-datepicker-toggle matSuffix [for]="dataPagamento"></mat-datepicker-toggle>
+        <mat-datepicker #dataPagamento startView="year" [startAt]="startDate" ></mat-datepicker >
+    
+        <mat-error *ngIf="firstFormGroup.controls['dataPagamento'].touched && firstFormGroup.controls['dataPagamento'].dirty && firstFormGroup.controls['dataPagamento'].invalid">
+            Data invalida. EX: (28/9/1992)
+        </mat-error>
+        <mat-error *ngIf="firstFormGroup.controls['dataPagamento'].invalid && firstFormGroup.controls['dataPagamento'].pristine">
+            Data de Pagamento é <strong>obrigatoria</strong>
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+          <input matInput placeholder="Data de PagamentoII"  formControlName="dataPagamentoII" [(ngModel)]="movimento.dataPagamentoII" [matDatepicker]="dataPagamentoII"
+            disabled readonly/>
+          <mat-datepicker-toggle matSuffix [for]="dataPagamentoII"></mat-datepicker-toggle>
+          <mat-datepicker #dataPagamentoII startView="year" [startAt]="startDate" ></mat-datepicker >
+      
+          <mat-error *ngIf="firstFormGroup.controls['dataPagamentoII'].touched && firstFormGroup.controls['dataPagamentoII'].dirty && firstFormGroup.controls['dataPagamentoII'].invalid">
+              Data invalida. EX: (28/9/1992)
+          </mat-error>
+          <mat-error *ngIf="firstFormGroup.controls['dataPagamentoII'].invalid && firstFormGroup.controls['dataPagamentoII'].pristine">
+              Data de Pagamento é <strong>obrigatoria</strong>
+          </mat-error>
+    </mat-form-field>
+
+        <br />
+        
+        <mat-form-field>
+            <input matInput placeholder="Observação" formControlName="observacao" [(ngModel)]="movimento.observacao"/>
+    
+            <mat-error *ngIf="firstFormGroup.controls['observacao'].touched && firstFormGroup.controls['observacao'].dirty">
+                Observação deve conter ao menos 1 caracterer.
+            </mat-error>
+            <mat-error *ngIf="firstFormGroup.controls['observacao'].invalid && firstFormGroup.controls['observacao'].pristine">
+                Observação é <strong>obrigatorio</strong>
+            </mat-error>
+        </mat-form-field>
+
+    <hr/>
+    <div>
+        <button mat-raised-button color="primary" (click)="save()" [disabled]="!firstFormGroup.valid">Salvar</button>
+    </div>      
+</form>
+</mat-step>
+</mat-horizontal-stepper>

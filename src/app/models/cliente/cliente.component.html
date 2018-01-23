@@ -10,44 +10,57 @@ Total: {{ clientes.length}} Clientes.
 </p>
 
 <mat-form-field floatPlaceholder="never">
-  <input matInput placeholder="Insira os dados para realizar busca..." [(ngModel)]="busca"#filter/>
+  <input id="filter" matInput placeholder="Filtro" [(ngModel)]="busca"#filter/>
 </mat-form-field>
 <br />
+<button mat-button color="primary" (click)="buscaPorVendedor()">Buscar por Vendedor</button>
 <button mat-button color="primary" (click)="buscaPorNome()">Buscar por Nome</button>
 <button mat-button color="primary" (click)="buscaPorRG()">Buscar por RG</button>
 <button mat-button color="primary" (click)="buscaPorCPF()">Buscar por CPF</button>
 
+<hr />  
+    <mat-paginator                  
+                  [length]="length"
+                  [pageSize]="pageSize"
+                  [pageSizeOptions]="pageSizeOptions"
+                  (page)="atualizaClientes($event)">
+    </mat-paginator>
+<hr />
+
 <table>
   <thead>
       <tr>
-        <th>Código</th>
+        <th>Cod.</th>
         <th>Nome</th>
+        <th>Cod.</th>
+        <th>Vendedor</th>
         <th>RG</th>
         <th>CPF</th>
         <th>Telefone</th>
         <th>Operadora</th>
         <th>Celular</th>
         <th>Operadora</th>
-        <th>Celular</th>
-        <th>Vendedor</th>
+        <th>Celular</th>        
       </tr>
   </thead>
 
-  <tbody>    
+  <tbody>
     <tr class="lista" *ngFor="let cliente of clientes">
       <td>{{ cliente.codigo }}</td>
-      <td><i class="material-icons">account_box</i>
+      <td><i class="material-icons">face</i>
         <a [routerLink]="['/cliente', cliente.id]">{{ cliente.nome }}</a>
       </td>
-      <td><i class="material-icons">account_box</i>{{ cliente.rg }}</td>
-      <td><i class="material-icons">account_box</i>{{ cliente.cpf }}</td>
+      <td>{{ cliente.vendedor.codigo }}</td>
+      <td>{{ cliente.vendedor.nome }}</td>
+      <td><i class="material-icons">receipt</i>{{ cliente.rg }}</td>
+      <td><i class="material-icons">receipt</i>{{ cliente.cpf }}</td>
       <td><i class="material-icons">phone</i>{{ cliente.telefone }}</td>
       <td><i class="material-icons">sd_storage</i>{{ cliente.operadora }}</td>
       <td><i class="material-icons">phone_iphone</i>{{ cliente.celular }}</td>
       <td><i class="material-icons">sd_storage</i>{{ cliente.operadoraII }}</td>
       <td><i class="material-icons">phone_iphone</i>{{ cliente.celularII }}</td>
-      <td *ngIf="cliente.vendedor.id!=undefinied">{{ cliente.vendedor.codigo }}</td>
-      <td *ngIf="cliente.vendedor.id==undefinied">{{ cliente.vendedor }}</td>
+      
+      
       <td>
         <a [routerLink]="['/cliente', cliente.id]">
           <i class="material-icons">mode_edit</i>
@@ -60,5 +73,14 @@ Total: {{ clientes.length}} Clientes.
       </td>
     </tr>
   </tbody>
+  <tfoot>
+    <tr>
+                   
+      </tr>
+  </tfoot>
 </table>
+</section>
+
+<section>
+  
 </section>

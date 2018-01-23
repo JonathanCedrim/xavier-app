@@ -19,11 +19,14 @@ export class VendedorComponent implements OnInit {
       {
         this.vendedores = data;
       });
-  }
+
+      setTimeout(()=> document.getElementById("filtro").focus(), 200);
+  }  
 
   buscaPorNome() {
     this.vendedorService.getVendedorByNome(this.busca).subscribe(
       data => {
+          this.vendedores = [];
           if(data != null) 
           {
             this.vendedores = data;
@@ -34,8 +37,8 @@ export class VendedorComponent implements OnInit {
   buscaPorRG() {
         this.vendedorService.getVendedorByRG(this.busca).subscribe(
         data => {
+          this.vendedores = [];
           if(data != null) {
-            this.vendedores = [];
             this.vendedores.push(data)
           }
       }
@@ -45,8 +48,8 @@ export class VendedorComponent implements OnInit {
   buscaPorCPF() {
     this.vendedorService.getVendedorByCPF(this.busca).subscribe(
     data => {
+      this.vendedores = [];
       if(data != null) {
-        this.vendedores = [];
         this.vendedores.push(data)
       }
   }

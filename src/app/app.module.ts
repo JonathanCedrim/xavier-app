@@ -10,17 +10,20 @@ import { MatButtonToggleModule,  MatButtonModule } from '@angular/material';
 import { RoutingModule } from './app.routing';
 import { VendedorModule } from './models/vendedor/vendedor.module';
 import { ClienteModule } from './models/cliente/cliente.module';
+import { MovimentoModule } from './models/movimento/movimento.module';
+import { IdealModule } from './models/ideal/ideal.module';
+import { HomePageModule } from './models/home-page/home-page.module';
 
 import { AppComponent } from './app.component';
-import { HomePageComponent } from './models/home-page/home-page.component';
 import { NotFoundComponent } from './models/not-found/not-found.component';
-import { HomePageModule } from './models/home-page/home-page.module';
+import { HomePageComponent } from './models/home-page/home-page.component';
+
 import { VendedorRouting } from './models/vendedor/vendedor.routing';
 import { ClienteRouting } from './models/cliente/cliente.routing';
+import { MovimentoRouting} from './models/movimento/movimento.routing';
+import { IdealRouting} from './models/ideal/ideal.routing';
 
 import { LoginPageComponent } from './models/login-page/login-page.component';
-import { ClienteFormComponent } from './models/cliente/cliente-form/cliente-form.component';
-
 import { CepService } from './shared/cep.service';
 
 
@@ -28,7 +31,7 @@ import { CepService } from './shared/cep.service';
   declarations: [
     AppComponent,
     NotFoundComponent,
-    LoginPageComponent
+    LoginPageComponent,    
   ],
   imports: [
     BrowserModule,
@@ -36,13 +39,17 @@ import { CepService } from './shared/cep.service';
     BrowserAnimationsModule,
     MatButtonModule,
     MatButtonToggleModule,
-    FormsModule,
-    VendedorModule,
-    ClienteModule,
     MatButtonModule,
-    VendedorRouting,
+    FormsModule,
+    ClienteModule,
+    VendedorModule,
+    MovimentoModule,
+    IdealModule,
     ClienteRouting,
-    HomePageModule,
+    VendedorRouting,
+    MovimentoRouting,
+    IdealRouting,
+    HomePageModule,    
     RoutingModule
   ],
   exports: [],

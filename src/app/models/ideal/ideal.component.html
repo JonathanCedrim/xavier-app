@@ -1,0 +1,76 @@
+<nav>
+  <a mat-raised-button routerLink="/ideal">Ideals</a>
+
+  <a mat-raised-button color="accent" routerLink="/ideal/novo">Novo Ideal</a>
+</nav>   
+
+<section>
+<p>
+Total: {{ ideals.length}} Ideals.
+</p>
+
+<mat-form-field>
+  <input id="primeiroInput" matInput placeholder="Codigo do Vendedor" name="vendedorCodigo" [(ngModel)]="ideal.vendedor.codigo"
+      (keyup)="buscaIdealPorVendedorEData()" autofocus required/>
+</mat-form-field>
+
+<mat-form-field>
+  <input matInput placeholder="Data Inicial" [(ngModel)]="ideal.dataInicial" [matDatepicker]="dataInicial" 
+  (blur)="buscaIdealPorVendedorEData()" required/>
+  <mat-datepicker-toggle matSuffix [for]="dataInicial"></mat-datepicker-toggle>
+  <mat-datepicker #dataInicial startView="year" [startAt]="startDate" ></mat-datepicker >  
+</mat-form-field>
+
+<mat-form-field>
+  <input matInput placeholder="Data Final"  [(ngModel)]="ideal.dataFinal" [matDatepicker]="dataFinal" 
+  (blur)="buscaIdealPorVendedorEData()" required/>
+  <mat-datepicker-toggle matSuffix [for]="dataFinal"></mat-datepicker-toggle>
+  <mat-datepicker #dataFinal startView="year" [startAt]="startDate" ></mat-datepicker >
+</mat-form-field>
+
+<hr />
+
+<table>
+  <thead>
+      <tr>
+        <th>Cod. Ideal</th>
+        <th></th>
+        <th>Vendedor</th>
+        <th>Lançamento</th>
+        <th>Data Inicial</th>
+        <th>Data Final</th>
+        <th>Total Recebido</th>
+        <th>Ideal</th>
+        <th>Sobra</th>        
+      </tr>
+  </thead>
+
+  <tbody>
+    <tr class="lista" *ngFor="let ideal of ideals">
+      <td [routerLink]="['/ideal', ideal.id]">{{ ideal.codigo }}</td>
+      <td>{{ ideal.vendedor.codigo }}</td>
+      <td><i class="material-icons">face</i><a>{{ ideal.vendedor.nome }}</a></td>      
+      <td><i class="material-icons">date_range</i>{{ ideal.dataLancamento | date: 'dd/MM/yyyy' }}</td>
+      <td><i class="material-icons">date_range</i>{{ ideal.dataInicial | date: 'dd/MM/yyyy' }}</td>
+      <td><i class="material-icons">date_range</i>{{ ideal.dataFinal | date: 'dd/MM/yyyy' }}</td>
+      <td><i class="material-icons">attach_money</i>{{ ideal.totalRecebido | currency:'BRL':true:'2.2-2' }}</td>
+      <td><i class="material-icons">attach_money</i>{{ ideal.ideal | currency:'BRL':true:'2.2-2' }}</td>
+      <td><i class="material-icons">grade</i>{{ ideal.sobra | number }}</td>
+      <td>
+        <a [routerLink]="['/ideal', ideal.id]">
+          <i class="material-icons">mode_edit</i>
+        </a>
+      </td>
+      <td>
+        <a (click)="deleteIdeal(ideal)">
+          <i class="material-icons">clear</i>
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</section>
+
+<section>
+  
+</section>

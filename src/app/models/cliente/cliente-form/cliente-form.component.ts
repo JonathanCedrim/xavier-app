@@ -11,13 +11,14 @@ import { Cep } from '../../../shared/cep';
 import { VendedorService } from '../../vendedor/shared/vendedor.service';
 import { CepService } from '../../../shared/cep.service';
 import { BasicValidators } from '../../../shared/basic-validators';
+import { empty } from 'rxjs/observable/empty';
 
 @Component({
   selector: 'app-cliente-form',
   templateUrl: './cliente-form.component.html',
   styleUrls: ['./cliente-form.component.css'],
   providers: [
-    {provide: MAT_DATE_LOCALE, useValue: 'pt_BR'},
+    {provide: MAT_DATE_LOCALE, useValue: 'pt-BR'},
     {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
     {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
   ],
@@ -40,7 +41,7 @@ export class ClienteFormComponent implements OnInit
     constructor(
       formBuilder: FormBuilder,
       private router: Router,
-      private route: ActivatedRoute,        
+      private route: ActivatedRoute,
       private adapter: DateAdapter<any>,
       private clienteService: ClienteService,
       private vendedorService: VendedorService,
@@ -67,17 +68,15 @@ export class ClienteFormComponent implements OnInit
             cep: ['', [Validators.pattern('^([0-9]){5}([-]?)([0-9]){3}$')]],
             bairro: ['', [Validators.minLength(2), Validators.maxLength(70)]],
             endereco: ['', [Validators.minLength(2), Validators.maxLength(70)]],
-            numero: ['', [Validators.maxLength(10)]],
+            numero: ['', [Validators.minLength(1), Validators.maxLength(10)]],
             referencia: ['', [Validators.maxLength(70)]],
             observacao: ['', [Validators.minLength(2), Validators.maxLength(70)]],
             dataCadastro: ['', [Validators.minLength(1), Validators.maxLength(10)]],
-            spc: ['', [Validators.minLength(1), Validators.maxLength(10)]],
-            selecionado: ['', [Validators.minLength(1), Validators.maxLength(10)]],
         })
     }
 
     ngOnInit() {
-      this.adapter.setLocale('pt_BR');
+      this.adapter.setLocale('pt-BR');
       
       let id = this.route.params.subscribe(params =>
       {
@@ -110,7 +109,7 @@ export class ClienteFormComponent implements OnInit
               if(this.cliente.dataNascimento != null || this.cliente.dataNascimento != undefined)
               {
                 this.cliente.dataNascimento = new Date(this.cliente.dataNascimento);
-              }
+              }                            
             },
             response => 
             {
@@ -118,7 +117,7 @@ export class ClienteFormComponent implements OnInit
               {
                 this.router.navigate(['NotFound']);
               }
-            });
+            });            
       });
 
       this.vendedorService.getVendedores() //arrumar
@@ -156,14 +155,20 @@ export class ClienteFormComponent implements OnInit
             });
       } else 
       {
-        console.log("invalido");
+        console.log("invalido");        
       }
     }
 
-    atualizaCamposVendedor(codigo: number) 
+    atualizaCamposVendedor(codigo) 
     {
       this.vendedorService.getVendedorByCodigo(codigo)
-        .subscribe(data => this.cliente.vendedor = data);          
+        .subscribe(data => {
+          if(data == null || data == undefined || codigo == NaN) {
+            this.cliente.vendedor.nome = "INVALIDO";         
+            return null;
+          }
+          this.cliente.vendedor = data
+        });
     }
 
     log() 

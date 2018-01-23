@@ -9,16 +9,14 @@
   Total: {{ vendedores.length}} Vendedores.
 </p>
 
-
-
 <mat-form-field floatPlaceholder="never">
-  <input matInput placeholder="Insira os dados para realizar busca..." [(ngModel)]="busca" #filter/>
+  <input matInput id="filtro" placeholder="Filtro" [(ngModel)]="busca" tabindex="1" #filter autofocus/>
 </mat-form-field>
 <br />
 
-<button mat-button color="primary" (click)="buscaPorNome()">Buscar por Nome</button>
-<button mat-button color="primary" (click)="buscaPorRG()">Buscar por RG</button>
-<button mat-button color="primary" (click)="buscaPorCPF()">Buscar por CPF</button>
+<button mat-button color="primary" (click)="buscaPorNome()" tabindex="2">Buscar por Nome</button>
+<button mat-button color="primary" (click)="buscaPorRG()" tabindex="3">Buscar por RG</button>
+<button mat-button color="primary" (click)="buscaPorCPF()" tabindex="4">Buscar por CPF</button>
 
 <table>
     <thead>
@@ -38,11 +36,11 @@
     <tbody>    
       <tr class="lista" *ngFor="let vendedor of vendedores">
         <td>{{ vendedor.codigo }}</td>
-        <td><i class="material-icons">account_box</i>
+        <td><i class="material-icons">face</i>
           <a [routerLink]="['/vendedor', vendedor.id]">{{ vendedor.nome }}</a>
         </td>
-        <td><i class="material-icons">account_box</i>    {{ vendedor.rg }}            </td>
-        <td><i class="material-icons">account_box</i>    {{ vendedor.cpf }}           </td>
+        <td><i class="material-icons">receipt</i>   {{ vendedor.rg }}            </td>
+        <td><i class="material-icons">receipt</i>    {{ vendedor.cpf }}           </td>
         <td><i class="material-icons">phone</i>          {{ vendedor.telefone }}      </td>
         <td><i class="material-icons">sd_storage</i>     {{ vendedor.operadora }}     </td>
         <td><i class="material-icons">phone_iphone</i>   {{ vendedor.celular }}       </td>

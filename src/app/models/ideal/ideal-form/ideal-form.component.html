@@ -1,0 +1,137 @@
+<nav>
+  <a mat-raised-button routerLink="/ideal">Ideals</a>
+
+  <a mat-raised-button color="accent" routerLink="/ideal/novo">Novo Ideal</a>
+</nav>   
+
+
+<h5>{{ title }}</h5>
+
+<mat-horizontal-stepper>
+<mat-step [stepControl]="firstFormGroup">
+
+<form [formGroup]="firstFormGroup" >      
+<ng-template matStepLabel>Por favor, preencha os dados do Ideal</ng-template>
+       
+      <mat-form-field>
+        <input matInput placeholder="Codigo" name="codigo" formControlName="codigo" [(ngModel)]="ideal.codigo"
+            [class.invalid]="firstFormGroup.controls['codigo'].touched && !firstFormGroup.controls['codigo'].valid"  [readonly]="codigoWrite"/>
+      </mat-form-field>
+
+    <mat-form-field>
+        <input matInput placeholder="Data Lançamento" formControlName="dataLancamento" [(ngModel)]="ideal.dataLancamento" [matDatepicker]="dataLancamento" disabled readonly/>
+        <mat-datepicker-toggle matSuffix [for]="dataLancamento"></mat-datepicker-toggle>
+        <mat-datepicker #dataLancamento></mat-datepicker>
+    </mat-form-field>
+
+      <h4>Vendedor</h4>
+
+        <mat-form-field>
+            <input matInput placeholder="Codigo do Vendedor" name="vendedorCodigo" formControlName="vendedorCodigo" [(ngModel)]="ideal.vendedor.codigo"
+                [class.invalid]="firstFormGroup.controls['vendedorCodigo'].touched && !firstFormGroup.controls['vendedorCodigo'].valid"
+                (keyup)="atualizaCamposVendedor(firstFormGroup.controls['vendedorCodigo'].value)" autofocus required/>
+        </mat-form-field>
+        
+        <mat-form-field>
+            <input matInput placeholder="Nome do Vendedor" class="vendedorNome" formControlName="vendedorNome" [(ngModel)]="ideal.vendedor.nome"
+                [class.invalid]="firstFormGroup.controls['vendedorNome'].touched && !firstFormGroup.controls['vendedorNome'].valid" maxRows="70" readonly="true"/>
+        </mat-form-field>
+        <br />
+        <br />
+       
+    <h4>Data Para Realização Do Ideal</h4>
+
+    <mat-form-field>
+        <input matInput placeholder="Data Inicial"  formControlName="dataInicial" [(ngModel)]="ideal.dataInicial" [matDatepicker]="dataInicial" 
+        (blur)="buscaMovimentos()" required/>
+        <mat-datepicker-toggle matSuffix [for]="dataInicial"></mat-datepicker-toggle>
+        <mat-datepicker #dataInicial startView="year" [startAt]="startDate" ></mat-datepicker >
+
+        <mat-error *ngIf="firstFormGroup.controls['dataInicial'].touched && firstFormGroup.controls['dataInicial'].dirty && firstFormGroup.controls['dataInicial'].invalid">
+            Data invalida. EX: (28/09/1992)
+        </mat-error>
+        <mat-error *ngIf="firstFormGroup.controls['dataInicial'].invalid && firstFormGroup.controls['dataInicial'].pristine">
+            Data Inicial é <strong>obrigatoria</strong>
+        </mat-error>
+    </mat-form-field>
+    
+    <hr/>
+    <div>
+        <button mat-raised-button color="primary" (click)="save()" [disabled]="!firstFormGroup.valid">Salvar</button>
+    </div>    
+</form>
+</mat-step>
+</mat-horizontal-stepper>
+
+
+<p>
+{{ movimentos.length }} MOVIMENTAÇÕES DE  {{ ideal.vendedor.nome }} DURANTE A DATA {{ dataInicialAux | date: 'dd/MM/yyyy' }} ATÉ {{ dataFinalAux | date: 'dd/MM/yyyy'}}.
+</p>
+<section>
+    <mat-form-field>
+        <input matInput placeholder="Total Recebido" class="totalRecebido" [(ngModel)]="ideal.totalRecebido"
+           maxRows="70" readonly="true"/>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="Ideal" class="ideal"  [(ngModel)]="ideal.ideal"
+            maxRows="70" readonly="true"/>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="Sobra" class="sobra"  [(ngModel)]="ideal.sobra"
+            maxRows="70" readonly="true"/>
+    </mat-form-field>
+
+
+    <table>
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Vendedor</th>
+                <th>Cliente</th>
+                <th>Nº Recibo</th>
+                <th>Nº Pedido</th>
+                <th>Data De Cadastro</th>
+                <th>Valor Da Compra</th>
+                <th>Valor Recebido</th>
+                <th>Observação</th>
+                <th>1º Data De Pagamento</th>
+                <th>2º Data De Pagamento</th>
+                <th>Saldo Devedor</th>
+            </tr>
+        </thead>
+      
+
+
+        <tbody>    
+          <tr class="lista" *ngFor="let movimento of movimentos">      
+            <td><i class="material-icons">vpn_key</i>
+              <a [routerLink]="['/movimento', movimento.id]">{{ movimento.codigo }}</a>
+            </td>
+      
+            <td><i class="material-icons">face</i>{{ movimento.vendedor.nome }} </td>
+            <td><i class="material-icons">face</i>{{ movimento.cliente.nome }}  </td>
+            <td><i class="material-icons">receipt</i>          {{ movimento.numeroRecibo }}  </td>
+            <td><i class="material-icons">receipt</i>   {{ movimento.numeroPedido }}  </td>
+            <td><i class="material-icons">date_range</i>   {{ movimento.dataCadastro | date: 'dd/MM/yyyy'}}       </td>
+            <td><i class="material-icons">attach_money</i>     {{ movimento.valorCompra | currency:'BRL':true:'2.2-2'}}   </td>
+            <td><i class="material-icons">attach_money</i>    {{ movimento.valorRecebido | currency:'BRL':true:'2.2-2' }} </td>
+            <td><i class="material-icons">priority_high</i>   {{ movimento.observacao }}    </td>
+            <td><i class="material-icons">date_range</i>   {{ movimento.dataPagamento | date: 'dd/MM/yyyy' }}      </td>
+            <td><i class="material-icons">date_range</i>   {{ movimento.dataPagamentoII | date: 'dd/MM/yyyy' }}    </td>
+            <td><i class="material-icons">attach_money</i>   {{ movimento.valorCompra - movimento.valorRecebido | currency:'BRL':true:'2.2-2'}}  </td>
+            <td>
+                <a [routerLink]="['/movimento', movimento.id]">
+                  <i class="material-icons">mode_edit</i>
+                </a>
+              </td>
+              <td>
+                <a (click)="deleteMovimento(movimento)">
+                  <i class="material-icons">clear</i>
+                </a>
+              </td>
+          </tr>
+        </tbody>
+      </table>
+</section>
+
+
