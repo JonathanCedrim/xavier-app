@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 
 import { Vendedor } from './shared/vendedor';
 import { VendedorService } from './shared/vendedor.service';
-import { setTimeout } from 'timers';
 
 @Component({
   selector: 'app-vendedor',
