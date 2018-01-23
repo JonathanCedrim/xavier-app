@@ -96,7 +96,8 @@ export class VendedorFormComponent implements OnInit {
             this.router.navigate(['NotFound']);
           }
       });      
-    });    
+    });
+    setTimeout(()=>document.getElementById("firstInput").focus(), 200);
   }
 
   save() {

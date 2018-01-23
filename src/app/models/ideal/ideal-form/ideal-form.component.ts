@@ -118,8 +118,10 @@ export class IdealFormComponent implements OnInit
             });
       });
 
-      this.vendedorService.getVendedores() //arrumar
-      .subscribe(data => this.vendedores = data);   
+      this.vendedorService.getVendedores()
+      .subscribe(data => this.vendedores = data);  
+      
+      setTimeout(()=> document.getElementById("firstInput").focus(), 200);
     }
 
     save() {

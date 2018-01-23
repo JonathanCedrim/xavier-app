@@ -27,7 +27,7 @@
       <h4>Vendedor</h4>
 
         <mat-form-field>
-            <input matInput placeholder="Codigo do Vendedor" name="vendedorCodigo" formControlName="vendedorCodigo" [(ngModel)]="ideal.vendedor.codigo"
+            <input id="firstInput" matInput placeholder="Codigo do Vendedor" name="vendedorCodigo" formControlName="vendedorCodigo" [(ngModel)]="ideal.vendedor.codigo"
                 [class.invalid]="firstFormGroup.controls['vendedorCodigo'].touched && !firstFormGroup.controls['vendedorCodigo'].valid"
                 (keyup)="atualizaCamposVendedor(firstFormGroup.controls['vendedorCodigo'].value)" autofocus required/>
         </mat-form-field>

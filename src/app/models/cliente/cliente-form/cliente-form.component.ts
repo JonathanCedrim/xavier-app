@@ -109,7 +109,7 @@ export class ClienteFormComponent implements OnInit
               if(this.cliente.dataNascimento != null || this.cliente.dataNascimento != undefined)
               {
                 this.cliente.dataNascimento = new Date(this.cliente.dataNascimento);
-              }                            
+              }              
             },
             response => 
             {
@@ -119,7 +119,7 @@ export class ClienteFormComponent implements OnInit
               }
             });            
       });
-
+      setTimeout(()=>{ document.getElementById("firstInput").focus();}, 200);
       this.vendedorService.getVendedores() //arrumar
       .subscribe(data => this.vendedores = data);   
     }

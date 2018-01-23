@@ -33,7 +33,6 @@ Total: {{ movimentos.length}} Movimentos.
 <br />
 <hr />
 
-<<<<<<< HEAD
 <mat-form-field floatPlaceholder="never">
   <input matInput placeholder="Filtro" [(ngModel)]="busca" tabindex="4" #filter/>
 </mat-form-field>
@@ -42,10 +41,6 @@ Total: {{ movimentos.length}} Movimentos.
 
 <button mat-button color="primary" (click)="buscaPorNumeroRecibo()" tabindex="5">Buscar por Numero Recibo</button>
 <button mat-button color="primary" (click)="buscaPorNumeroPedido()" tabindex="6">Buscar por Numero Pedido</button>
-=======
-<button mat-button color="primary" (click)="buscaPorNumeroRecibo()">Buscar por Numero Recibo</button>
-<button mat-button color="primary" (click)="buscaPorNumeroPedido()">Buscar por Numero Pedido</button>
->>>>>>> de295b07dd93b4f05298f47aa5b39b437c98feee
 
 <h4>Saldo Devedor Total: {{saldo| currency:'BRL':true:'2.2-2'}}</h4>
 <table>
@@ -62,10 +57,6 @@ Total: {{ movimentos.length}} Movimentos.
           <th>Observação</th>
           <th>1º Data De Pagamento</th>
           <th>2º Data De Pagamento</th>          
-<<<<<<< HEAD
-=======
-          <th>Saldo</th>
->>>>>>> de295b07dd93b4f05298f47aa5b39b437c98feee
       </tr>
   </thead>
 
@@ -84,12 +75,7 @@ Total: {{ movimentos.length}} Movimentos.
       <td><i class="material-icons">attach_money</i>    {{ movimento.valorRecebido | currency:'BRL':true:'2.2-2' }} </td>
       <td><i class="material-icons">priority_high</i>   {{ movimento.observacao }}    </td>
       <td><i class="material-icons">date_range</i>   {{ movimento.dataPagamento | date: 'dd/MM/yyyy'}}      </td>
-<<<<<<< HEAD
       <td><i class="material-icons">date_range</i>   {{ movimento.dataPagamentoII | date: 'dd/MM/yyyy'}}    </td>      
-=======
-      <td><i class="material-icons">date_range</i>   {{ movimento.dataPagamentoII | date: 'dd/MM/yyyy'}}    </td>
-      <td><i class="material-icons">attach_money</i>   {{ movimento.valorCompra - movimento.valorRecebido | currency:'BRL':true:'2.2-2'}}  </td>
->>>>>>> de295b07dd93b4f05298f47aa5b39b437c98feee
       <td>
           <a [routerLink]="['/movimento', movimento.id]">
             <i class="material-icons">mode_edit</i>

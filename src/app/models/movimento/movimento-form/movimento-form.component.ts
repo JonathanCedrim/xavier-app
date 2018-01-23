@@ -99,6 +99,7 @@ export class MovimentoFormComponent implements OnInit {
           }
       });
     });
+    setTimeout(()=> document.getElementById("firstInput").focus(), 200);
   }
 
   save() {

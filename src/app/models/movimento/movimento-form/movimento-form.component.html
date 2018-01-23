@@ -30,7 +30,7 @@
       <h4>Informações Pessoais</h4>
 
         <mat-form-field>
-            <input id="codigoVendedor" matInput placeholder="Codigo Vendedor" formControlName="vendedorCodigo" [(ngModel)]="movimento.vendedor.codigo" 
+            <input id="firstInput" matInput placeholder="Codigo Vendedor" formControlName="vendedorCodigo" [(ngModel)]="movimento.vendedor.codigo" 
             (keyup)="atualizaCamposVendedor(firstFormGroup.controls['vendedorCodigo'].value)" autofocus required/>
             
             <mat-error *ngIf="firstFormGroup.controls['vendedorCodigo'].touched && firstFormGroup.controls['vendedorCodigo'].dirty">
