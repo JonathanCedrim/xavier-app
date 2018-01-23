@@ -83,7 +83,12 @@ export class ClienteComponent implements OnInit {
       if(data != null) {        
         this.clientes.push(data)        
       } 
+<<<<<<< HEAD
   });
+=======
+  }
+);
+>>>>>>> de295b07dd93b4f05298f47aa5b39b437c98feee
 }
 
   buscaPorVendedor() {
@@ -131,5 +136,16 @@ export class ClienteComponent implements OnInit {
           }
         }
       });
+<<<<<<< HEAD
+=======
+}
+
+  clear(){ this.saldo = 0; console.error("try");}//POG
+  
+  
+  
+  log(d, e) {
+    console.log("test: " + d + e);
+>>>>>>> de295b07dd93b4f05298f47aa5b39b437c98feee
   }
 }
