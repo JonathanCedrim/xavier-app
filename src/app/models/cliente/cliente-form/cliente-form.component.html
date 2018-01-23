@@ -18,19 +18,30 @@
             [class.invalid]="firstFormGroup.controls['codigo'].touched && !firstFormGroup.controls['codigo'].valid"  [readonly]="codigoWrite"/>
       </mat-form-field>
 
-      <h4>Vendedor</h4>
 
-        <mat-form-field>
-            <input id="firstInput" matInput placeholder="Codigo do Vendedor" name="vendedorCodigo" formControlName="vendedorCodigo" [(ngModel)]="cliente.vendedor.codigo"
-                [class.invalid]="firstFormGroup.controls['vendedorCodigo'].touched && !firstFormGroup.controls['vendedorCodigo'].valid"
-                (keyup)="atualizaCamposVendedor(firstFormGroup.controls['vendedorCodigo'].value)" autofocus required/>
-        </mat-form-field>
-        <mat-form-field>
-            <input matInput placeholder="Nome do Vendedor" class="vendedorNome" formControlName="vendedorNome" [(ngModel)]="cliente.vendedor.nome"
-                [class.invalid]="firstFormGroup.controls['vendedorNome'].touched && !firstFormGroup.controls['vendedorNome'].valid" maxRows="70" readonly="true"/>
-        </mat-form-field>
+      <h4>Informações Pessoais</h4>
 
-    <h4>Informações Pessoais</h4>
+    <mat-form-field>
+        <input id="firstInput" matInput placeholder="RG" formControlName="rg" [(ngModel)]="cliente.rg" (blur)="buscaClienteByRG(rg.value)" #rg />
+
+        <mat-error *ngIf="firstFormGroup.controls['rg'].touched && firstFormGroup.controls['rg'].dirty">
+            RG deve conter de 9 a 14 caracteres, sem pontuação.
+          </mat-error>
+          <mat-error *ngIf="firstFormGroup.controls['rg'].invalid && firstFormGroup.controls['rg'].pristine">
+             RG é <strong>obrigatorio</strong>
+          </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+            <input matInput placeholder="CPF" formControlName="cpf" [(ngModel)]="cliente.cpf" (blur)="buscaClienteByCPF(cpf.value)" #cpf/>
+
+            <mat-error *ngIf="firstFormGroup.controls['cpf'].touched && firstFormGroup.controls['cpf'].dirty">
+                CPF deve conter 11 caracteres, sem pontuação.
+            </mat-error>
+            <mat-error *ngIf="firstFormGroup.controls['cpf'].invalid && firstFormGroup.controls['cpf'].pristine">
+                CPF é <strong>obrigatorio</strong>
+            </mat-error>
+      </mat-form-field>
 
       <mat-form-field>
             <input id="nome" matInput placeholder="Nome Completo" formControlName="nome" [(ngModel)]="cliente.nome" required/>
@@ -55,27 +66,7 @@
       </mat-form-field>
 
       <br />
-      <mat-form-field>
-        <input matInput placeholder="RG" formControlName="rg" [(ngModel)]="cliente.rg"/>
-
-        <mat-error *ngIf="firstFormGroup.controls['rg'].touched && firstFormGroup.controls['rg'].dirty">
-            RG deve conter de 9 a 14 caracteres, sem pontuação.
-          </mat-error>
-          <mat-error *ngIf="firstFormGroup.controls['rg'].invalid && firstFormGroup.controls['rg'].pristine">
-             RG é <strong>obrigatorio</strong>
-          </mat-error>
-      </mat-form-field>
-
-      <mat-form-field>
-            <input matInput placeholder="CPF" formControlName="cpf" [(ngModel)]="cliente.cpf"/>
-
-            <mat-error *ngIf="firstFormGroup.controls['cpf'].touched && firstFormGroup.controls['cpf'].dirty">
-                CPF deve conter 11 caracteres, sem pontuação.
-            </mat-error>
-            <mat-error *ngIf="firstFormGroup.controls['cpf'].invalid && firstFormGroup.controls['cpf'].pristine">
-                CPF é <strong>obrigatorio</strong>
-            </mat-error>
-      </mat-form-field>
+  
 
       <mat-form-field>
             <input matInput placeholder="Data de Nascimento"  formControlName="dataNascimento" [(ngModel)]="cliente.dataNascimento" [matDatepicker]="dataNascimento"/>
@@ -263,8 +254,23 @@
             <mat-datepicker #dataCadastro></mat-datepicker>
         </mat-form-field>
     <hr/>
+
+
+      <h4>Vendedor</h4>
+
+        <mat-form-field>
+            <input matInput placeholder="Codigo do Vendedor" name="vendedorCodigo" formControlName="vendedorCodigo" [(ngModel)]="cliente.vendedor.codigo"
+                [class.invalid]="firstFormGroup.controls['vendedorCodigo'].touched && !firstFormGroup.controls['vendedorCodigo'].valid"
+                (keyup)="atualizaCamposVendedor(firstFormGroup.controls['vendedorCodigo'].value)" autofocus required/>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Nome do Vendedor" class="vendedorNome" formControlName="vendedorNome" [(ngModel)]="cliente.vendedor.nome"
+                [class.invalid]="firstFormGroup.controls['vendedorNome'].touched && !firstFormGroup.controls['vendedorNome'].valid" maxRows="70" readonly="true"/>
+        </mat-form-field>
+
+    
     <div>
-        <button mat-raised-button color="primary" (click)="save()" [disabled]="!firstFormGroup.valid">Salvar</button>
+        <button mat-raised-button color="primary" (submit)="save()" [disabled]="!firstFormGroup.valid">Salvar</button>
     </div>    
 </form>
 </mat-step>

@@ -31,10 +31,14 @@ export class ClienteFormComponent implements OnInit
     title: string;
     codigoWrite: boolean = false;
     cliente: Cliente = new Cliente();
+    clienteAux: Cliente = new Cliente();
     vendedor: Vendedor = new Vendedor();
     cep: Cep = new Cep();
     vendedores: Vendedor[] = [];
     data: Date;
+    doc: Document = document;
+    auxiliar;
+    encontrado: boolean = false;
     operadoras: string[] = ['TIM', 'VIVO', 'OI', 'CLARO', 'NEXTEL', 'ALGAR'];
     startDate = new Date(1970, 0, 1);
 
@@ -76,8 +80,7 @@ export class ClienteFormComponent implements OnInit
     }
 
     ngOnInit() {
-      this.adapter.setLocale('pt-BR');
-      
+      this.adapter.setLocale('pt-BR');            
       let id = this.route.params.subscribe(params =>
       {
         let id = params['id'];
@@ -119,7 +122,7 @@ export class ClienteFormComponent implements OnInit
               }
             });            
       });
-      setTimeout(()=>{ document.getElementById("firstInput").focus();}, 200);
+      setTimeout(()=>{ this.doc.getElementById("firstInput").focus();}, 200);
       this.vendedorService.getVendedores() //arrumar
       .subscribe(data => this.vendedores = data);   
     }
@@ -164,7 +167,7 @@ export class ClienteFormComponent implements OnInit
       this.vendedorService.getVendedorByCodigo(codigo)
         .subscribe(data => {
           if(data == null || data == undefined || codigo == NaN) {
-            this.cliente.vendedor.nome = "INVALIDO";         
+            this.cliente.vendedor.nome = "INVALIDO";
             return null;
           }
           this.cliente.vendedor = data
@@ -177,6 +180,33 @@ export class ClienteFormComponent implements OnInit
         console.log("Data nascimento: " + this.cliente.dataNascimento)
     }
 
+    buscaClienteByRG(rg: string) {      
+      
+        this.clienteService.getClienteByRG(rg)
+            .subscribe(data => {              
+
+            if(rg.length >= 9 && rg.length <= 14 && data != null && this.cliente.id == null && this.cliente.rg == data.rg) {
+                this.cliente = data;                 
+                this.cliente.dataCadastro = new Date();
+              
+                alert("Cliente : " + data.nome + "Já está cadastrado, caso queira mudar o codigodo Vendedor, basta alterar o campo codigo vendedor.");                 
+            }
+        });
+    }
+
+    buscaClienteByCPF(cpf: string) {            
+        this.clienteService.getClienteByCPF(cpf)
+            .subscribe(data => {
+              console.log(data);
+              if(cpf.length == 11 && data != null && this.cliente.id == null && this.cliente.cpf != data.cpf) {
+                 this.cliente = data;
+                 this.cliente.dataCadastro = new Date();
+                
+                 alert("Cliente : " + data.nome + "Já está cadastrado, caso queira mudar o codigodo Vendedor, basta alterar o campo codigo vendedor.");
+              }
+        });    
+    }
+  
     private setEndereco(cep: Cep) 
     {
         this.cliente.sigla = cep.uf;
